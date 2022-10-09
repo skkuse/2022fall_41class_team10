@@ -1,0 +1,4 @@
+copydetect
+multimetric
+pylama
+openAIcodex
