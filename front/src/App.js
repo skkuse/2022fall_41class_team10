@@ -1,25 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useRef} from "react";
+import CodeEdit from "./CodeEdit";
+import styled from 'styled-components';
+impo
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+
+
+
+export default class App extends React.Component {
+  
+  
+  api(){
+    axios({
+      method:"post",
+      url:"",
+      Headers:{}
+    })
+      .then((res)=>{dispatchEvent()})
+  } 
+  render(){
+      return(
+        <div
+          style={{
+            height:"1000px",
+            width:"1500px"
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+          <div
+            style={{
+              height:"5%",
+              widht:"100%",
+              borderColor:"black",
+              borderStyle:"solid",
+              borderWidth:"1px",
+            }}
+          >
 
-export default App;
+          </div>
+          <div
+            style={{
+              height:"80%",
+              width:"29.5%",
+              borderColor:"black",
+              borderStyle:"solid",
+              borderWidth:"1px",
+              float:"left"
+            }}>
+          </div>
+
+          <div
+            style={{
+              height:"80%",
+              width:"30%",
+              borderColor:"black",
+              borderStyle:"solid",
+              borderWidth:"1px",
+              float:"left"
+            }}>
+              <CodeEdit/>
+          </div>
+          <div
+            style={{
+              height:"80%",
+              width:"40%",
+              borderColor:"black",
+              borderStyle:"solid",
+              borderWidth:"1px",
+              float:"left"
+            }}>
+          </div>
+        </div>
+      )
+    }
+}
