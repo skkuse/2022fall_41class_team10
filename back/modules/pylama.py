@@ -9,8 +9,11 @@ class pylama:
         self.radon = 20
         self.pycodestyle = 20
     
-    def act2(self, file):
-        os.system("pylama " + file + " > save.txt")
+    def act(self, text):
+        temp = open('./test.py', mode='w')
+        temp.write(text)
+        temp.close()
+        os.system("pylama " +"./test.py" + " > save.txt")
         #file 자리에 해당 파이썬 코드의 파일이름 입력
         f = open('./save.txt', mode = 'r', encoding='utf-8')
         f1 = open('./mypy.txt', mode = 'w')
