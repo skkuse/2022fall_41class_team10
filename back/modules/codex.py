@@ -15,3 +15,5 @@ response = openai.Completion.create(
     presence_penalty=0.0,
     stop=["\"\"\""]
 )
+
+#From example of openai(openai.com)
