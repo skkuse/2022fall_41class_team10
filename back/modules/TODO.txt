@@ -1,4 +1,6 @@
 copydetect
+- how we save reference files
 multimetric
+- what is appropriate metric
 pylama
 openAIcodex
