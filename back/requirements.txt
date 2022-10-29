@@ -32,3 +32,4 @@ typing_extensions==4.1.1
 wcwidth==0.2.5
 wincertstore==0.2
 zipp==3.5.0
+pylama==8.4.1
