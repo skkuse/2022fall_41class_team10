@@ -1,6 +1,6 @@
 import os
 
-class pylama:
+class Pylama:
     def __init__(self):
         # 각각의 점수
         self.mypy = 20

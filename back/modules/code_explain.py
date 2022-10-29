@@ -1,12 +1,13 @@
 import os
 import openai
 
-class explain:
+class Explain:
     def __init__(self):
         self.response = ""
 
     def act(self, text):
         openai.api_key = os.getenv("OPENAI_API_KEY")
+        #이거 key를 openai에서 받아와야 하는데 방법을 모르겠음.
         #API 키 받아서 입력
 
         self.response = openai.Completion.create(
