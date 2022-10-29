@@ -22,7 +22,7 @@ class Explain:
             presence_penalty=0.0,
             stop=["\"\"\""]
         )
-        print(self.response)
+        return self.response
         
 
 #From example of openai(openai.com)

@@ -74,6 +74,7 @@ class Pylama:
         f3.close()
         f4.close()
         f5.close()
+        return "mypy: {0}, pylint: {1}, eradicate: {2}, radon: {3}, pycodestyle: {4}".format(self.mypy, self.pylint, self.eradicate, self.radon, self.pycodestyle)
         '''
         total_score = mypy + pylint + eradicate + radon + pycodestyle
         print(total_score)
