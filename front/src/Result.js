@@ -8,7 +8,7 @@ export default class Result extends React.Component{
     render(){
         return(
             <>
-                {this.props.result.submit
+                {this.props.result.submit===1
                     ?   
                         <>
                             <div
@@ -41,7 +41,7 @@ export default class Result extends React.Component{
                                     float:"left"
                                 }}    
                             >
-                                가독성 점수 확인
+                                기능 점수 확인
                             </div>
                             <div
                                 style={{
@@ -54,7 +54,7 @@ export default class Result extends React.Component{
                                     float:"left"
                                 }}    
                             >
-                                가독성 점수 확인
+                                효율 점수 확인
                             </div>
                             <div
                                 style={{
@@ -86,9 +86,9 @@ export default class Result extends React.Component{
                                 &nbsp;&nbsp;&nbsp;&nbsp;실행 결과
                             </div>
                             <div style = {{lineHeight:"180%"}}>
-                                {this.props.result.code_result.split('\n').map(word => {
-                                    return (<span>&nbsp;&nbsp;&nbsp;&nbsp;{ word }<br/></span>)
-                                })}
+                                    {this.props.result.code_result.split('\n').map(word => {
+                                        return (<span>&nbsp;&nbsp;&nbsp;&nbsp;{ word }<br/></span>)
+                                    })}
                             </div>
                         </>}
             </>

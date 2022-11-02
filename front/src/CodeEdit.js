@@ -31,7 +31,8 @@ export default function CodeEdit(props) {
   }
   function clear(){
     editorRef.current.setValue("print('Hello Wolrd!')"); 
-    props.unsubmit()
+    props.submit(0)
+    props.setCodeResult(" ")
   }
   function copy(){
     navigator.clipboard.writeText(editorRef.current.getValue());
@@ -46,6 +47,7 @@ export default function CodeEdit(props) {
   }
   function execution(api){
     props.api(editorRef.current.getValue())
+    props.submit(0)
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -54,7 +56,7 @@ export default function CodeEdit(props) {
   }
   function grade(api){
     props.api(editorRef.current.getValue())
-
+    props.submit(2)
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -64,7 +66,7 @@ export default function CodeEdit(props) {
   
   function submission(){
     props.api(editorRef.current.getValue())
-    props.submit()
+    props.submit(1)
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -159,7 +161,7 @@ export default function CodeEdit(props) {
                         border:"3px solid black",
                 }}
             >
-            1
+            업로드
             </label>
             
             <input type="file" id="file" style = {{display:"none"}} ref={upload(this)}/>
@@ -175,7 +177,7 @@ export default function CodeEdit(props) {
             }}
             onClick={clear}
         >
-            2
+            지우기
         </div>
         <div
             style={{
@@ -189,7 +191,7 @@ export default function CodeEdit(props) {
             }}
             onClick={copy}
         >
-            3
+            복사
         </div>
         <div
             style={{
@@ -204,7 +206,7 @@ export default function CodeEdit(props) {
             }}
             onClick={download}
         >
-            4
+            다운로드
         </div>
         <div
             style={{

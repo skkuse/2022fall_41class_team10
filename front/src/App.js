@@ -19,10 +19,10 @@ export default class App extends React.Component {
   
   state  = {
     submit: 0,
-    case_correct:[0,0,0,0,0],
+    case_correct:[0,1,1,0,0],
     efficency:[20,20,30,30],
     readability: [20,18,20,20,15],
-    code_result:"111"
+    code_result:" "
   }
   api = async (data)=>{
     await axios.post(
@@ -38,15 +38,12 @@ export default class App extends React.Component {
         this.setState(current=>({
           code_result:code}))
   }
-  setSubmit = ()=>{
+  setSubmit = (tf)=>{
         this.setState(current=>({
-          submit:1}))
+          submit:tf}))
 
   }
-  setUnSubmit = ()=>{
-        this.setState(current=>({
-          submit:0}))
-  }
+
   
   render(){
       return(
@@ -92,7 +89,7 @@ export default class App extends React.Component {
               borderWidth:"1px",
               float:"left"
             }}>
-              <CodeEdit api = {this.api} submit = {this.setSubmit} unsubmit={this.setUnSubmit}/>
+              <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult}/>
           </div>
           <div
             style={{
