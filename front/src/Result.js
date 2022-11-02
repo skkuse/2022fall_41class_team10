@@ -1,8 +1,26 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import styled from 'styled-components';
+
+
 
 export default class Result extends React.Component{
 
+    state = {
+        view : this.props.result.case_correct
+    }
+    functionality= ()=>{
+        this.setState({
+            view : this.props.result.case_correct})
+    }
+    efficency = () => {
+        this.setState({
+            view : this.props.result.efficency})
+    }   
+    readability = ()=>{
+        this.setState({
+            view : this.props.result.readability})
+        console.log(this.view)
+    }
 
 
     render(){
@@ -38,8 +56,10 @@ export default class Result extends React.Component{
                                     height:"4%",
                                     width:"33%",
                                     border:"3px solid black",
-                                    float:"left"
-                                }}    
+                                    float:"left",
+                                    
+                                }}  
+                                onClick={this.functionality}  
                             >
                                 기능 점수 확인
                             </div>
@@ -53,6 +73,7 @@ export default class Result extends React.Component{
                                     border:"3px solid black",
                                     float:"left"
                                 }}    
+                                onClick={this.efficency}
                             >
                                 효율 점수 확인
                             </div>
@@ -65,11 +86,18 @@ export default class Result extends React.Component{
                                     width:"32%",
                                     border:"3px solid black",
                                     float:"left"
-                                }}    
+                                }}   
+                                onClick={this.readability} 
                             >
                                 가독성 점수 확인
                             </div>
-                            
+                            <div>
+                                {
+                                    this.state.view.map(word =>{
+                                        return (<div>&nbsp;&nbsp;&nbsp;&nbsp; {word} </div>)
+                                    })
+                                }
+                            </div>
                         </>
                     :
                         <> 
