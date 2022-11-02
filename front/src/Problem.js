@@ -118,7 +118,7 @@ export default class Problem extends React.Component{
                         lineHeight: "150%",
                     }}
                 >
-                    &nbsp;&nbsp;&nbsp;&nbsp;input:{this.props.testcase2['input']}
+                    &nbsp;&nbsp;&nbsp;&nbsp;input: {this.props.testcase2['input']}
                     <br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;output: {this.props.testcase2['output']}
                 </div>
