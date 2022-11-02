@@ -17,14 +17,37 @@ const testcase2 ={
 }
 export default class App extends React.Component {
   
-  
-  api(data){
-    axios.post(
+  state  = {
+    submit: 0,
+    case_correct:[0,0,0,0,0],
+    efficency:[20,20,30,30],
+    readability: [20,18,20,20,15],
+    code_result:"111"
+  }
+  api = async (data)=>{
+    await axios.post(
       "http://127.0.0.1:5000/submit",
       {code: data}
     )
-      .then(response => console.log(response['data']))
-  } 
+    .then(response => this.setState(current=>({
+      code_result:response['data']}))
+    )
+  }
+  setCodeResult = (code)=>{
+        console.log(code)
+        this.setState(current=>({
+          code_result:code}))
+  }
+  setSubmit = ()=>{
+        this.setState(current=>({
+          submit:1}))
+
+  }
+  setUnSubmit = ()=>{
+        this.setState(current=>({
+          submit:0}))
+  }
+  
   render(){
       return(
         <div
@@ -69,7 +92,7 @@ export default class App extends React.Component {
               borderWidth:"1px",
               float:"left"
             }}>
-              <CodeEdit api = {this.api}/>
+              <CodeEdit api = {this.api} submit = {this.setSubmit} unsubmit={this.setUnSubmit}/>
           </div>
           <div
             style={{
@@ -80,7 +103,7 @@ export default class App extends React.Component {
               borderWidth:"1px",
               float:"left"
             }}>
-              <Result />
+              <Result result = {this.state}/>
           </div>
         </div>
       )

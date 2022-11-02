@@ -19,16 +19,19 @@ export default function CodeEdit(props) {
 
 
   function upload(){
-    //const file = e.target.files[0];
     /*
+    const file = e.target.files[0];
+    
     const reader = new FileReader();
     reader.onloadend  = function(){
         editorRef.current.setValue(reader.result);
     }
-    reader.readAsText(file);*/
+    reader.readAsText(file);
+    */
   }
   function clear(){
-    editorRef.current.setValue("// some comment"); 
+    editorRef.current.setValue("print('Hello Wolrd!')"); 
+    props.unsubmit()
   }
   function copy(){
     navigator.clipboard.writeText(editorRef.current.getValue());
@@ -50,6 +53,8 @@ export default function CodeEdit(props) {
     //get하고 나서 채점 component에 내용 전송
   }
   function grade(api){
+    props.api(editorRef.current.getValue())
+
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -58,6 +63,8 @@ export default function CodeEdit(props) {
   }
   
   function submission(){
+    props.api(editorRef.current.getValue())
+    props.submit()
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -129,7 +136,7 @@ export default function CodeEdit(props) {
      <Editor
        height="80%"
        defaultLanguage="python"
-       defaultValue="// some comment"
+       defaultValue="print('Hello Wolrd!')"
        onMount={handleEditorDidMount}
      />
      <div
@@ -210,8 +217,8 @@ export default function CodeEdit(props) {
                 float:"right",
                 lineHeight: "200%",
             }}
-            onClick={execution}
-        > 실행</div>
+            onClick={submission}
+        > 제출 </div>
         <div
             style={{
                 marginTop:"5%",
@@ -250,7 +257,8 @@ export default function CodeEdit(props) {
                 float:"right",
                 lineHeight: "200%",
             }}
-        > 제출 </div>
+            onClick={execution}
+        > 실행 </div>
     </div>
    </>
   );
