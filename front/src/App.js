@@ -26,7 +26,7 @@ export default class App extends React.Component {
   }
   api = async (data)=>{
     await axios.post(
-      "http://127.0.0.1:5000/submit",
+      "http://127.0.0.1:8000/submit/",
       {code: data}
     )
     .then(response => this.setState(current=>({
