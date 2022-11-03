@@ -1,15 +1,7 @@
 import os
 
 class Pylama:
-    def __init__(self):
-        # 각각의 점수
-        self.mypy = 20
-        self.pylint = 20
-        self.eradicate = 20
-        self.radon = 20
-        self.pycodestyle = 20
-    
-    def act(self, text):
+    def act(text):
         temp = open('./test.py', mode='w')
         temp.write(text)
         temp.close()
@@ -27,56 +19,57 @@ class Pylama:
             to_write = ""
             word_list = line.split()
             if(word_list[-1] == "[mypy]"):
-                self.mypy -= 1
+                mypy -= 1
                 for i in word_list[2:-1]:
                     to_write += (i + " ")
                 to_write += "\n"
                 f1.write(to_write)
             elif(word_list[-1] == "[pylint]"):
-                self.pylint -= 1
+                pylint -= 1
                 for i in word_list[2:-1]:
                     to_write += (i + " ")
                 to_write += "\n"
                 f2.write(to_write)
             elif(word_list[-1] == "[eradicate]"):
-                self.eradicate -= 1
+                eradicate -= 1
                 for i in word_list[2:-1]:
                     to_write += (i + " ")
                 to_write += "\n"
                 f3.write(to_write)
             elif(word_list[-1] == "[radon]"):
-                self.radon -= 1
+                radon -= 1
                 for i in word_list[2:-1]:
                     to_write += (i + " ")
                 to_write += "\n"
                 f4.write(to_write)
             elif(word_list[-1] == "[pycodestyle]"):
-                self.pycodestyle -= 1
+                pycodestyle -= 1
                 for i in word_list[2:-1]:
                     to_write += (i + " ")
                 to_write += "\n"
                 f5.write(to_write)
 
-        if(self.mypy < 0):
-            self.mypy = 0
-        if(self.pylint < 0):
-            self.pylint = 0
-        if(self.eradicate < 0):
-            self.eradicate = 0
-        if(self.radon < 0):
-            self.radon = 0
-        if(self.pycodestyle < 0):
-            self.pycodestyle = 0
+        if(mypy < 0):
+            mypy = 0
+        if(pylint < 0):
+            pylint = 0
+        if(eradicate < 0):
+            eradicate = 0
+        if(radon < 0):
+            radon = 0
+        if(pycodestyle < 0):
+            pycodestyle = 0
 
         f.close()
+        os.remove("save.txt")
         f1.close()
         f2.close()
         f3.close()
         f4.close()
         f5.close()
+        '''
         return "mypy: {0}, pylint: {1}, eradicate: {2}, radon: {3}, pycodestyle: {4}".format(self.mypy, self.pylint, self.eradicate, self.radon, self.pycodestyle)
         '''
         total_score = mypy + pylint + eradicate + radon + pycodestyle
-        print(total_score)
-        '''
+        return total_score
                 

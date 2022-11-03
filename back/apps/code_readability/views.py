@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-
+from modules.code_readability import Pylama
 
 def pylama(request):
     return JsonResponse(Pylama.act("#This is test code"),safe=False)
