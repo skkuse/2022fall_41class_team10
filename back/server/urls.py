@@ -22,4 +22,5 @@ urlpatterns = [
     path('code_explain/', include('apps.code_explain.urls')),
     path('code_readability/', include('apps.code_readability.urls')),
     path('copy_detect/', include('apps.copy_detect.urls')),
+    path('submit/', include('apps.code_execute.urls')),
 ]
