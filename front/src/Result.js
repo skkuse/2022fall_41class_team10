@@ -6,19 +6,26 @@ import styled from 'styled-components';
 export default class Result extends React.Component{
 
     state = {
-        view : this.props.result.case_correct
+        view : this.props.result.case_correct,
+        type : 0
     }
     functionality= ()=>{
         this.setState({
-            view : this.props.result.case_correct})
+            view : this.props.result.case_correct,
+            type : 0
+        })  
     }
     efficency = () => {
         this.setState({
-            view : this.props.result.efficency})
+            view : this.props.result.efficency,
+            type : 1
+        })
     }   
     readability = ()=>{
         this.setState({
-            view : this.props.result.readability})
+            view : this.props.result.readability,
+            type : 1
+        })
         console.log(this.view)
     }
 
@@ -28,7 +35,13 @@ export default class Result extends React.Component{
             <>
                 {this.props.result.submit===1
                     ?   
-                        <>
+                        <div
+                            style={{
+                                position:"relative",
+                                width:"100%",
+                                height:'100%'
+                            }}
+                        >
                             <div
                                 style = {{
                                     position : "relative",
@@ -43,7 +56,8 @@ export default class Result extends React.Component{
                             </div>
                             <div
                                 style={{
-                                    height:"30%"
+                                    position : "relative",
+                                    height:"40%"
                                 }}
                             >
 
@@ -91,16 +105,41 @@ export default class Result extends React.Component{
                             >
                                 가독성 점수 확인
                             </div>
-                            <div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <>
                                 {
-                                    this.state.view.map(word =>{
-                                        return (<div>&nbsp;&nbsp;&nbsp;&nbsp; {word} </div>)
-                                    })
+                                    
+                                    this.state.type===0
+                                    ?
+                                    Object.entries(this.state.view).map(
+                                        ([word, int]) => 
+                                            <>
+                                                <div style={{marginTop:"5%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center"}}>{word}</div> 
+                                                <div style={{marginTop:"5%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
+                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right"}}>{int}</div> 
+                                            </>
+                                    )
+                                    :
+
+                                    Object.entries(this.state.view).map(
+                                        ([word, int]) => <                       
+                                                        >
+                                                            <div style={{marginTop:"5%",position:"relative",width:"40%",height:"3%",float:"left",textAlign:"center"}}>{word}</div> 
+                                                            <div style={{marginTop:"5%",position:"relative",width:"33%",height:"3%",border:"1px solid black",float:"left",}}>
+                                                                <div style={{position:"relative",backgroundColor:"red", width:int.toString()+"%",height: "100%"}}>
+                                                                </div>
+                                                            </div>
+                                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right"}}>{int}점 </div>
+                                                            <br/>
+                                                        </> 
+                                    )
                                 }
-                            </div>
-                        </>
+                            </>
+                        </div>
                     :
-                        <> 
+                        <div> 
                             <div
                                 style = {{
                                     position : "relative",
@@ -118,7 +157,7 @@ export default class Result extends React.Component{
                                         return (<span>&nbsp;&nbsp;&nbsp;&nbsp;{ word }<br/></span>)
                                     })}
                             </div>
-                        </>}
+                        </div>}
             </>
         )
     }

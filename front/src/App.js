@@ -19,14 +19,31 @@ export default class App extends React.Component {
   
   state  = {
     submit: 0,
-    case_correct:[0,1,1,0,0],
-    efficency:[20,20,30,30],
-    readability: [20,18,20,20,15],
+    case_correct:{
+                  "테스트케이스-1":"통과",
+                  "테스트케이스-2":"통과",
+                  "히든 테스트케이스-3":"실패",
+                  "히든 테스트케이스-4":"실패",
+                  "히든 테스트케이스-5":"통과",
+                  },
+    efficency:{
+                  "Line Of Codes": 60,
+                  "Resevation Words": 100,
+                  "Data Flow Compliexity": 80,
+                  "control Flow Complexity": 30
+    },
+    readability: {
+                  "mypy": 20,
+                  "pylint": 90,
+                  "eradicate" : 85,
+                  "radon": 70,
+                  "pycodestyle": 15
+    },
     code_result:" "
   }
   api = async (data)=>{
     await axios.post(
-      "http://127.0.0.1:8000/submit/",
+      "http://127.0.0.1:8000/submit",
       {code: data}
     )
     .then(response => this.setState(current=>({

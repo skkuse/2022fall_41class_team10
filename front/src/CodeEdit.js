@@ -159,6 +159,8 @@ export default function CodeEdit(props) {
                         height:"40%",
                         width:"10%",
                         border:"3px solid black",
+                        fontSize:"90%",
+                        lineHeight:"220%"
                 }}
             >
             업로드
@@ -174,6 +176,8 @@ export default function CodeEdit(props) {
                 height:"40%",
                 width:"10%",
                 border:"3px solid black",
+                fontSize:"90%",
+                lineHeight:"220%"
             }}
             onClick={clear}
         >
@@ -188,6 +192,8 @@ export default function CodeEdit(props) {
                 height:"40%",
                 width:"10%",
                 border:"3px solid black",
+                fontSize:"90%",
+                lineHeight:"220%"
             }}
             onClick={copy}
         >
@@ -203,6 +209,8 @@ export default function CodeEdit(props) {
                 height:"40%",
                 width:"10%",
                 border:"3px solid black",
+                fontSize:"60%",
+                lineHeight:"290%"
             }}
             onClick={download}
         >
