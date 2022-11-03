@@ -2,6 +2,11 @@ import os
 
 class Pylama:
     def act(text):
+        mypy = 20
+        pylint = 20
+        eradicate = 20
+        radon = 20
+        pycodestyle = 20
         temp = open('./test.py', mode='w')
         temp.write(text)
         temp.close()
