@@ -43,12 +43,19 @@ export default class App extends React.Component {
   }
   api = async (data)=>{
     await axios.post(
-      "http://127.0.0.1:8000/submit",
+      "http://127.0.0.1:8000/code_efficiency/",
       {code: data}
     )
-    .then(response => this.setState(current=>({
-      code_result:response['data']}))
+    .then(response=>
+        console.log(response)
+      )
+    /*
+    .then(response=>
+        this.setState(current=>({
+          code_result:JSON.parse(response['data'])['result']
+        }))
     )
+    */
   }
   setCodeResult = (code)=>{
         console.log(code)
