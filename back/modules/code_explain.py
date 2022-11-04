@@ -9,7 +9,7 @@ class Explain:
 
         response = openai.Completion.create(
             model="code-davinci-002",
-            prompt=text+ "\n \"\"\"\n The code is doing the following:\n",
+            prompt=text+ "\n\"\"\"\nThe code is doing the following:\n",
             #앞의 file에 파이썬 코드 입력 필요
             #그리고 뒤의 부분과 합쳐야 코드가 돌아감
             temperature=0,
