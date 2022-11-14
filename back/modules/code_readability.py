@@ -72,9 +72,30 @@ class Pylama:
         f3.close()
         f4.close()
         f5.close()
+        f1 = open('./mypy.txt', mode = 'r')
+        f2 = open('./pylint.txt', mode = 'r')
+        f3 = open('./eradicate.txt', mode = 'r')
+        f4 = open('./radon.txt', mode = 'r')
+        f5 = open('./pycodestyle.txt', mode = 'r')
+        data1 = f1.read()
+        data2 = f2.read()
+        data3 = f3.read()
+        data4 = f4.read()
+        data5 = f5.read()
+        f1.close()
+        f2.close()
+        f3.close()
+        f4.close()
+        f5.close()
+        os.remove("mypy.txt")
+        os.remove("pylint.txt")
+        os.remove("eradicate.txt")
+        os.remove("radon.txt")
+        os.remove("pycodestyle.txt")
+        os.remove("test.py")
         '''
         return "mypy: {0}, pylint: {1}, eradicate: {2}, radon: {3}, pycodestyle: {4}".format(self.mypy, self.pylint, self.eradicate, self.radon, self.pycodestyle)
         '''
         total_score = mypy + pylint + eradicate + radon + pycodestyle
-        return total_score
+        return mypy, pylint, eradicate, radon, pycodestyle, data1, data2, data3, data4, data5
                 
