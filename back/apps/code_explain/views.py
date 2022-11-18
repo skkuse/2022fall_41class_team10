@@ -9,3 +9,6 @@ def codex(request):
     code_json = json.loads(request.body)
     code = code_json["code"]
     return JsonResponse(Explain.act(code),safe=False)
+    
+
+#This text is from openai Example
