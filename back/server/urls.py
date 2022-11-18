@@ -18,9 +18,10 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('code_efficiency/', include('apps.code_efficiency.urls')),
-    path('code_explain/', include('apps.code_explain.urls')),
-    path('code_readability/', include('apps.code_readability.urls')),
-    path('copy_detect/', include('apps.copy_detect.urls')),
-    path('submit/', include('apps.code_execute.urls')),
+    # path('code_efficiency/', include('apps.code_efficiency.urls')),
+    # path('code_explain/', include('apps.code_explain.urls')),
+    # path('code_readability/', include('apps.code_readability.urls')),
+    # path('copy_detect/', include('apps.copy_detect.urls')),
+    path('code_submit/', include('apps.code_submit.urls')),
+    path('code_run/', include('apps.code_run.urls')),
 ]
