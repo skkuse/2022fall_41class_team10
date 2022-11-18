@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     #CORS
     'corsheaders',
     #apps
-    'apps.code_efficiency',
-    'apps.code_explain',
-    'apps.code_readability',
-    'apps.copy_detect',
+    # 'apps.code_efficiency',
+    # 'apps.code_explain',
+    # 'apps.code_readability',
+    # 'apps.copy_detect',
+    'apps.code_run',
+    'apps.code_submit',
 ]
 
 MIDDLEWARE = [

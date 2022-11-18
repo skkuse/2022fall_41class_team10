@@ -9,9 +9,9 @@ parser.add_argument('--module', type=str, help='add module you want to test')
 # data = 
 # json_data = json.dumps(data)
 
-url = "http://127.0.0.1:8000/"
+url = "http://127.0.0.1:8000/code_submit/"
 sub_url = parser.parse_args().module
-url+=sub_url
+# url+=sub_url
 
 # print((json_data))
 response = requests.post(url, json={"code" : "print('hello world!')"})

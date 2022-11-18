@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CodeExplainConfig(AppConfig):
+class CodeSubmitConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.code_explain'
+    name = 'apps.code_submit'

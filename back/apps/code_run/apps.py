@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CodeReadabilityConfig(AppConfig):
+class CodeRunConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.code_readability'
+    name = 'apps.code_run'

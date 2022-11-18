@@ -1,1 +1,0 @@
-from modules.copy_detect import CopyDetect
