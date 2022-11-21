@@ -23,7 +23,6 @@ code1 = ""
 
 class CodeExecute(unittest.TestCase):
 
-    @unittest.skip("demonstrate skipping")
     def code_execute(code):
         global code1
         code1 = code
