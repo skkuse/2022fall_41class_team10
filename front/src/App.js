@@ -73,8 +73,9 @@ export default class App extends React.Component {
       return(
         <div
           style={{
-            height:"1000px",
-            width:"1500px"
+            height:"1100px",
+            width:"1500px",
+            backgroundColor:"#D5D4D6",
           }}
         >
           <div
@@ -90,7 +91,7 @@ export default class App extends React.Component {
           </div>
           <div
             style={{
-              height:"80%",
+              height:"94.5%",
               width:"29.5%",
               borderColor:"black",
               borderStyle:"solid",
@@ -106,8 +107,8 @@ export default class App extends React.Component {
 
           <div
             style={{
-              height:"80%",
-              width:"30%",
+              height:"94.5%",
+              width:"70.1%",
               borderColor:"black",
               borderStyle:"solid",
               borderWidth:"1px",
@@ -115,6 +116,8 @@ export default class App extends React.Component {
             }}>
               <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult}/>
           </div>
+          {
+            /*
           <div
             style={{
               height:"80%",
@@ -126,6 +129,8 @@ export default class App extends React.Component {
             }}>
               <Result result = {this.state}/>
           </div>
+            */
+          }
         </div>
       )
     }

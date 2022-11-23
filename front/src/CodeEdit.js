@@ -1,9 +1,11 @@
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
-
-
-
+import FolderOpen from "./icon/FolderOpen.jpg"
+import DownloadSimple from "./icon/DownloadSimple.jpg"
+import CopySimple from "./icon/CopySimple.jpg"
+import Arrow from "./icon/ArrowCounterClockwise.jpg"
+import FolppyDisk from "./icon/FloppyDisk.jpg"
 const SaveDiv = styled.div`
   border-color: black;
   float: left;
@@ -11,23 +13,24 @@ const SaveDiv = styled.div`
 
 export default function CodeEdit(props) {
   const editorRef = useRef(null);
-  const textInput = useRef();
-  const submit = props.api
+  const textInput = useRef(null);
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor; 
   }
 
-
-  function upload(){
-    /*
-    const file = e.target.files[0];
+  const uploadClick = (e) =>{
+    textInput.current.click();
+  }
+  const upload = (e) =>{
     
+    const file = e.target.files[0];
     const reader = new FileReader();
+    
     reader.onloadend  = function(){
         editorRef.current.setValue(reader.result);
     }
     reader.readAsText(file);
-    */
+    
   }
   function clear(){
     editorRef.current.setValue("print('Hello Wolrd!')"); 
@@ -37,13 +40,25 @@ export default function CodeEdit(props) {
   function copy(){
     navigator.clipboard.writeText(editorRef.current.getValue());
   }
-  function download(){
-    
-  } 
+  const download =
+    () => {
+        let fileName = '파일이름.py';
+        let output = editorRef.current.getValue();
+        const element = document.createElement('a');
+        const file = new Blob([output], {
+          type: 'text/plain',
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = fileName;
+        document.body.appendChild(element); // FireFox
+        element.click();
+      }
+
+  
 
 
   function save(){  
-    //일단 보류
+    //editorRef.current.getValue()
   }
   function execution(api){
     props.api(editorRef.current.getValue())
@@ -78,31 +93,23 @@ export default function CodeEdit(props) {
     <div
         style={{
             position:"relative",
-            height:"9%",
+            height:"6%",
             overflow:"auto"
         }}
     >
-        <div
-            style={{
-                marginTop:"5%",
-                marginLeft:"5%",
-                textAlign:"center",
-                height:"30%",
-                width:"20%",
-                borderRadius:"10px",
-                lineHeight: "300%",
-                float:"left"
-            }}
-        > 코드 입력</div>
+        
         <div
             style={{
                 position : "absolute",
-                bottom :"10%",
-                right:"2%",
+                top:"15%",
+                right:"69%",
                 textAlign:"center",
-                height:"40%",
-                width:"8%",
-                border:"3px solid black",
+                height:"70%",
+                width:"5.5%",
+                backgroundColor:"#2E4E3F",
+                color:"white",
+                fontSize:"210%",
+                borderRadius:"100%"
             }}
         >
             3
@@ -111,12 +118,15 @@ export default function CodeEdit(props) {
         <div
             style={{
                 position : "absolute",
-                bottom :"10%",
-                right:"13%",
+                top:"15%",
+                right:"75%",
                 textAlign:"center",
-                height:"40%",
-                width:"8%",
-                border:"3px solid black",
+                height:"70%",
+                width:"5.5%",
+                backgroundColor:"#2E4E3F",
+                color:"white",
+                fontSize:"210%",
+                borderRadius:"100%"
             }}
         >
             2
@@ -124,111 +134,139 @@ export default function CodeEdit(props) {
         <div
             style={{
                 position : "absolute",
-                bottom :"10%",
-                right:"24%",
+                top:"15%",
+                right:"81%",
                 textAlign:"center",
-                height:"40%",
-                width:"8%",
-                border:"3px solid black",
+                height:"70%",
+                width:"5.5%",
+                backgroundColor:"#2E4E3F",
+                color:"white",
+                fontSize:"210%",
+                borderRadius:"100%"
             }}
         >
             1
         </div>
+        <img
+            src = {FolppyDisk}
+            style={{
+                position : "absolute",
+                top:"15%",
+                left:"5%",
+                height:"70%",
+                width:"5%",
+                border:"2px solid black",
+            }}
+        />
     </div>
      <Editor
-       height="80%"
+       height="60%"
        defaultLanguage="python"
        defaultValue="print('Hello Wolrd!')"
        onMount={handleEditorDidMount}
      />
+
+    <div
+        style={{
+            position:"relative",
+            height:"25%",
+            width:"10%",
+            left:"100%",
+
+            top:"-90%",
+
+        }}
+    >
+        <label
+
+        for="file"
+        >
+        <img 
+            style={{
+                position : "absolute",
+                    top :"0%",
+                    textAlign:"center",
+                    left:"25%",
+                    height:"20%",
+                    width:"35%",
+                    border:"3px solid black",
+                    fontSize:"90%",
+                    lineHeight:"220%"}}
+            src ={FolderOpen}/>
+        </label>
+        <input type="file" id="file" style = {{display:"none"}} onChange={upload} ref={textInput}/>
+
+        <img
+            src = {Arrow}
+            style={{
+            position : "absolute",
+            top :"25%",
+            left:"25%",
+            textAlign:"center",
+            height:"20%",
+            width:"35%",
+            border:"3px solid black",
+            fontSize:"90%",
+            lineHeight:"220%"
+            }}
+        onClick={clear}
+        />
+
+        <img
+            src = {CopySimple}
+            style={{
+            position : "absolute",
+            top :"50%",
+            left:"25%",
+            textAlign:"center",
+            height:"20%",
+            width:"35%",
+            border:"3px solid black",
+            fontSize:"90%",
+            lineHeight:"220%"
+        }}
+        onClick={copy}
+        />
+        <img
+            src = {DownloadSimple}
+            style={{
+            position : "absolute",
+            top :"75%",
+            left:"25%",
+            textAlign:"center",
+            height:"20%",
+            width:"35%",
+            border:"3px solid black",
+            fontSize:"60%",
+            lineHeight:"290%"
+        }}
+        onClick={download}
+        />
+    </div>
+
+
      <div
         style={{
             position:"relative",
             height:"10.8%",
             width:"100%",
-            border:"1px solid black",
+            top:"-1%"
         }}
     >
-            <label
-                for="file"
-                style={{
-                    position : "absolute",
-                        top :"25%",
-                        textAlign:"center",
-                        left:"2%",
-                        height:"40%",
-                        width:"10%",
-                        border:"3px solid black",
-                        fontSize:"90%",
-                        lineHeight:"220%"
-                }}
-            >
-            업로드
-            </label>
-            
-            <input type="file" id="file" style = {{display:"none"}} ref={upload(this)}/>
-        <div
-            style={{
-                position : "absolute",
-                top :"25%",
-                textAlign:"center",
-                left:"13%",
-                height:"40%",
-                width:"10%",
-                border:"3px solid black",
-                fontSize:"90%",
-                lineHeight:"220%"
-            }}
-            onClick={clear}
-        >
-            지우기
-        </div>
-        <div
-            style={{
-                position : "absolute",
-                top :"25%",
-                textAlign:"center",
-                left:"24%",
-                height:"40%",
-                width:"10%",
-                border:"3px solid black",
-                fontSize:"90%",
-                lineHeight:"220%"
-            }}
-            onClick={copy}
-        >
-            복사
-        </div>
-        <div
-            style={{
-                position : "absolute",
-                top :"25%",
-                right:"30%",
-                textAlign:"center",
-                left:"35%",
-                height:"40%",
-                width:"10%",
-                border:"3px solid black",
-                fontSize:"60%",
-                lineHeight:"290%"
-            }}
-            onClick={download}
-        >
-            다운로드
-        </div>
         <div
             style={{
                 marginTop:"5%",
                 textAlign:"center",
-                height:"40%",
-                width:"13%",
-                borderRadius:"10px",
+                height:"30%",
+                width:"9%",
+                borderRadius:"20px",
                 border:"3px solid black",
+                backgroundColor:"#50A657",
                 float:"right",
                 lineHeight: "200%",
             }}
             onClick={submission}
-        > 제출 </div>
+        > Submit </div>
         <div
             style={{
                 marginTop:"5%",
@@ -240,15 +278,16 @@ export default function CodeEdit(props) {
             style={{
                 marginTop:"5%",
                 textAlign:"center",
-                height:"40%",
-                width:"13%",
-                borderRadius:"10px",
+                height:"30%",
+                width:"9%",
+                borderRadius:"20px",
                 border:"3px solid black",
+                backgroundColor:"white",
                 float:"right",
                 lineHeight: "200%",
             }}
             onClick={grade}
-        > 채점 </div>
+        > Score </div>
         <div
             style={{
                 marginTop:"5%",
@@ -260,15 +299,16 @@ export default function CodeEdit(props) {
             style={{
                 marginTop:"5%",
                 textAlign:"center",
-                height:"40%",
-                width:"13%",
-                borderRadius:"10px",
+                height:"30%",
+                width:"9%",
+                borderRadius:"20px",
                 border:"3px solid black",
+                backgroundColor:"white",
                 float:"right",
                 lineHeight: "200%",
             }}
             onClick={execution}
-        > 실행 </div>
+        > Run </div>
     </div>
    </>
   );
