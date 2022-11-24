@@ -73,8 +73,8 @@ export default class App extends React.Component {
       return(
         <div
           style={{
-            height:"1100px",
-            width:"1500px",
+            height:"1000px",
+            width:"1200px",
             backgroundColor:"#D5D4D6",
           }}
         >
@@ -82,9 +82,7 @@ export default class App extends React.Component {
             style={{
               height:"5%",
               widht:"100%",
-              borderColor:"black",
-              borderStyle:"solid",
-              borderWidth:"1px",
+              backgroundColor:"#2E4E3F"
             }}
           >
             
@@ -93,9 +91,7 @@ export default class App extends React.Component {
             style={{
               height:"94.5%",
               width:"29.5%",
-              borderColor:"black",
-              borderStyle:"solid",
-              borderWidth:"1px",
+              
               float:"left"
             }}>
               <Problem data1 = {pro1} 
@@ -109,9 +105,7 @@ export default class App extends React.Component {
             style={{
               height:"94.5%",
               width:"70.1%",
-              borderColor:"black",
-              borderStyle:"solid",
-              borderWidth:"1px",
+              
               float:"left"
             }}>
               <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult}/>

@@ -104,11 +104,11 @@ export default function CodeEdit(props) {
                 top:"15%",
                 right:"69%",
                 textAlign:"center",
-                height:"70%",
-                width:"5.5%",
+                height:"65%",
+                width:"5%",
                 backgroundColor:"#2E4E3F",
                 color:"white",
-                fontSize:"210%",
+                fontSize:"150%",
                 borderRadius:"100%"
             }}
         >
@@ -121,11 +121,11 @@ export default function CodeEdit(props) {
                 top:"15%",
                 right:"75%",
                 textAlign:"center",
-                height:"70%",
-                width:"5.5%",
+                height:"65%",
+                width:"5%",
                 backgroundColor:"#2E4E3F",
                 color:"white",
-                fontSize:"210%",
+                fontSize:"150%",
                 borderRadius:"100%"
             }}
         >
@@ -137,11 +137,11 @@ export default function CodeEdit(props) {
                 top:"15%",
                 right:"81%",
                 textAlign:"center",
-                height:"70%",
-                width:"5.5%",
+                height:"65%",
+                width:"5%",
                 backgroundColor:"#2E4E3F",
                 color:"white",
-                fontSize:"210%",
+                fontSize:"150%",
                 borderRadius:"100%"
             }}
         >
@@ -173,7 +173,7 @@ export default function CodeEdit(props) {
             width:"10%",
             left:"100%",
 
-            top:"-90%",
+            top:"-70%",
 
         }}
     >
@@ -187,9 +187,9 @@ export default function CodeEdit(props) {
                     top :"0%",
                     textAlign:"center",
                     left:"25%",
-                    height:"20%",
+                    height:"17%",
                     width:"35%",
-                    border:"3px solid black",
+                    border:"1px solid black",
                     fontSize:"90%",
                     lineHeight:"220%"}}
             src ={FolderOpen}/>
@@ -203,9 +203,9 @@ export default function CodeEdit(props) {
             top :"25%",
             left:"25%",
             textAlign:"center",
-            height:"20%",
+            height:"17%",
             width:"35%",
-            border:"3px solid black",
+            border:"1px solid black",
             fontSize:"90%",
             lineHeight:"220%"
             }}
@@ -219,9 +219,9 @@ export default function CodeEdit(props) {
             top :"50%",
             left:"25%",
             textAlign:"center",
-            height:"20%",
+            height:"17%",
             width:"35%",
-            border:"3px solid black",
+            border:"1px solid black",
             fontSize:"90%",
             lineHeight:"220%"
         }}
@@ -234,14 +234,25 @@ export default function CodeEdit(props) {
             top :"75%",
             left:"25%",
             textAlign:"center",
-            height:"20%",
+            height:"17%",
             width:"35%",
-            border:"3px solid black",
+            border:"1px solid black",
             fontSize:"60%",
             lineHeight:"290%"
         }}
         onClick={download}
         />
+    </div>
+    <div
+        style={{
+            position:"relative",
+            top:"-23%",
+            height:"25%",
+            width:"100%",
+            backgroundColor:"black"
+        }}
+    >
+
     </div>
 
 
@@ -250,7 +261,7 @@ export default function CodeEdit(props) {
             position:"relative",
             height:"10.8%",
             width:"100%",
-            top:"-1%"
+            top:"-25%"
         }}
     >
         <div
