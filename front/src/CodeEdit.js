@@ -252,7 +252,18 @@ export default function CodeEdit(props) {
             backgroundColor:"black"
         }}
     >
-
+        <div
+            style={{
+                position:"relative",
+                top:"8%",
+                left:"5%",
+                height:"84%",
+                width:"90%",
+                color:"white"
+            }}
+        >
+            Hello Wolrd!
+        </div>
     </div>
 
 
@@ -271,10 +282,11 @@ export default function CodeEdit(props) {
                 height:"30%",
                 width:"9%",
                 borderRadius:"20px",
-                border:"3px solid black",
+                border:"0.5px solid grey",
                 backgroundColor:"#50A657",
                 float:"right",
                 lineHeight: "200%",
+                fontWeight:"bolder"
             }}
             onClick={submission}
         > Submit </div>
@@ -292,10 +304,11 @@ export default function CodeEdit(props) {
                 height:"30%",
                 width:"9%",
                 borderRadius:"20px",
-                border:"3px solid black",
+                border:"0.5px solid grey",
                 backgroundColor:"white",
                 float:"right",
                 lineHeight: "200%",
+                fontWeight:"bolder"
             }}
             onClick={grade}
         > Score </div>
@@ -313,10 +326,11 @@ export default function CodeEdit(props) {
                 height:"30%",
                 width:"9%",
                 borderRadius:"20px",
-                border:"3px solid black",
+                border:"0.5px solid grey",
                 backgroundColor:"white",
                 float:"right",
                 lineHeight: "200%",
+                fontWeight:"bolder"
             }}
             onClick={execution}
         > Run </div>

@@ -4,7 +4,7 @@ import Problem from "./Problem"
 import Result from "./Result"
 import styled from 'styled-components';
 import axios from 'axios'
-
+import Home from "./icon/House.png"
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -80,12 +80,51 @@ export default class App extends React.Component {
         >
           <div
             style={{
+              position:"relative",
               height:"5%",
               widht:"100%",
               backgroundColor:"#2E4E3F"
             }}
           >
-            
+            <img
+              style={{
+                position:"relative",
+                left:"1%",
+                height:"70%",
+                width:"3%",
+                top:"15%"
+
+              }}
+              src = {Home}
+            >
+            </img>
+            <span
+              style={{
+                position:"relative",
+                color:"white",
+                fontSize:"25px",
+                fontWeight:"bolder",
+                top:"4%",
+                width:"10%",
+                left:"4%"
+              }}
+            >강의 1</span>
+            <div
+              style={{
+                position:"relative",
+                borderRadius:"10px",
+                backgroundColor:"white",
+                top:"-60%",
+                left:"35%",
+                height:"60%",
+                width:"30%",
+                textAlign:"center",
+                fontWeight:"bolder",
+                fontSize:"120%",
+              }}
+            >
+                week 1 정수 덧셈 구현
+            </div>
           </div>
           <div
             style={{
