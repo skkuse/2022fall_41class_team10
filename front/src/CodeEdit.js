@@ -249,7 +249,7 @@ export default function CodeEdit(props) {
             top:"-23%",
             height:"25%",
             width:"100%",
-            backgroundColor:"black"
+            backgroundColor:"white"
         }}
     >
         <div
@@ -259,7 +259,7 @@ export default function CodeEdit(props) {
                 left:"5%",
                 height:"84%",
                 width:"90%",
-                color:"white"
+                
             }}
         >
             Hello Wolrd!
