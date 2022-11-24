@@ -24,4 +24,5 @@ urlpatterns = [
     # path('copy_detect/', include('apps.copy_detect.urls')),
     path('code_submit/', include('apps.code_submit.urls')),
     path('code_run/', include('apps.code_run.urls')),
+    path('lecture/', include('apps.db.urls'))
 ]

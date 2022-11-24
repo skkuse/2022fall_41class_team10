@@ -2,10 +2,15 @@ import sys
 from io import StringIO
 import sqlite3
 import unittest
+import os
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
 
 # Create your views here.
 def connection():
-    con = sqlite3.connect('../db.sqlite3')
+    print(BASE_DIR)
+    con = sqlite3.connect(DB_PATH)
     return con
 def read_output(con):
     cursor_db = con.cursor()
