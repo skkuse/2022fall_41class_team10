@@ -29,7 +29,14 @@ code1 = ""
 class CodeExecute(unittest.TestCase):
 
     def code_execute(code):
-        #code = "a = 2\nprint(b)" #일단 임의로 지정함
+
+        #금지 module
+        stopwords = ['itertools', 'import sys', "scipy", "numpy"]
+        
+        for word in stopwords:
+            if word in code:
+                return "Failed to execute command"
+
         global code1
         code1 = code
         old_stdout = sys.stdout
