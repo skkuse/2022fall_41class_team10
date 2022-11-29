@@ -18,7 +18,7 @@ const testcase2 ={
 export default class App extends React.Component {
   
   state  = {
-    submit: 0,
+    submit: 1,
     case_correct:{
                   "테스트케이스-1":"통과",
                   "테스트케이스-2":"통과",
@@ -43,12 +43,15 @@ export default class App extends React.Component {
   }
   api = async (data)=>{
     await axios.post(
-      "http://127.0.0.1:8000/code_efficiency/",
+      "http://127.0.0.1:8000/code_run/",
       {code: data}
     )
     .then(response=>
         console.log(response)
-      )
+    )
+    .then(this.setState({
+      submit:1
+    }))
     /*
     .then(response=>
         this.setState(current=>({
@@ -126,6 +129,9 @@ export default class App extends React.Component {
                 week 1 정수 덧셈 구현
             </div>
           </div>
+          {
+            this.state.submit===0
+          ?
           <div
             style={{
               height:"94.5%",
@@ -139,30 +145,34 @@ export default class App extends React.Component {
                   testcase2 = {testcase2}
               />
           </div>
-
+          :
+          <>
+          </>
+          }
           <div
             style={{
               height:"94.5%",
-              width:"70.1%",
-              
+              width: !(this.state.submit===1) ?"70.1%":"44.1%",
+              left: !(this.state.submit===1) ? "0%":"1%",
               float:"left"
             }}>
-              <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult}/>
+              <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
           </div>
           {
-            /*
+            
           <div
             style={{
               height:"80%",
-              width:"40%",
+              width:"50%",
               borderColor:"black",
               borderStyle:"solid",
               borderWidth:"1px",
               float:"left"
+              
             }}>
               <Result result = {this.state}/>
           </div>
-            */
+            
           }
         </div>
       )

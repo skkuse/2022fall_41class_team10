@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
 import FolderOpen from "./icon/FolderOpen.jpg"
@@ -6,6 +6,7 @@ import DownloadSimple from "./icon/DownloadSimple.jpg"
 import CopySimple from "./icon/CopySimple.jpg"
 import Arrow from "./icon/ArrowCounterClockwise.jpg"
 import FolppyDisk from "./icon/FloppyDisk.jpg"
+import axios from 'axios'
 const SaveDiv = styled.div`
   border-color: black;
   float: left;
@@ -14,6 +15,7 @@ const SaveDiv = styled.div`
 export default function CodeEdit(props) {
   const editorRef = useRef(null);
   const textInput = useRef(null);
+  const [codeResult, setCodeResult ] = useState("");
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor; 
   }
@@ -61,17 +63,30 @@ export default function CodeEdit(props) {
     //editorRef.current.getValue()
   }
   function execution(api){
+    /*
     props.api(editorRef.current.getValue())
     props.submit(0)
-    //상위 component에서 채점하는 것을 알아야 함
-    //또한 현재 작성한 코드를 상위 component로 전송
-    //상위 component는 서버로 데이터 전송
-    //get전까지 loading
-    //get하고 나서 채점 component에 내용 전송
+    */
+    axios.post(
+        "http://127.0.0.1:8000/code_run/",
+        {code: editorRef.current.getValue()}
+      )
+      .then(response=>
+        setCodeResult(JSON.parse(response['data'])['result'])
+      )
   }
   function grade(api){
+    /*
     props.api(editorRef.current.getValue())
     props.submit(2)
+    */
+    axios.post(
+        "http://127.0.0.1:8000/code_submit/",
+        {code: editorRef.current.getValue()}
+      )
+      .then(response=>
+            console.log(JSON.parse(response['data']))
+      )
     //상위 component에서 채점하는 것을 알아야 함
     //또한 현재 작성한 코드를 상위 component로 전송
     //상위 component는 서버로 데이터 전송
@@ -90,6 +105,7 @@ export default function CodeEdit(props) {
   }
   return (
    <>
+   
     <div
         style={{
             position:"relative",
@@ -97,7 +113,9 @@ export default function CodeEdit(props) {
             overflow:"auto"
         }}
     >
-        
+    {(props.visible===0)
+        ?
+        <>
         <div
             style={{
                 position : "absolute",
@@ -158,6 +176,17 @@ export default function CodeEdit(props) {
                 border:"2px solid black",
             }}
         />
+        </>
+        :
+        <div
+            style={{
+                position:"absolute",
+                width:"5%",
+                height:"10%",
+
+            }}
+        />
+    }
     </div>
      <Editor
        height="60%"
@@ -165,7 +194,9 @@ export default function CodeEdit(props) {
        defaultValue="print('Hello Wolrd!')"
        onMount={handleEditorDidMount}
      />
-
+    {
+        props.visible===0
+    ?
     <div
         style={{
             position:"relative",
@@ -243,6 +274,19 @@ export default function CodeEdit(props) {
         onClick={download}
         />
     </div>
+    :
+    <div
+        style={{
+            position:"relative",
+            height:"25%",
+            width:"10%",
+            left:"100%",
+
+            top:"-70%",
+
+        }}
+    />
+    }
     <div
         style={{
             position:"relative",
@@ -262,11 +306,14 @@ export default function CodeEdit(props) {
                 
             }}
         >
-            Hello Wolrd!
+            {codeResult}
         </div>
     </div>
 
+    {
 
+    props.visible===0
+    ?
      <div
         style={{
             position:"relative",
@@ -335,6 +382,9 @@ export default function CodeEdit(props) {
             onClick={execution}
         > Run </div>
     </div>
+    :
+    <></>
+    }
    </>
   );
 }

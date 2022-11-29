@@ -1,10 +1,11 @@
-import React, {useRef} from "react";
+import React, {useRef,useState} from "react";
 import styled from 'styled-components';
 
-var testnum = 1;
 
 export default class Problem extends React.Component{
-
+    state = {
+        testnum:1
+    }
     render(){
         return(
             <>
@@ -80,6 +81,7 @@ export default class Problem extends React.Component{
                             borderRadius:"100%",
                             lineHeight: "170%",
                         }}
+                        onClick={()=>{this.setState({testnum:1})}}
                     >
                         1
                     </div>
@@ -97,6 +99,7 @@ export default class Problem extends React.Component{
                             borderRadius:"100%",
                             lineHeight: "170%",
                         }}
+                        onClick={()=>{this.setState({testnum:2})}}
                     >
                         2
                     </div>
@@ -112,7 +115,7 @@ export default class Problem extends React.Component{
                     }}
                 >
                     {
-                    (testnum===1)
+                    (this.state.testnum===1)
                     ?
                         <>
                             &nbsp;&nbsp;&nbsp;&nbsp;input: {this.props.testcase1['input']}
