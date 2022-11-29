@@ -14,7 +14,7 @@ sub_url = parser.parse_args().module
 # url+=sub_url
 
 # print((json_data))
-response = requests.post(url, json={"code" : "import sys\nprint('hello')"})
+response = requests.post(url, json={"code" : "import time\ntime.sleep(11)"})
 print (response.json())
 
 assert response.status_code == 200

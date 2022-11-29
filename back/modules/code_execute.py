@@ -4,6 +4,8 @@ import sqlite3
 import unittest
 import os
 from pathlib import Path
+import time
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
 
@@ -48,10 +50,14 @@ class CodeExecute(unittest.TestCase):
         result = ""
 
         try:
+            start = time.time()
             exec(code)
+            end = time.time()
             sys.stdout = old_stdout
             sys.stderr = old_stderr
             result = redirected_output.getvalue()
+            if end - start > 10:
+                result =  "Timeout"
         except:
             sys.stdout = old_stdout
             sys.stderr = old_stderr
