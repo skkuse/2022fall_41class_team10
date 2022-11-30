@@ -83,9 +83,9 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"33%",
-                                    
+                                    fontWeight:"bolder",
                                     float:"left",
-                                    
+                                    fontSize:"18px"
                                     
                                 }}  
                                 onClick={this.functionality}  
@@ -99,8 +99,9 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"32%",
-                                  
-                                    float:"left"
+                                    fontWeight:"bolder",
+                                    float:"left",
+                                    fontSize:"18px"
                                 }}    
                                 onClick={this.efficency}
                             >
@@ -113,7 +114,9 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"32%",
-                                    float:"left"
+                                    float:"left",
+                                    fontWeight:"bolder",
+                                    fontSize:"18px"
                                 }}   
                                 onClick={this.readability} 
                             >
@@ -130,9 +133,9 @@ export default class Result extends React.Component{
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => 
                                             <>
-                                                <div style={{marginTop:"5%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center"}}>{word}</div> 
+                                                <div style={{marginTop:"5%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div> 
                                                 <div style={{marginTop:"5%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
-                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right"}}>{int}</div> 
+                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder"}}>{int}</div> 
                                             </>
                                     )
                                     :
