@@ -33,35 +33,49 @@ export default class Result extends React.Component{
     render(){
         return(
             <>
-                {this.props.result.submit===1
-                    ?   
+                
+                    <>
                         <div
                             style={{
                                 position:"relative",
                                 width:"100%",
-                                height:'100%'
+                                height:'7%',
                             }}
                         >
+                            <div
+                                style={{
+                                    position : "absolute",
+                                    width:"20%",
+                                    lineHeight:"230%",
+                                    fontSize:"150%",
+                                    fontWeight:"bolder",
+                                    left:"-80%"
+                                }}
+                                onClick={this.props.backHome}
+                            >코드 보기</div>
                             <div
                                 style = {{
                                     position : "relative",
                                     height:"6%",
-                                    borderColor:"black",
-                                    borderStyle:"solid",
-                                    borderWidth:"1px",
-                                    lineHeight: "300%",
+                                    lineHeight:"220%",
+                                    fontSize:"150%",
+                                    fontWeight:"bolder",
+                                    
                                 }}
                             >
                                 &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
                             </div>
-                            <div
-                                style={{
-                                    position : "relative",
-                                    height:"40%"
-                                }}
-                            >
-
-                            </div>
+                        </div>   
+                        <div
+                            style={{
+                                position:"relative",
+                                width:"100%",
+                                height:'103%',
+                                backgroundColor:"white",
+                                left:"3%"
+                            }}
+                        >
+                            <br/>
                             <div
                                 style={{
                                     position : "relative",
@@ -69,8 +83,9 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"33%",
-                                    border:"3px solid black",
+                                    
                                     float:"left",
+                                    
                                     
                                 }}  
                                 onClick={this.functionality}  
@@ -84,7 +99,7 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"32%",
-                                    border:"3px solid black",
+                                  
                                     float:"left"
                                 }}    
                                 onClick={this.efficency}
@@ -98,7 +113,6 @@ export default class Result extends React.Component{
                                     Top:"65%",
                                     height:"4%",
                                     width:"32%",
-                                    border:"3px solid black",
                                     float:"left"
                                 }}   
                                 onClick={this.readability} 
@@ -126,38 +140,21 @@ export default class Result extends React.Component{
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => <                       
                                                         >
-                                                            <div style={{marginTop:"5%",position:"relative",width:"40%",height:"3%",float:"left",textAlign:"center"}}>{word}</div> 
-                                                            <div style={{marginTop:"5%",position:"relative",width:"33%",height:"3%",border:"1px solid black",float:"left",}}>
-                                                                <div style={{position:"relative",backgroundColor:"red", width:int.toString()+"%",height: "100%"}}>
+                                                            <div style={{marginTop:"5%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div> 
+                                                            <div style={{marginTop:"5%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
+                                                                <div style={{position:"relative",backgroundColor:"#FF7E7E", width:int.toString()+"%",height: "100%",borderRadius:"10px"}}>
                                                                 </div>
                                                             </div>
-                                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right"}}>{int}점 </div>
+                                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}점 </div>
                                                             <br/>
                                                         </> 
                                     )
                                 }
                             </>
                         </div>
-                    :
-                        <div> 
-                            <div
-                                style = {{
-                                    position : "relative",
-                                    height:"6%",
-                                    borderColor:"black",
-                                    borderStyle:"solid",
-                                    borderWidth:"1px",
-                                    lineHeight: "300%",
-                                }}
-                            >
-                                &nbsp;&nbsp;&nbsp;&nbsp;실행 결과
-                            </div>
-                            <div style = {{lineHeight:"180%"}}>
-                                    {this.props.result.code_result.split('\n').map(word => {
-                                        return (<span>&nbsp;&nbsp;&nbsp;&nbsp;{ word }<br/></span>)
-                                    })}
-                            </div>
-                        </div>}
+                        </>
+                    
+                        
             </>
         )
     }

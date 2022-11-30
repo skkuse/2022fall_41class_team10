@@ -18,7 +18,7 @@ const testcase2 ={
 export default class App extends React.Component {
   
   state  = {
-    submit: 1,
+    submit: 0,
     case_correct:{
                   "테스트케이스-1":"통과",
                   "테스트케이스-2":"통과",
@@ -39,26 +39,29 @@ export default class App extends React.Component {
                   "radon": 70,
                   "pycodestyle": 15
     },
-    code_result:" "
+    code_result:" ",
+    data:""
   }
   api = async (data)=>{
     await axios.post(
-      "http://127.0.0.1:8000/code_run/",
+      "http://127.0.0.1:8000/code_submit/",
       {code: data}
     )
     .then(response=>
-        console.log(response)
+        this.setReadability(JSON.parse(response["data"]))
     )
-    .then(this.setState({
-      submit:1
-    }))
-    /*
-    .then(response=>
-        this.setState(current=>({
-          code_result:JSON.parse(response['data'])['result']
-        }))
-    )
-    */
+  }
+  setReadability = (data)=>{
+    console.log(data)
+    this.setState({
+      readability: {
+        "mypy": data["score"]["code_readability"][0]*5,
+        "pylint": data["score"]["code_readability"][1]*5,
+        "eradicate" : data["score"]["code_readability"][2]*5,
+        "radon": data["score"]["code_readability"][3]*5,
+        "pycodestyle": data["score"]["code_readability"][4]*5
+      }
+    })
   }
   setCodeResult = (code)=>{
         console.log(code)
@@ -70,6 +73,11 @@ export default class App extends React.Component {
           submit:tf}))
 
   }
+  backHome = ()=>{
+    this.setState(current=>({
+      submit:0
+    }))
+  }
 
   
   render(){
@@ -78,7 +86,7 @@ export default class App extends React.Component {
           style={{
             height:"1000px",
             width:"1200px",
-            backgroundColor:"#D5D4D6",
+            backgroundColor:"#F0F0F0",
           }}
         >
           <div
@@ -151,6 +159,7 @@ export default class App extends React.Component {
           }
           <div
             style={{
+              position:"relative",
               height:"94.5%",
               width: !(this.state.submit===1) ?"70.1%":"44.1%",
               left: !(this.state.submit===1) ? "0%":"1%",
@@ -159,20 +168,19 @@ export default class App extends React.Component {
               <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
           </div>
           {
-            
+            this.state.submit===1
+            ?
           <div
             style={{
               height:"80%",
               width:"50%",
-              borderColor:"black",
-              borderStyle:"solid",
-              borderWidth:"1px",
               float:"left"
               
             }}>
-              <Result result = {this.state}/>
+              <Result result = {this.state} backHome={this.backHome}/>
           </div>
-            
+            :
+            <></>
           }
         </div>
       )

@@ -1,11 +1,11 @@
 import React, {useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
-import FolderOpen from "./icon/FolderOpen.jpg"
-import DownloadSimple from "./icon/DownloadSimple.jpg"
-import CopySimple from "./icon/CopySimple.jpg"
-import Arrow from "./icon/ArrowCounterClockwise.jpg"
-import FolppyDisk from "./icon/FloppyDisk.jpg"
+import FolderOpen from "./icon/FolderOpen.png"
+import DownloadSimple from "./icon/DownloadSimple.png"
+import CopySimple from "./icon/CopySimple.png"
+import Arrow from "./icon/ArrowCounterClockwise.png"
+import FolppyDisk from "./icon/FloppyDisk.png"
 import axios from 'axios'
 const SaveDiv = styled.div`
   border-color: black;
@@ -35,7 +35,7 @@ export default function CodeEdit(props) {
     
   }
   function clear(){
-    editorRef.current.setValue("print('Hello Wolrd!')"); 
+    editorRef.current.setValue("print('Hello World!')"); 
     props.submit(0)
     props.setCodeResult(" ")
   }
@@ -95,6 +95,7 @@ export default function CodeEdit(props) {
   }
   
   function submission(){
+    execution()
     props.api(editorRef.current.getValue())
     props.submit(1)
     //상위 component에서 채점하는 것을 알아야 함
@@ -173,7 +174,7 @@ export default function CodeEdit(props) {
                 left:"5%",
                 height:"70%",
                 width:"5%",
-                border:"2px solid black",
+                border:"0px solid black",
             }}
         />
         </>
@@ -189,9 +190,10 @@ export default function CodeEdit(props) {
     }
     </div>
      <Editor
+       backgroundColor="#F0F0F0"
        height="60%"
        defaultLanguage="python"
-       defaultValue="print('Hello Wolrd!')"
+       defaultValue="print('Hello World!')"
        onMount={handleEditorDidMount}
      />
     {
@@ -201,11 +203,11 @@ export default function CodeEdit(props) {
         style={{
             position:"relative",
             height:"25%",
-            width:"10%",
-            left:"100%",
-
+            width:"6%",
+            left:"102%",
+            backgroundColor:"#F0F0F0",
             top:"-70%",
-
+            borderRadius:"10px"
         }}
     >
         <label
@@ -215,12 +217,9 @@ export default function CodeEdit(props) {
         <img 
             style={{
                 position : "absolute",
-                    top :"0%",
+                    top :"5%",
                     textAlign:"center",
-                    left:"25%",
-                    height:"17%",
-                    width:"35%",
-                    border:"1px solid black",
+                    left:"10%",
                     fontSize:"90%",
                     lineHeight:"220%"}}
             src ={FolderOpen}/>
@@ -231,12 +230,10 @@ export default function CodeEdit(props) {
             src = {Arrow}
             style={{
             position : "absolute",
-            top :"25%",
-            left:"25%",
+            top :"28%",
+            left:"11%",
             textAlign:"center",
-            height:"17%",
-            width:"35%",
-            border:"1px solid black",
+            
             fontSize:"90%",
             lineHeight:"220%"
             }}
@@ -247,12 +244,9 @@ export default function CodeEdit(props) {
             src = {CopySimple}
             style={{
             position : "absolute",
-            top :"50%",
-            left:"25%",
+            top :"53%",
+            left:"9%",
             textAlign:"center",
-            height:"17%",
-            width:"35%",
-            border:"1px solid black",
             fontSize:"90%",
             lineHeight:"220%"
         }}
@@ -263,11 +257,8 @@ export default function CodeEdit(props) {
             style={{
             position : "absolute",
             top :"75%",
-            left:"25%",
+            left: "10%",
             textAlign:"center",
-            height:"17%",
-            width:"35%",
-            border:"1px solid black",
             fontSize:"60%",
             lineHeight:"290%"
         }}
