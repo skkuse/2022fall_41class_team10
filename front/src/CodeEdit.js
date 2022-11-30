@@ -122,7 +122,7 @@ export default function CodeEdit(props) {
     {(props.visible===0)
         ?
         <>
-        <div
+        <button
             style={{
                 position : "absolute",
                 top:"15%",
@@ -137,9 +137,9 @@ export default function CodeEdit(props) {
             }}
         >
             3
-        </div>
+        </button>
 
-        <div
+        <button
             style={{
                 position : "absolute",
                 top:"15%",
@@ -154,8 +154,8 @@ export default function CodeEdit(props) {
             }}
         >
             2
-        </div>
-        <div
+        </button>
+        <button
             style={{
                 position : "absolute",
                 top:"15%",
@@ -170,7 +170,7 @@ export default function CodeEdit(props) {
             }}
         >
             1
-        </div>
+        </button>
         <img
             src = {FolppyDisk}
             style={{
@@ -191,7 +191,11 @@ export default function CodeEdit(props) {
                 height:"10%",
 
             }}
-        />
+        >
+            <text>
+                Hi
+            </text>
+        </div>
     }
     </div>
      <Editor
