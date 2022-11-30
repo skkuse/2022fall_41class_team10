@@ -13,6 +13,11 @@ const SaveDiv = styled.div`
 `;
 
 export default function CodeEdit(props) {
+    const state = {
+        1:"",
+        2:"",
+        3:"",
+    }
   const editorRef = useRef(null);
   const textInput = useRef(null);
   const [codeResult, setCodeResult ] = useState("");
@@ -44,7 +49,7 @@ export default function CodeEdit(props) {
   }
   const download =
     () => {
-        let fileName = '파일이름.py';
+        let fileName = 'week1_assign.py';
         let output = editorRef.current.getValue();
         const element = document.createElement('a');
         const file = new Blob([output], {

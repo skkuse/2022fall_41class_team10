@@ -27,10 +27,10 @@ export default class App extends React.Component {
                   "히든 테스트케이스-5":"통과",
                   },
     efficency:{
-                  "Line Of Codes": 60,
+                  "Line Of Codes": 90,
                   "Resevation Words": 100,
                   "Data Flow Compliexity": 80,
-                  "control Flow Complexity": 30
+                  "control Flow Complexity": 80
     },
     readability: {
                   "mypy": 20,
