@@ -72,14 +72,14 @@ export default class Problem extends React.Component{
                             position:"absolute",
                             textAlign:"center",
                             top:"25%",
-                            left:"40%",
-                            height:"60%",
+                            right:"20%",
+                            height:"70%",
                             width:"10%",
                             backgroundColor:"#2E4E3F",
                             color:"white",
                             fontSize:"100%",
                             borderRadius:"100%",
-                            lineHeight: "170%",
+                            lineHeight: "200%",
                         }}
                         onClick={()=>{this.setState({testnum:1})}}
                     >
@@ -90,14 +90,14 @@ export default class Problem extends React.Component{
                             position:"absolute",
                             textAlign:"center",
                             top:"25%",
-                            left:"52%",
-                            height:"60%",
+                            right:"5%",
+                            height:"70%",
                             width:"10%",
                             backgroundColor:"#2E4E3F",
                             color:"white",
                             fontSize:"100%",
                             borderRadius:"100%",
-                            lineHeight: "170%",
+                            lineHeight: "200%",
                         }}
                         onClick={()=>{this.setState({testnum:2})}}
                     >

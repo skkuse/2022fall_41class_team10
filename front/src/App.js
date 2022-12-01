@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import axios from 'axios'
 import {ReactComponent as Home} from "./icon/house.svg"
 import {ReactComponent as Gear} from "./icon/gear.svg"
+import Diff from "./Diff"
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -19,7 +20,7 @@ const testcase2 ={
 export default class App extends React.Component {
   
     state = {
-        submit: 0,
+        submit: 1,
         case_correct:{
             "테스트케이스-1":"통과",
             "테스트케이스-2":"통과",
@@ -83,8 +84,8 @@ export default class App extends React.Component {
         <div
             id={"total_container"}
             style={{
-                height:"1000px",
-                width:"1200px",
+                height:"1200px",
+                width:"1800px",
                 backgroundColor:"#F0F0F0"}}>
 
             <header
@@ -139,6 +140,7 @@ export default class App extends React.Component {
             </header>
 
             {this.state.submit===0 ?
+            <>
                 <div
                     id={"problemComponent"}
                     style={{
@@ -150,8 +152,7 @@ export default class App extends React.Component {
                              testcase1 = {testcase1}
                              testcase2 = {testcase2}/>
                 </div>
-                : <> </>}
-            <div
+                <div
                 id={"condeEditComponent"}
                 style={{
                     position:"relative",
@@ -161,7 +162,22 @@ export default class App extends React.Component {
                     float:"left"}}>
                 <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
             </div>
+            </>
+                : <> </>}
             {this.state.submit===1 ?
+                <>
+                <div
+                    style={{position:"relative",
+                    top:"1%",
+                    height:"85%",
+                    width:"48%",
+                    float:"left",
+                    marginTop:"3%",
+                    backgroundColor:"white"
+                }}
+                >
+                <Diff/>
+                </div>
                 <div
                     id={"resultComponent"}
                     style={{
@@ -170,6 +186,7 @@ export default class App extends React.Component {
                         float:"left"}}>
                     <Result result = {this.state} backHome={this.backHome}/>
                 </div>
+                </>
                 : <></>}
         </div>)
     }

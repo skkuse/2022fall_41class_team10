@@ -133,7 +133,8 @@ export default function CodeEdit(props) {
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    width: "4%",
+                                    height: "65%",
                                     left: "5%"
                                 }}>
                                 1
@@ -141,7 +142,8 @@ export default function CodeEdit(props) {
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    width: "4%",
+                                    height: "65%",
                                     left: "7%"
                                 }}>
                                 2
@@ -149,7 +151,8 @@ export default function CodeEdit(props) {
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    width: "4%",
+                                    height: "65%",
                                     left: "9%"
                                 }}>
                                 3
