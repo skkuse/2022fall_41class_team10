@@ -2,7 +2,7 @@ import React, {useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
 import './style/class.css'
-import FolderOpen from "./icon/FolderOpen.png"
+import {ReactComponent as FolderOpen} from "./icon/folderopen.svg"
 import DownloadSimple from "./icon/DownloadSimple.png"
 import CopySimple from "./icon/CopySimple.png"
 import Arrow from "./icon/ArrowCounterClockwise.png"
@@ -93,7 +93,7 @@ export default function CodeEdit(props) {
         //get전까지 loading
         //get하고 나서 채점 component에 내용 전송
     }
-  
+
     function submission(){
         execution()
         props.api(editorRef.current.getValue())

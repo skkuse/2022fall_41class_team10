@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import axios from 'axios'
 import {ReactComponent as Home} from "./icon/house.svg"
 import {ReactComponent as Gear} from "./icon/gear.svg"
-import {Button} from "react-bootstrap";
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -96,7 +95,7 @@ export default class App extends React.Component {
                     width:"100%",
                     backgroundColor:"#2E4E3F",
                     border:"1em #F0F0F0"}}>
-                <Button
+                <button
                     id={"homeButton"}
                     style={{
                         position:"relative",
@@ -105,7 +104,7 @@ export default class App extends React.Component {
                         backgroundColor:"#2E4E3F",
                         border:"#2E4E3F"}}>
                     <Home/>
-                </Button>
+                </button>
                 <div
                     style={{
                         position:"relative",
@@ -127,7 +126,7 @@ export default class App extends React.Component {
                         fontWeight:"bolder",
                         fontSize:"120%"}}>
                     week 1 정수 덧셈 구현</div>
-                <Button
+                <button
                     id={"settingButton"}
                     style={{
                         position:"relative",
@@ -136,7 +135,7 @@ export default class App extends React.Component {
                         backgroundColor:"#2E4E3F",
                         border:"#2E4E3F"}}>
                     <Gear/>
-                </Button>
+                </button>
             </header>
 
             {this.state.submit===0 ?
