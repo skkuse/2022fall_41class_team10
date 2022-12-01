@@ -13,14 +13,14 @@ class CodeScore:
         return False
 
     def save2file(name, code):
-        file_path = "../data/" + name + ".py" 
+        file_path = "./data/" + name + ".py" 
         f = open(file_path, mode='w')
         f.write(code)
         f.close()
 
     def check_testcase(name, unittest_input, unittest_output):
         try:
-            file_path = "../data/" + name + ".py" 
+            file_path = "./data/" + name + ".py" 
             result = subprocess.run(
                 ["python", file_path],
                 capture_output=True,

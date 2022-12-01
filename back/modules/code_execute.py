@@ -33,13 +33,6 @@ class CodeExecute(unittest.TestCase):
 
     def code_execute(code):
 
-        #금지 module
-        stopwords = ['itertools', 'import sys', "scipy", "numpy"]
-        
-        for word in stopwords:
-            if word in code:
-                return "Failed to execute command"
-
         global code1
         code1 = code
         old_stdout = sys.stdout
@@ -61,31 +54,3 @@ class CodeExecute(unittest.TestCase):
             result = "Failed to execute command"
         
         return result
-
-    def test(self):
-        result = CodeExecute.code_execute(code1)
-        if result == "Failed to execute command":
-            with self.assertRaises(IOError):
-                exec(code1)
-        else:
-            self.assertEqual(result.strip(), answer)
-
-'''
-def makeSuite(testcase, tests):
-    return unittest.TestSuite(map(testcase, tests))
-'''
-
-if __name__ == "__main__":
-    '''
-    suite = makeSuite(CodeExecute,['test'])
-
-    allsuites = unittest.TestSuite([suite])
-    redirected_result = StringIO()
-    unittest.TextTestRunner(verbosity = 2).run(allsuites)
-    result = redirected_result.getvalue()
-    '''
-    # path = "./save.txt"
-    # old_stderr = sys.stderr
-    # with open(path,'w') as sys.stderr:
-    #     unittest.main()
-    print(CodeExecute.code_execute("input()"))
