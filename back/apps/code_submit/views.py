@@ -39,7 +39,7 @@ def code_submit(request):
     code_efficiency = MultiMetrics.CalculMetrics(code)
     # code_explain = Explain.act(code)
     code_readability = Pylama.act("#This is test code")
-    copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, code)
+    copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
 
     result_json = json.dumps({
         "result": tc_list,
