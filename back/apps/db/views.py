@@ -44,6 +44,15 @@ def get_testcase_list(request, class_id, assign_id):
 
     return JsonResponse(result_json, safe=False)
 
+def get_explain(request, class_id, assign_id):
+    data=db.get_explain(class_id, assign_id)
+    # Maybe change later
+    result_json = json.dumps({
+        "Explain" : data,
+    })
+
+    return JsonResponse(result_json, safe=False)
+
 def save_user_code(request):
     try:
         body = json.loads(request.body)
