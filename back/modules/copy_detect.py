@@ -21,12 +21,30 @@ class CopyDetect:
 
         
         dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
-        boil_path = dir_path+"/boil"
+        boil_dir_path = dir_path+"/boil"
+        anwser_path=dir_path+"/anwser.py"
+        boil_path=boil_dir_path+"/boiler.py"
 
-        if not os.path.isdir(boil_path):
-            os.mkdir(boil_path)
+        info=db.get_assignment_info(class_id,assign_id)
+        skeleton=info[0][3]
+        anwser=info[0][4]
+
+        if not os.path.isfile(anwser_path):
+            anwser_f=open(anwser_path,"w")
+            anwser_f.write(anwser)
+            anwser_f.close()
+
+        if not os.path.isdir(boil_dir_path):
+            os.mkdir(boil_dir_path)
+
+        if not os.path.isfile(boil_path):
+            boil_f=open(boil_path,"w")
+            boil_f.write(skeleton)
+            boil_f.close()
         
-        detector = CopyDetector(ref_dirs=[dir_path], boilerplate_dirs=[boil_path], extensions=["py"],display_t=0.5)
+        
+
+        detector = CopyDetector(ref_dirs=[dir_path], boilerplate_dirs=[boil_dir_path], extensions=["py"],display_t=0.5)
         detector.add_file(file_path)
         detector.run()
 
