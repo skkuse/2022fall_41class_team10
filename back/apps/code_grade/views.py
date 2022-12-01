@@ -26,7 +26,8 @@ def code_grade(request):
     tc_list = []
     for tc in db.get_testcase_list(class_id, assign_id):
         tcID, tcIN, tcOUT, isHidden = tc
-        tc_list.append(CodeScore.check_testcase(file_path, tcIN, tcOUT))
+        if isHidden == 0:
+            tc_list.append(CodeScore.check_testcase(file_path, tcIN, tcOUT))
 
     result_json = json.dumps({"result": tc_list})
     return JsonResponse(result_json, safe=False)
