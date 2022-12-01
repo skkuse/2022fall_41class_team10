@@ -15,17 +15,18 @@ def code_grade(request):
         result_json = json.dumps({"result": isProhibitLib})
         return JsonResponse(result_json, safe=False)
     
-    user_id = code_json["user_id"]
     class_id = code_json["class_id"]
     assign_id = code_json["assign_id"]
+    user_id = code_json["user_id"]
     
-    file_name = "%d_%d_%d" % (user_id, class_id, assign_id)
-    CodeScore.save2file(file_name, code)
+    dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
+    file_path = "%s/%d.py" % (dir_path, user_id)
+    CodeScore.save2file(dir_path, file_path, code)
 
     tc_list = []
     for tc in db.get_testcase_list(class_id, assign_id):
         tcID, tcIN, tcOUT, isHidden = tc
-        tc_list.append(CodeScore.check_testcase(file_name, tcIN, tcOUT))
+        tc_list.append(CodeScore.check_testcase(file_path, tcIN, tcOUT))
 
     result_json = json.dumps({"result": tc_list})
     return JsonResponse(result_json, safe=False)

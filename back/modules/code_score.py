@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 TIMEOUT = 10
 
@@ -12,15 +13,15 @@ class CodeScore:
 
         return False
 
-    def save2file(name, code):
-        file_path = "./data/" + name + ".py" 
+    def save2file(dir_path, file_path, code):
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
         f = open(file_path, mode='w')
         f.write(code)
         f.close()
 
-    def check_testcase(name, unittest_input, unittest_output):
+    def check_testcase(file_path, unittest_input, unittest_output):
         try:
-            file_path = "./data/" + name + ".py" 
             result = subprocess.run(
                 ["python", file_path],
                 capture_output=True,
