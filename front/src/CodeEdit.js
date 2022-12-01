@@ -163,7 +163,7 @@ export default function CodeEdit(props) {
                                     position:"relative",
                                     display:"flex",
                                     alignItems:"center",
-                                    left:"53%"
+                                    left:"66%"
                                 }}>
                                 <div
                                     style={{

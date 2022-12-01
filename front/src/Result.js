@@ -39,7 +39,7 @@ export default class Result extends React.Component{
     readability = ()=>{
         this.setState({
             view : this.props.result.readability,
-            type : 1
+            type : 2
         })
         console.log(this.view)
     }
@@ -60,19 +60,19 @@ export default class Result extends React.Component{
                             <div
                                 style={{
                                     position : "absolute",
-                                    width:"20%",
-                                    lineHeight:"230%",
+                                    width:"30%",
+                                    lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
-                                    left:"-90%"
+                                    left:"-93%"
                                 }}
                                 onClick={this.props.backHome}
-                            >코드 보기</div>
+                            >코드 페이지 돌아가기</div>
                             <div
                                 style = {{
                                     position : "relative",
                                     height:"6%",
-                                    lineHeight:"220%",
+                                    lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
                                     
@@ -113,8 +113,8 @@ export default class Result extends React.Component{
                                     width:"33%",
                                     fontWeight:"bolder",
                                     float:"left",
-                                    fontSize:"18px"
-                                    
+                                    fontSize:"18px",
+                                    color: (this.state.type===0)? "red":"black"
                                 }}  
                                 onClick={this.functionality}  
                             >
@@ -129,7 +129,8 @@ export default class Result extends React.Component{
                                     width:"32%",
                                     fontWeight:"bolder",
                                     float:"left",
-                                    fontSize:"18px"
+                                    fontSize:"18px",
+                                    color: (this.state.type===1)? "red":"black"
                                 }}    
                                 onClick={this.efficency}
                             >
@@ -144,7 +145,8 @@ export default class Result extends React.Component{
                                     width:"32%",
                                     float:"left",
                                     fontWeight:"bolder",
-                                    fontSize:"18px"
+                                    fontSize:"18px",
+                                    color: (this.state.type===2)? "red":"black"
                                 }}   
                                 onClick={this.readability} 
                             >
