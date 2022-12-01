@@ -5,6 +5,7 @@ import Result from "./Result"
 import styled from 'styled-components';
 import axios from 'axios'
 import Home from "./icon/House.png"
+import {Button} from "react-bootstrap";
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -42,15 +43,16 @@ export default class App extends React.Component {
     code_result:" ",
     data:""
   }
-  api = async (data)=>{
-    await axios.post(
+    api = async (data)=>{
+        await axios.post(
       "http://127.0.0.1:8000/code_submit/",
       {code: data}
-    )
-    .then(response=>
-        this.setReadability(JSON.parse(response["data"]))
-    )
-  }
+        )
+        .then(response=>
+            this.setReadability(JSON.parse(response["data"]))
+        )
+    }
+
   setReadability = (data)=>{
     console.log(data)
     this.setState({
@@ -83,60 +85,61 @@ export default class App extends React.Component {
   render(){
       return(
         <div
+            id={"total_container"}
           style={{
             height:"1000px",
             width:"1200px",
             backgroundColor:"#F0F0F0",
           }}
         >
-          <div
-            style={{
+          <header
+              style={{
               position:"relative",
               height:"5%",
-              widht:"100%",
+              width:"100%",
               backgroundColor:"#2E4E3F"
-            }}
-          >
-            <img
-              style={{
-                position:"relative",
-                left:"1%",
-                height:"70%",
-                width:"3%",
-                top:"15%"
-
               }}
-              src = {Home}
-            >
-            </img>
-            <span
+          >
+              <Button
+              style={{
+                  position:"relative",
+                  left:"1%",
+                  height:"100%",
+                  backgroundColor:"transparent",
+                  border:"transparent"
+              }}>
+                  <img
+                      src = {Home}
+                      style={{
+                          height:"100%"
+                      }}
+                  />
+              </Button>
+            <div
               style={{
                 position:"relative",
                 color:"white",
                 fontSize:"25px",
+                  lineHeight:"100%",
                 fontWeight:"bolder",
-                top:"4%",
-                width:"10%",
-                left:"4%"
+                left:"3%"
               }}
-            >강의 1</span>
+            >강의 1</div>
             <div
               style={{
                 position:"relative",
                 borderRadius:"10px",
                 backgroundColor:"white",
-                top:"-60%",
                 left:"35%",
                 height:"60%",
                 width:"30%",
                 textAlign:"center",
                 fontWeight:"bolder",
                 fontSize:"120%",
-              }}
-            >
+              }}>
                 week 1 정수 덧셈 구현
             </div>
-          </div>
+          </header>
           {
             this.state.submit===0
           ?
@@ -170,13 +173,13 @@ export default class App extends React.Component {
           {
             this.state.submit===1
             ?
-          <div
-            style={{
-              height:"80%",
-              width:"50%",
-              float:"left"
-              
-            }}>
+                <div
+                style={{
+                  height:"80%",
+                  width:"50%",
+                  float:"left"
+
+                }}>
               <Result result = {this.state} backHome={this.backHome}/>
           </div>
             :

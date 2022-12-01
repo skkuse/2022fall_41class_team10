@@ -7,6 +7,8 @@ import CopySimple from "./icon/CopySimple.png"
 import Arrow from "./icon/ArrowCounterClockwise.png"
 import FolppyDisk from "./icon/FloppyDisk.png"
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from "react-bootstrap";
 const SaveDiv = styled.div`
   border-color: black;
   float: left;
@@ -119,69 +121,79 @@ export default function CodeEdit(props) {
             overflow:"auto"
         }}
     >
-    {(props.visible===0)
-        ?
+    {(props.visible===0) ?
         <>
-        <button
-            style={{
-                position : "absolute",
-                top:"15%",
-                right:"69%",
-                textAlign:"center",
-                height:"65%",
-                width:"5%",
-                backgroundColor:"#2E4E3F",
-                color:"white",
-                fontSize:"150%",
-                borderRadius:"100%"
-            }}
-        >
-            3
-        </button>
+            <div
+                style={{
+                    height:"100%",
+                    width:"100%"
+                }}
+            >
+                <img
+                    src = {FolppyDisk}
+                    style={{
+                        top:"15%",
+                        left:"5%",
+                        height:"70%",
+                        width:"5%",
+                        border:"0px solid black",
+                    }}
+                />
+                <Button
+                    style={{
+                        top:"15%",
+                        right:"81%",
+                        textAlign:"center",
+                        height:"65%",
+                        width:"5%",
+                        backgroundColor:"#2E4E3F",
+                        color:"white",
+                        fontSize:"150%",
+                        borderRadius:"50%"
+                    }}
+                >
+                    1
+                </Button>
+                <Button
+                    style={{
+                        top:"15%",
+                        right:"75%",
+                        textAlign:"center",
+                        height:"65%",
+                        width:"5%",
+                        backgroundColor:"#2E4E3F",
+                        color:"white",
+                        fontSize:"150%",
+                        borderRadius:"50%"
+                    }}
+                >
+                    2
+                </Button>
+                <Button
+                    style={{
+                        top:"15%",
+                        right:"69%",
+                        textAlign:"center",
+                        height:"65%",
+                        width:"5%",
+                        backgroundColor:"#2E4E3F",
+                        color:"white",
+                        fontSize:"150%",
+                        borderRadius:"50%"
+                    }}
+                >
+                    3
+                </Button>
 
-        <button
-            style={{
-                position : "absolute",
-                top:"15%",
-                right:"75%",
-                textAlign:"center",
-                height:"65%",
-                width:"5%",
-                backgroundColor:"#2E4E3F",
-                color:"white",
-                fontSize:"150%",
-                borderRadius:"100%"
-            }}
-        >
-            2
-        </button>
-        <button
-            style={{
-                position : "absolute",
-                top:"15%",
-                right:"81%",
-                textAlign:"center",
-                height:"65%",
-                width:"5%",
-                backgroundColor:"#2E4E3F",
-                color:"white",
-                fontSize:"150%",
-                borderRadius:"100%"
-            }}
-        >
-            1
-        </button>
-        <img
-            src = {FolppyDisk}
-            style={{
-                position : "absolute",
-                top:"15%",
-                left:"5%",
-                height:"70%",
-                width:"5%",
-                border:"0px solid black",
-            }}
-        />
+                <div
+                    style={{
+                        right:"0%"
+                    }}>
+                    <Button>
+                        ...
+                    </Button>
+                </div>
+            </div>
         </>
         :
         <div
@@ -192,9 +204,7 @@ export default function CodeEdit(props) {
 
             }}
         >
-            <text>
-                Hi
-            </text>
+
         </div>
     }
     </div>
