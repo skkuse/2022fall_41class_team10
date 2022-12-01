@@ -2,15 +2,20 @@ import React, {useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
 import './style/class.css'
-import {ReactComponent as FolderOpen} from "./icon/folderopen.svg"
+import {ReactComponent as FolderOpen} from "./icon/folderopen_black.svg"
 import DownloadSimple from "./icon/DownloadSimple.png"
 import CopySimple from "./icon/CopySimple.png"
 import Arrow from "./icon/ArrowCounterClockwise.png"
-import {ReactComponent as FloppyDisk} from "./icon/floppydisk.svg"
-import {ReactComponent as ThreeDots} from "./icon/threedots.svg"
+import {ReactComponent as FloppyDisk_W} from "./icon/floppydisk_white.svg"
+import {ReactComponent as FloppyDisk_B} from "./icon/floppydisk_black.svg"
+import {ReactComponent as ThreeDots_W} from "./icon/threedots_white.svg"
+import {ReactComponent as ThreeDots_B} from "./icon/threedots_black.svg"
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button} from "react-bootstrap";
+import {ReactComponent as Home_B} from "./icon/house_black.svg";
+import {ReactComponent as Home_W} from "./icon/house_white.svg";
+
+
 const SaveDiv = styled.div`
     border-color: black;
     float: left;
@@ -125,15 +130,16 @@ export default function CodeEdit(props) {
                                     left:"1%",
                                     background:"transparent",
                                     border:"0",
-                                    borderRight:"",
-                                    borderRightColor:"#566270"
+                                    borderRight:"solid 2px",
+                                    borderLeftColor: (props.theme === 1) ? "#F2F2F2F2" : "#566270"
                                 }}>
-                                <FloppyDisk/>
+                                {props.theme === 1 ?  <FloppyDisk_W/>  :<FloppyDisk_B/>}
                             </button>
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    height: "36px",
+                                    width: "36px",
                                     left: "5%"
                                 }}>
                                 1
@@ -141,7 +147,8 @@ export default function CodeEdit(props) {
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    height: "36px",
+                                    width: "36px",
                                     left: "7%"
                                 }}>
                                 2
@@ -149,13 +156,15 @@ export default function CodeEdit(props) {
                             <button
                                 className={"numberButton"}
                                 style={{
-                                    width: "4.5%",
+                                    height: "36px",
+                                    width: "36px",
                                     left: "9%"
                                 }}>
                                 3
                             </button>
 
                             <div
+
                                 style={{
                                     position:"relative",
                                     display:"flex",
@@ -163,10 +172,11 @@ export default function CodeEdit(props) {
                                     left:"53%"
                                 }}>
                                 <div
+                                    className={"text_body"}
                                     style={{
                                         textAlign:"center",
                                         lineHeight:"40px",
-                                        backgroundColor:"white",
+                                        // backgroundColor:"white",
                                         position:"relative",
                                         fontSize:"20px",
                                         height:"40px",
@@ -182,9 +192,9 @@ export default function CodeEdit(props) {
                                         height:"100%",
                                         background:"transparent",
                                         border:"0",
-                                        borderLeft:"",
-                                        borderLeftColor:"#566270"}}>
-                                    <ThreeDots/>
+                                        borderLeft:"solid 2px",
+                                        borderLeftColor: (props.theme === 1) ? "#F2F2F2F2" : "#566270"}}>
+                                    {props.theme === 1 ?  <ThreeDots_W/>  :<ThreeDots_B/>}
                                 </button>
                             </div>
                         </div>
@@ -201,10 +211,11 @@ export default function CodeEdit(props) {
             </div>
 
             <Editor
-                backgroundColor="#F0F0F0"
+                // backgroundColor="#F0F0F0"
                 height="60%"
                 defaultLanguage="python"
                 defaultValue="print('Hello World!')"
+                theme={(props.theme === 1) ? "vs-dark" : "light"}
                 onMount={handleEditorDidMount}/>
             {props.visible===0 ?
                 <div
@@ -217,15 +228,17 @@ export default function CodeEdit(props) {
                         top:"-70%",
                         borderRadius:"10px"}}>
                     <label for="file">
-                        <img
+                        <div
                             style={{
                                 position : "absolute",
-                                    top :"5%",
-                                    textAlign:"center",
-                                    left:"10%",
-                                    fontSize:"90%",
-                                    lineHeight:"220%"}}
-                            src ={FolderOpen}/>
+                                top :"5%",
+                                left:"10%",
+                                width: "100%",
+                                border: '0'
+                            }}
+                            >
+                            <FolderOpen />
+                        </div>
                     </label>
                     <input type="file" id="file" style = {{display:"none"}} onChange={upload} ref={textInput}/>
 
@@ -236,7 +249,6 @@ export default function CodeEdit(props) {
                         top :"28%",
                         left:"11%",
                         textAlign:"center",
-
                         fontSize:"90%",
                         lineHeight:"220%"
                         }}
@@ -285,60 +297,62 @@ export default function CodeEdit(props) {
                         height:"5%",
                         width:"100%",
                         top:"-23%"}}>
-                    <div
+                    <button
                         id={"submitButton"}
                         style={{
                             textAlign:"center",
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            backgroundColor:"#50A657",
+                            // backgroundColor:"#50A657",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder"}}
                         onClick={submission}> Submit
-                    </div>
+                    </button>
 
                     <div className={"spacer3percent"}/>
-                    <div
+                    <button
                         id={"gradeButton"}
                         style={{
                             textAlign:"center",
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            backgroundColor:"white",
+                            // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder"}}
                         onClick={grade}> Score
-                    </div>
+                    </button>
                     <div className={"spacer3percent"}/>
-                    <div
+                    <button
                         id={"executeButton"}
                         style={{
                             textAlign:"center",
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            backgroundColor:"white",
+                            // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder"}}
                         onClick={execution}> Run
-                    </div>
+                    </button>
                 </div>
                 :
                 <></>
             }
 
             <div
+                className={"text_body"}
                 style={{
                     position:"relative",
                     top:"-23%",
                     height:"26%",
                     width:"100%",
-                    backgroundColor:"white"}}>
+                    // backgroundColor:"white"
+                }}>
                 <div
                     style={{
                         position:"relative",

@@ -20,12 +20,13 @@ export default class Problem extends React.Component{
                     &nbsp;&nbsp;&nbsp;&nbsp;Problem
                 </div>
                 <div
+                    className={"text_body"}
                     style = {{
                         position:'relative',
                         left:"1%",
                         height:"65%",
                         width:"98%",
-                        backgroundColor:"#F8F8F8",
+                        // backgroundColor:"#F8F8F8",
                         //borderRadius:"10px",
                         lineHeight: "200%",
                         //boxShadow: "1px 1px 1px black"
@@ -67,7 +68,8 @@ export default class Problem extends React.Component{
                     }}
                 >
                     &nbsp;&nbsp;&nbsp;&nbsp;Test Case
-                    <div
+                    <button
+                        className={"numberButton"}
                         style={{
                             position:"absolute",
                             textAlign:"center",
@@ -75,8 +77,8 @@ export default class Problem extends React.Component{
                             left:"40%",
                             height:"60%",
                             width:"10%",
-                            backgroundColor:"#2E4E3F",
-                            color:"white",
+                            // backgroundColor:"#2E4E3F",
+                            // color:"white",
                             fontSize:"100%",
                             borderRadius:"100%",
                             lineHeight: "170%",
@@ -84,8 +86,9 @@ export default class Problem extends React.Component{
                         onClick={()=>{this.setState({testnum:1})}}
                     >
                         1
-                    </div>
-                    <div
+                    </button>
+                    <button
+                        className={"numberButton"}
                         style={{
                             position:"absolute",
                             textAlign:"center",
@@ -93,8 +96,8 @@ export default class Problem extends React.Component{
                             left:"52%",
                             height:"60%",
                             width:"10%",
-                            backgroundColor:"#2E4E3F",
-                            color:"white",
+                            // backgroundColor:"#2E4E3F",
+                            // color:"white",
                             fontSize:"100%",
                             borderRadius:"100%",
                             lineHeight: "170%",
@@ -102,15 +105,16 @@ export default class Problem extends React.Component{
                         onClick={()=>{this.setState({testnum:2})}}
                     >
                         2
-                    </div>
+                    </button>
                 </div>
                 <div
+                    className={"text_body"}
                     style = {{
                         position:'relative',
                         left:"1%",
                         height:"22%",
                         width:"98%",
-                        backgroundColor:"#F8F8F8",
+                        // backgroundColor:"#F8F8F8",
                         lineHeight: "200%",
                     }}
                 >

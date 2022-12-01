@@ -67,11 +67,12 @@ export default class Result extends React.Component{
                             </div>
                         </div>   
                         <div
+                            className={"text_body"}
                             style={{
                                 position:"relative",
                                 width:"100%",
                                 height:'103%',
-                                backgroundColor:"white",
+                                // backgroundColor:"white",
                                 left:"3%"
                             }}
                         >

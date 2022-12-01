@@ -2,10 +2,15 @@ import React, {useRef} from "react";
 import CodeEdit from "./CodeEdit";
 import Problem from "./Problem"
 import Result from "./Result"
-import styled from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import axios from 'axios'
-import {ReactComponent as Home} from "./icon/house.svg"
-import {ReactComponent as Gear} from "./icon/gear.svg"
+import reset from 'styled-reset';
+import { darkTheme, lightTheme } from './themes/theme';
+import {ReactComponent as Home_W} from "./icon/house_white.svg"
+import {ReactComponent as Home_B} from "./icon/house_black.svg"
+import {ReactComponent as Gear_W} from "./icon/gear_white.svg"
+import {ReactComponent as Gear_B} from "./icon/gear_black.svg"
+
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -16,9 +21,61 @@ const testcase2 ={
     'input': '4 4',
     'output': '8'
 }
+
+const GlobalStyle = createGlobalStyle`
+    ${reset}
+    // tag
+    body{
+      background-color: ${(props) => props.theme.backgroundColor};
+      color:${(props) => props.theme.textColor}
+    }
+    
+    header{
+      background-color: ${(props) => props.theme.primaryColor};
+    }
+    
+    header div.title{
+      color:${(props) => props.theme.numButtonTextColor}
+    }
+    
+    button{
+      background-color: ${(props) => props.theme.backgroundColor};
+      color:${(props) => props.theme.textColor}
+    }
+    
+    // .class
+    .numberButton{
+      background-color: ${(props) => props.theme.primaryColor};
+      color:${(props) => props.theme.numButtonTextColor}
+    }
+    
+    .iconButton{
+      background-color: ${(props) => props.theme.transparent};
+    }
+    
+    .text_body{
+      background-color: ${(props) => props.theme.bgsecondary};
+    }
+    
+    // #id
+    #total_container{
+      background-color: ${(props) => props.theme.containerBg};
+    }
+    
+    #weekTitle{
+      background-color: ${(props) => props.theme.backgroundColor};
+    }
+    
+    #submitButton{
+      background-color: ${(props) => props.theme.secondaryColor};
+    }
+`
+
+
 export default class App extends React.Component {
-  
+
     state = {
+        theme: 0,
         submit: 0,
         case_correct:{
             "테스트케이스-1":"통과",
@@ -74,103 +131,177 @@ export default class App extends React.Component {
         this.setState(current=>({submit:tf}))
     }
 
+    handleOptionChange = changeEvent => {
+        this.setState({
+            theme: (changeEvent.target.value === "Light")? 0 : 1
+        });
+    };
+
     backHome = ()=>{
         this.setState(current=>({submit:0}))
     }
 
     render(){
         return(
-        <div
-            id={"total_container"}
-            style={{
-                height:"1000px",
-                width:"1200px",
-                backgroundColor:"#F0F0F0"}}>
+            <ThemeProvider theme={(this.state.theme === 1) ? darkTheme : lightTheme}>
+                <GlobalStyle />
+                <div
+                    id={"total_container"}
+                    style={{
+                        height:"1000px",
+                        width:"1200px",
+                        // backgroundColor:"#F0F0F0"
+                    }}>
 
-            <header
-                style={{
-                    display:"flex",
-                    alignItems:"center",
-                    height:"5%",
-                    width:"100%",
-                    backgroundColor:"#2E4E3F",
-                    border:"1em #F0F0F0"}}>
-                <button
-                    id={"homeButton"}
-                    style={{
-                        position:"relative",
-                        left:"1%",
-                        height:"100%",
-                        backgroundColor:"#2E4E3F",
-                        border:"#2E4E3F"}}>
-                    <Home/>
-                </button>
-                <div
-                    style={{
-                        position:"relative",
-                        color:"white",
-                        fontSize:"25px",
-                        fontWeight:"bolder",
-                        left:"3%"}}>
-                    강의 1</div>
-                <div
-                    style={{
-                        position:"relative",
-                        border: "5px #E6C619",
-                        borderRadius:"10px",
-                        backgroundColor:"white",
-                        left:"25%",
-                        height:"60%",
-                        width:"30%",
-                        textAlign:"center",
-                        fontWeight:"bolder",
-                        fontSize:"120%"}}>
-                    week 1 정수 덧셈 구현</div>
-                <button
-                    id={"settingButton"}
-                    style={{
-                        position:"relative",
-                        left:"53%",
-                        height:"100%",
-                        backgroundColor:"#2E4E3F",
-                        border:"#2E4E3F"}}>
-                    <Gear/>
-                </button>
-            </header>
+                    <header
+                        style={{
+                            display:"flex",
+                            alignItems:"center",
+                            height:"5%",
+                            width:"100%",
+                            // backgroundColor:"#2E4E3F",
+                            borderBottom:"solid 1px #F0F0F0"}}>
+                        <button
+                            id={"homeButton"}
+                            className={'iconButton'}
+                            style={{
+                                position:"relative",
+                                left:"1%",
+                                height:"100%",
+                                // backgroundColor:"#2E4E3F",
+                                border:"0"}}>
+                            {this.state.theme === 1 ?  <Home_B/>  :<Home_W/>}
+                        </button>
+                        <div
+                            className={'title'}
+                            style={{
+                                position:"relative",
+                                // color:"white",
+                                fontSize:"25px",
+                                fontWeight:"bolder",
+                                left:"3%"}}>
+                            강의 1</div>
+                        <div
+                            id={'weekTitle'}
+                            style={{
+                                position:"relative",
+                                border: "solid 2px #E6C619",
+                                borderRadius:"10px",
+                                // backgroundColor:"white",
+                                left:"25%",
+                                height:"60%",
+                                lineHeight:"140%",
+                                width:"30%",
+                                textAlign:"center",
+                                fontWeight:"bolder",
+                                fontSize:"120%"}}>
+                            week 1 정수 덧셈 구현</div>
 
-            {this.state.submit===0 ?
-                <div
-                    id={"problemComponent"}
-                    style={{
-                        height:"94.5%",
-                        width:"29.5%",
-                        float:"left"}}>
-                    <Problem data1 = {pro1}
-                             data2 = {pro2}
-                             testcase1 = {testcase1}
-                             testcase2 = {testcase2}/>
+                        <div
+                            id={"themeRadio"}
+                            style={{
+                                position:"relative",
+                                left:"42%"
+                            }}>
+                            <form
+                                style={{display:"flex"}}>
+                                <div className={"form-check title"}>
+                                    <label style={{
+                                        fontWeight:"bold",
+                                        display:"flex",
+                                        alignItems:"center",
+                                        textAlign:"center",
+                                        padding:"0"}}>
+                                        <input
+                                            style={{
+                                                marginRight:"5px"
+                                            }}
+                                            type="radio"
+                                            name="react-tips"
+                                            value="Light"
+                                            checked={this.state.theme === 0}
+                                            onChange={this.handleOptionChange}
+                                            className="form-check-input"
+                                        />
+                                        Light
+                                    </label>
+                                </div>
+
+                                <div className={"form-check title"}
+                                     style={{position:"relative",
+                                     left:"10px"}}>
+                                    <label style={{
+                                        fontWeight:"bold",
+                                        display:"flex",
+                                        alignItems:"center",
+                                        textAlign:"center",
+                                        padding:"0"}}>
+                                        <input
+                                            style={{
+                                                marginRight:"5px"
+                                            }}
+                                            type="radio"
+                                            name="react-tips"
+                                            value="Dark"
+                                            checked={this.state.theme === 1}
+                                            onChange={this.handleOptionChange}
+                                            className="form-check-input"
+                                        />
+                                        Dark
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <button
+                            id={"settingButton"}
+                            className={'iconButton'}
+                            style={{
+                                position:"relative",
+                                left:"43%",
+                                height:"100%",
+                                // backgroundColor:"#2E4E3F"
+                                border:"0"
+                                }}>
+                            {this.state.theme === 1 ?  <Gear_B/> :<Gear_W/>}
+                        </button>
+                    </header>
+
+                    {this.state.submit===0 ?
+                        <div
+                            id={"problemComponent"}
+                            style={{
+                                height:"94.5%",
+                                width:"29.5%",
+                                float:"left"}}>
+                            <Problem data1 = {pro1}
+                                     data2 = {pro2}
+                                     testcase1 = {testcase1}
+                                     testcase2 = {testcase2}/>
+                        </div>
+                        : <> </>}
+                    <div
+                        id={"condeEditComponent"}
+                        style={{
+                            position:"relative",
+                            height:"94.5%",
+                            width: !(this.state.submit===1) ?"70.1%":"44.1%",
+                            left: !(this.state.submit===1) ? "0%":"1%",
+                            float:"left"}}>
+                        <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
+                    </div>
+                    {this.state.submit===1 ?
+                        <div
+                            id={"resultComponent"}
+                            style={{
+                                height:"80%",
+                                width:"50%",
+                                float:"left"}}>
+                            <Result result = {this.state} backHome={this.backHome}/>
+                        </div>
+                        : <></>}
                 </div>
-                : <> </>}
-            <div
-                id={"condeEditComponent"}
-                style={{
-                    position:"relative",
-                    height:"94.5%",
-                    width: !(this.state.submit===1) ?"70.1%":"44.1%",
-                    left: !(this.state.submit===1) ? "0%":"1%",
-                    float:"left"}}>
-                <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
-            </div>
-            {this.state.submit===1 ?
-                <div
-                    id={"resultComponent"}
-                    style={{
-                        height:"80%",
-                        width:"50%",
-                        float:"left"}}>
-                    <Result result = {this.state} backHome={this.backHome}/>
-                </div>
-                : <></>}
-        </div>)
+            </ThemeProvider>
+        )
     }
 }

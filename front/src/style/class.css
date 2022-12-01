@@ -2,10 +2,11 @@
   position: relative;
   padding: 0;
   text-align: center;
-  background-color: #2E4E3F;
+  /*background-color: #2E4E3F;*/
   border: 0;
-  color: white;
+  /*color: white;*/
   font-size: 150%;
+  font-weight: bold;
   border-radius: 50%;
 }
 
