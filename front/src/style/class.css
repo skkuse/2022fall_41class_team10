@@ -1,0 +1,16 @@
+.numberButton{
+  position: relative;
+  padding: 0;
+  text-align: center;
+  background-color: #2E4E3F;
+  border: 0;
+  color: white;
+  font-size: 150%;
+  border-radius: 50%;
+}
+
+.spacer3percent{
+  margin-top: 5%;
+  width: 3%;
+  float: right;
+}
