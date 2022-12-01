@@ -14,6 +14,7 @@ def connection():
     print(BASE_DIR)
     con = sqlite3.connect(DB_PATH)
     return con
+
 def read_output(con):
     cursor_db = con.cursor()
     cursor_db.execute('SELECT output FROM testcase')
@@ -50,14 +51,10 @@ class CodeExecute(unittest.TestCase):
         result = ""
 
         try:
-            start = time.time()
             exec(code)
-            end = time.time()
             sys.stdout = old_stdout
             sys.stderr = old_stderr
             result = redirected_output.getvalue()
-            if end - start > 10:
-                result =  "Timeout"
         except:
             sys.stdout = old_stdout
             sys.stderr = old_stderr
@@ -87,7 +84,8 @@ if __name__ == "__main__":
     unittest.TextTestRunner(verbosity = 2).run(allsuites)
     result = redirected_result.getvalue()
     '''
-    path = "./save.txt"
-    old_stderr = sys.stderr
-    with open(path,'w') as sys.stderr:
-        unittest.main()
+    # path = "./save.txt"
+    # old_stderr = sys.stderr
+    # with open(path,'w') as sys.stderr:
+    #     unittest.main()
+    print(CodeExecute.code_execute("input()"))
