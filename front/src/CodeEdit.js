@@ -15,12 +15,12 @@ const SaveDiv = styled.div`
     border-color: black;
     float: left;
 `;
-
+var val = ["print('Hello World!')",
+"print('Hello World!')",
+"print('Hello World!')"]
 export default function CodeEdit(props) {
     const state = {
-        1:"",
-        2:"",
-        3:"",
+        val : 0
     }
     const editorRef = useRef(null);
     const textInput = useRef(null);
@@ -43,7 +43,10 @@ export default function CodeEdit(props) {
         }
         reader.readAsText(file);
     }
-
+    function load(num){
+        editorRef.current.setValue(val[num]);
+        props.setCodeResult(" ")
+    }
     function clear(){
         editorRef.current.setValue("print('Hello World!')");
         props.submit(0)
@@ -65,6 +68,25 @@ export default function CodeEdit(props) {
 
     function save(){
         // editorRef.current.getValue()
+        if(val[0]==="print('Hello World!')"){
+            val[0] = editorRef.current.getValue()
+            this.setState({
+                val : 1
+            })
+        }
+        else if(val[1]==="print('Hello World!')"){
+            val[1] = editorRef.current.getValue()
+            this.setState({
+                val : 2 
+            })
+        }
+        else if(val[2]==="print('Hello World!')"){
+            val[2] = editorRef.current.getValue()
+            this.setState({
+                val : 3
+            })
+        }
+        //{editorRef.current.getValue()}
     }
     function execution(api){
         /*
@@ -127,7 +149,9 @@ export default function CodeEdit(props) {
                                     border:"0",
                                     borderRight:"",
                                     borderRightColor:"#566270"
-                                }}>
+                                }}
+                                onClick={save}
+                                >
                                 <FloppyDisk/>
                             </button>
                             <button
@@ -136,7 +160,9 @@ export default function CodeEdit(props) {
                                     width: "4%",
                                     height: "65%",
                                     left: "5%"
-                                }}>
+                                }}
+                                onClick={()=>load(0)}    
+                            >
                                 1
                             </button>
                             <button
@@ -145,7 +171,9 @@ export default function CodeEdit(props) {
                                     width: "4%",
                                     height: "65%",
                                     left: "7%"
-                                }}>
+                                }}
+                                onClick={()=>load(1)}    
+                            >
                                 2
                             </button>
                             <button
@@ -154,7 +182,9 @@ export default function CodeEdit(props) {
                                     width: "4%",
                                     height: "65%",
                                     left: "9%"
-                                }}>
+                                }}
+                                onClick={()=>load(2)}
+                            >
                                 3
                             </button>
 
@@ -291,14 +321,17 @@ export default function CodeEdit(props) {
                     <div
                         id={"submitButton"}
                         style={{
+
                             textAlign:"center",
-                            width:"9%",
+                            height:"80%",
+                            width:"10%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
                             backgroundColor:"#50A657",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={submission}> Submit
                     </div>
 
@@ -307,27 +340,32 @@ export default function CodeEdit(props) {
                         id={"gradeButton"}
                         style={{
                             textAlign:"center",
+                            height:"80%",
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
                             backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={grade}> Score
                     </div>
                     <div className={"spacer3percent"}/>
                     <div
                         id={"executeButton"}
                         style={{
+                            
                             textAlign:"center",
+                            height:"80%",
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
                             backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={execution}> Run
                     </div>
                 </div>

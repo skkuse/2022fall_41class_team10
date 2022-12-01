@@ -14,7 +14,7 @@ export default class Problem extends React.Component{
                         height:"6%",
                         fontWeight:"bolder",
                         lineHeight: "300%",
-                        fontSize:"20px"
+                        fontSize:"25px"
                     }}
                 >
                     &nbsp;&nbsp;&nbsp;&nbsp;Problem
@@ -62,7 +62,7 @@ export default class Problem extends React.Component{
                         position:"relative",
                         height:"6%",
                         lineHeight: "300%",
-                        fontSize:"20px",
+                        fontSize:"25px",
                         fontWeight:"bolder"
                     }}
                 >
