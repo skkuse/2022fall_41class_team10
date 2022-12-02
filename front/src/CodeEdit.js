@@ -21,11 +21,13 @@ const SaveDiv = styled.div`
     float: left;
 `;
 
+var val = ["print('Hello World!')",
+"print('Hello World!')",
+"print('Hello World!')"]
+
 export default function CodeEdit(props) {
     const state = {
-        1:"",
-        2:"",
-        3:"",
+        val : 0
     }
     const editorRef = useRef(null);
     const textInput = useRef(null);
@@ -49,7 +51,11 @@ export default function CodeEdit(props) {
         reader.readAsText(file);
     }
 
-    // Todo clear
+    function load(num){
+        editorRef.current.setValue(val[num]);
+        props.setCodeResult(" ")
+    }
+
     function clear(){
         editorRef.current.setValue("def plus(a, b):\n" +
             "    #Write Your Code!\n" +
@@ -76,6 +82,40 @@ export default function CodeEdit(props) {
 
     function save(){
         // editorRef.current.getValue()
+        if(val[0]===("def plus(a, b):\n" +
+            "    #Write Your Code!\n" +
+            "\n" +
+            "a, b = map(int, input().split())\n" +
+            "result = plus(a, b)\n" +
+            "print(result)")){
+            val[0] = editorRef.current.getValue()
+            this.setState({
+                val : 1
+            })
+        }
+        else if(val[1]===("def plus(a, b):\n" +
+            "    #Write Your Code!\n" +
+            "\n" +
+            "a, b = map(int, input().split())\n" +
+            "result = plus(a, b)\n" +
+            "print(result)")){
+            val[1] = editorRef.current.getValue()
+            this.setState({
+                val : 2
+            })
+        }
+        else if(val[2]===("def plus(a, b):\n" +
+            "    #Write Your Code!\n" +
+            "\n" +
+            "a, b = map(int, input().split())\n" +
+            "result = plus(a, b)\n" +
+            "print(result)")){
+            val[2] = editorRef.current.getValue()
+            this.setState({
+                val : 3
+            })
+        }
+        //{editorRef.current.getValue()}
     }
     function execution(api){
         /*
@@ -83,7 +123,7 @@ export default function CodeEdit(props) {
         props.submit(0)
         */
         // todo delete
-        setCodeResult("4")
+        // setCodeResult("4")
         axios.post(
             "http://127.0.0.1:8000/code_run/",
             {code: editorRef.current.getValue()})
@@ -144,7 +184,8 @@ export default function CodeEdit(props) {
                                     border:"0",
                                     borderRight:"solid 2px",
                                     borderLeftColor: (props.theme === 1) ? "#F2F2F2F2" : "#566270"
-                                }}>
+                                }}
+                                onClick={save}>
                                 {props.theme === 1 ?  <FloppyDisk_W/>  :<FloppyDisk_B/>}
                             </button>
                             <button
@@ -153,7 +194,8 @@ export default function CodeEdit(props) {
                                     height: "36px",
                                     width: "36px",
                                     left: "5%"
-                                }}>
+                                }}
+                                onClick={()=>load(0)}>
                                 1
                             </button>
                             <button
@@ -162,7 +204,8 @@ export default function CodeEdit(props) {
                                     height: "36px",
                                     width: "36px",
                                     left: "7%"
-                                }}>
+                                }}
+                                onClick={()=>load(1)}>
                                 2
                             </button>
                             <button
@@ -171,12 +214,12 @@ export default function CodeEdit(props) {
                                     height: "36px",
                                     width: "36px",
                                     left: "9%"
-                                }}>
+                                }}
+                                onClick={()=>load(2)}>
                                 3
                             </button>
 
                             <div
-
                                 style={{
                                     position:"relative",
                                     display:"flex",
@@ -324,7 +367,8 @@ export default function CodeEdit(props) {
                             // backgroundColor:"#50A657",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={submission}> Submit
                     </button>
 
@@ -339,7 +383,8 @@ export default function CodeEdit(props) {
                             // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={grade}> Score
                     </button>
                     <div className={"spacer3percent"}/>
@@ -353,7 +398,8 @@ export default function CodeEdit(props) {
                             // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder"}}
+                            fontWeight:"bolder",
+                            fontSize:"20px"}}
                         onClick={execution}> Run
                     </button>
                 </div>

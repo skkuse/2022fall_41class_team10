@@ -10,6 +10,7 @@ import {ReactComponent as Home_W} from "./icon/house_white.svg"
 import {ReactComponent as Home_B} from "./icon/house_black.svg"
 import {ReactComponent as Gear_W} from "./icon/gear_white.svg"
 import {ReactComponent as Gear_B} from "./icon/gear_black.svg"
+import Diff from "./Diff"
 
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
@@ -268,7 +269,8 @@ export default class App extends React.Component {
                     </header>
 
                     {this.state.submit===0 ?
-                        <div
+                        <>
+                <div
                             id={"problemComponent"}
                             style={{
                                 height:"94.5%",
@@ -279,7 +281,7 @@ export default class App extends React.Component {
                                      testcase1 = {testcase1}
                                      testcase2 = {testcase2}/>
                         </div>
-                        : <> </>}
+
                     <div
                         id={"condeEditComponent"}
                         style={{
@@ -290,15 +292,29 @@ export default class App extends React.Component {
                             float:"left"}}>
                         <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
                     </div>
-                    {this.state.submit===1 ?
-                        <div
+                    </>
+                : <> </>}{this.state.submit===1 ?
+                        <>
+                <div
+                    style={{position:"relative",
+                    top:"1%",
+                    height:"85%",
+                    width:"48%",
+                    float:"left",
+                    marginTop:"3%",
+                    backgroundColor:"white"
+                }}
+                >
+                <Diff/>
+                </div>
+                <div
                             id={"resultComponent"}
                             style={{
                                 height:"80%",
                                 width:"50%",
                                 float:"left"}}>
                             <Result result = {this.state} backHome={this.backHome}/>
-                        </div>
+                        </div></>
                         : <></>}
                 </div>
             </ThemeProvider>

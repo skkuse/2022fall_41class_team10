@@ -1,9 +1,24 @@
-import React, {useRef, useState} from "react";
+import React, {useRef,useEffect, useState} from "react";
 import styled from 'styled-components';
+import * as Diff2Html from "diff2html";
+import "diff2html/bundles/css/diff2html.min.css";
 
+var exp1 = "1. It's defining a function called plus inside the class"
+var exp2 = "2. It's taking two inputs from the user."
+var exp3 = "3. It's calling the plus function and passing the two inputs as arguments."
+var exp4 = ""
 
+var res1 = "[python] 파이썬 나누기, 곱하기, 더하기, 빼기 (사칙연산)"
+var res2 = "파이썬(Python) 두 개의 숫자 더하기 - Code Hunter"
+var res3 = "6.2 변수로 계산하기 - 파이썬 코딩 도장"
+
+var url1 = "https://blockdmask.tistory.com/378"
+var url2 = "https://notstop.co.kr/cgi-sys/suspendedpage.cgi"
+var url3 = "https://dojang.io/mod/page/view.php?id=2177"
 
 export default class Result extends React.Component{
+
+    
 
     state = {
         view : this.props.result.case_correct,
@@ -24,7 +39,7 @@ export default class Result extends React.Component{
     readability = ()=>{
         this.setState({
             view : this.props.result.readability,
-            type : 1
+            type : 2
         })
         console.log(this.view)
     }
@@ -45,19 +60,19 @@ export default class Result extends React.Component{
                             <div
                                 style={{
                                     position : "absolute",
-                                    width:"20%",
-                                    lineHeight:"230%",
+                                    width:"30%",
+                                    lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
-                                    left:"-80%"
+                                    left:"-93%"
                                 }}
                                 onClick={this.props.backHome}
-                            >코드 보기</div>
+                            >코드 페이지 돌아가기</div>
                             <div
                                 style = {{
                                     position : "relative",
                                     height:"6%",
-                                    lineHeight:"220%",
+                                    lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
                                     
@@ -65,6 +80,19 @@ export default class Result extends React.Component{
                             >
                                 &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
                             </div>
+                            <span
+                                style = {{
+                                    position : "relative",
+                                    height:"6%",
+                                    lineHeight:"400%",
+                                    fontSize:"100%",
+                                    fontWeight:"bolder",
+                                    left:"87%"
+                                    
+                                }}
+                            >
+                                표절율 : 0%
+                            </span>
                         </div>   
                         <div
                             className={"text_body"}
@@ -82,12 +110,12 @@ export default class Result extends React.Component{
                                     position : "relative",
                                     textAlign:"center",
                                     Top:"65%",
-                                    height:"4%",
+                                    height:"2%",
                                     width:"33%",
                                     fontWeight:"bolder",
                                     float:"left",
-                                    fontSize:"18px"
-                                    
+                                    fontSize:"18px",
+                                    color: (this.state.type===0)? "red":"black"
                                 }}  
                                 onClick={this.functionality}  
                             >
@@ -98,11 +126,12 @@ export default class Result extends React.Component{
                                     position : "relative",
                                     textAlign:"center",
                                     Top:"65%",
-                                    height:"4%",
+                                    height:"2%",
                                     width:"32%",
                                     fontWeight:"bolder",
                                     float:"left",
-                                    fontSize:"18px"
+                                    fontSize:"18px",
+                                    color: (this.state.type===1)? "red":"black"
                                 }}    
                                 onClick={this.efficency}
                             >
@@ -113,17 +142,67 @@ export default class Result extends React.Component{
                                     position : "relative",
                                     textAlign:"center",
                                     Top:"65%",
-                                    height:"4%",
+                                    height:"2%",
                                     width:"32%",
                                     float:"left",
                                     fontWeight:"bolder",
-                                    fontSize:"18px"
+                                    fontSize:"18px",
+                                    color: (this.state.type===2)? "red":"black"
                                 }}   
                                 onClick={this.readability} 
                             >
                                 가독성 점수 확인
                             </div>
-                            <br/>
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    backgroundColor:"black",
+                                    width:"94%",
+                                    height:"0.1%",
+                                    left:"3%",
+                                    top:"8%",
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    backgroundColor:"black",
+                                    width:"94%",
+                                    height:"0.1%",
+                                    left:"3%",
+                                    top:"40%",
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    backgroundColor:"black",
+                                    width:"94%",
+                                    height:"0.1%",
+                                    left:"3%",
+                                    top:"46%",
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    backgroundColor:"black",
+                                    width:"94%",
+                                    height:"0.1%",
+                                    left:"3%",
+                                    top:"67%",
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    backgroundColor:"black",
+                                    width:"94%",
+                                    height:"0.1%",
+                                    left:"3%",
+                                    top:"73%",
+                                }}
+                            />
                             <br/>
                             <br/>
                             <>
@@ -131,30 +210,132 @@ export default class Result extends React.Component{
                                     
                                     this.state.type===0
                                     ?
+                                    <>
+                                    {
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => 
                                             <>
-                                                <div style={{marginTop:"5%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div> 
-                                                <div style={{marginTop:"5%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
-                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder"}}>{int}</div> 
+                                                <div style={{marginTop:"3%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div> 
+                                                <div style={{marginTop:"3%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
+                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder",color:(int==="통과")? "red":"blue"}}>{int}</div> 
                                             </>
-                                    )
+                                    )}
+                                    </>
                                     :
-
+                                    
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => <                       
                                                         >
-                                                            <div style={{marginTop:"5%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div> 
-                                                            <div style={{marginTop:"5%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
+                                                            <div style={{marginTop:"3%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div> 
+                                                            <div style={{marginTop:"3%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
                                                                 <div style={{position:"relative",backgroundColor:"#FF7E7E", width:int.toString()+"%",height: "100%",borderRadius:"10px"}}>
                                                                 </div>
                                                             </div>
-                                                                <div  style={{marginTop:"5%",width:"10%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}점 </div>
+                                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}점 </div>
                                                             <br/>
                                                         </> 
                                     )
                                 }
                             </>
+                            <div
+                                style={{
+                                    position:"absolute",
+                                    top:"42%",
+                                    left:"65%",
+                                    width:"90%",
+                                    height:"20%",
+                                    lineHeight:"100%",
+                                }}
+                            >
+                                <span
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"20px"
+                                    }}
+                                >코드 설명</span>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <span
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"20px",
+                                        lineHeight:"100%"
+                                    }}
+                                >
+                                {exp1}
+                                <br/>
+                                <br/>
+                                {exp2}
+                                <br/>
+                                <br/>
+                                {exp3}
+                                </span>
+                            </div>
+                            <div
+                            style={{
+                                position:"absolute",
+                                top:"69%",
+                                left:"65%",
+                                width:"90%",
+                                height:"20%",
+                                lineHeight:"100%",
+                            }}
+                            >
+                                <span
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"20px"
+                                    }}
+                                >관련 자료</span>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <a 
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"17px"
+                                    }}
+                                    href={url1}>
+                                    {res1}
+                                </a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <a 
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"17px"
+                                    }}
+                                    href={url2}>
+                                    {res2}
+                                </a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <a 
+                                    style={{
+                                        position:"relative",
+                                        left:"-65%",
+                                        fontWeight:"bolder",
+                                        fontSize:"17px"
+                                    }}
+                                    href={url3}>
+                                    {res3}
+                                </a>
+                            </div>
                         </div>
                         </>
                     

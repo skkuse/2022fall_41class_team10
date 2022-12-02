@@ -1,5 +1,6 @@
 from modules.code_score import CodeScore
 from modules.db import db
+from modules.code_execute import CodeExecute
 
 from modules.code_efficiency import MultiMetrics
 from modules.code_explain import Explain
@@ -21,11 +22,11 @@ def code_submit(request):
     if isProhibitLib:
         result_json = json.dumps({"result": isProhibitLib})
         return JsonResponse(result_json, safe=False)
-    
+
     class_id = code_json["class_id"]
     assign_id = code_json["assign_id"]
     user_id = code_json["user_id"]
-    
+
     dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
     file_path = "%s/%d.py" % (dir_path, user_id)
     CodeScore.save2file(dir_path, file_path, code)

@@ -53,4 +53,10 @@ class db:
         con.close()
         return data
 
- 
+    def get_explain(class_id, assign_id):
+        con = sqlite3.connect(DB_PATH)
+        cur = con.cursor()
+        data=cur.execute('SELECT text FROM explain WHERE class_id={0} AND assign_id={1}'.format(class_id,assign_id)).fetchall()
+        cur.close()
+        con.close()
+        return data

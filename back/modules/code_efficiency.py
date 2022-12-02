@@ -1,8 +1,5 @@
 import argparse
-import json
 import os
-import textwrap
-import multiprocessing as mp
 
 import chardet
 from pygments import lexers
@@ -19,35 +16,11 @@ API를 따로 제공해주지 않아 소스코드를 복사하여 사용
 Copyright 관련해서 확인해야 함
 """
 
-
 class MultiMetrics:
     def ArgParser(f):
         parser = argparse.ArgumentParser(
             formatter_class=argparse.RawTextHelpFormatter,
-            prog="multimetric", description='Calculate code metrics in various languages',
-            epilog=textwrap.dedent("""
-            Currently you could import files of the following types for --warn_* or --coverage
-    
-            Following information can be read
-    
-                <file> = full path to file
-                <content> = either a string
-                <severity> = optional severity
-    
-                Note: you could also add a single line, then <content>
-                    has to be a number reflecting to total number of findings
-    
-            File formats
-    
-            csv: CSV file of following line format
-                 <file>,<content>,<severity>
-    
-            json: JSON file
-                 <file>: {
-                     "content": <content>,
-                     "severity": <severity>
-                 }
-            """))
+            prog="multimetric", description='Calculate code metrics in various languages')
         parser.add_argument(
             "--warn_compiler",
             default=None,
@@ -127,9 +100,9 @@ class MultiMetrics:
     결과물은 JSON 형식으로 나옴
 
     LOC : loc
+    Halstead : Halstead effort
     Control flow 복잡도: Cyclomatic_complexity
-
-    Halstead와 Data flow 복잡도, Reservation Words는 어떤 항목을 보고 판단해야하는지 문의 필요
+    Data flow 복잡도, Reservation Words는 어떤 항목을 보고 판단해야하는지 문의 필요
     """
 
 
@@ -164,15 +137,17 @@ class MultiMetrics:
         results = [MultiMetrics.file_process(f, _args, _importer) for f in _args.files]
         for x in results:
             _result["files"][x[1]] = x[0]
-    
-        for y in _overallMetrics:
-            _result["overall"].update(y.get_results_global([x[4] for x in results]))
-        for y in _overallCalc:
-            _result["overall"].update(y.get_results(_result["overall"]))
         for m in get_modules_stats(_args, **_importer):
             _result = m.get_results(_result, "files", "overall")
   
         os.remove("test.py")
-        return(_result)
-
-    
+        
+        data=_result["files"]
+        keys=list(data.keys())
+        code_efficiency={}
+        code_efficiency['LOC']=data[keys[0]]["loc"]
+        code_efficiency['Halstead']=data[keys[0]]["halstead_effort"]
+        code_efficiency['Control_flow']=data[keys[0]]["cyclomatic_complexity"]
+        #수정필요
+        code_efficiency['Data flow']=data[keys[0]]["cyclomatic_complexity"]
+        return(code_efficiency)
