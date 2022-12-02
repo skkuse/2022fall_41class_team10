@@ -44,6 +44,15 @@ def get_testcase_list(request, class_id, assign_id):
 
     return JsonResponse(result_json, safe=False)
 
+def get_explain(request, class_id, assign_id):
+    data=db.get_explain(class_id, assign_id)
+    # Maybe change later
+    result_json = json.dumps({
+        "Explain" : data,
+    })
+
+    return JsonResponse(result_json, safe=False)
+
 def save_user_code(request):
     try:
         body = json.loads(request.body)
@@ -58,13 +67,4 @@ def save_user_code(request):
 
 def get_user_code(request):
     body = json.loads(request.body)
-    class_id = body["class_id"]
-    assign_id = body["assign_id"]
-    code_id = body["code_id"]
-    data=db.get_user_code(class_id,assign_id,code_id)
-
-    result_json = json.dumps({
-        "Code" : data,
-    })
-
-    return JsonResponse(result_json, safe=False)
+    class_id = body["class_id
