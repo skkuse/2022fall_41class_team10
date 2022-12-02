@@ -9,6 +9,6 @@ urlpatterns = [
     path('<int:class_id>/<int:assign_id>/testcase', views.get_testcase_list, name="get_testcase_list"),
     path('<int:class_id>/<int:assign_id>/explain', views.get_explain, name="get_explain"),
     path('save',views.save_user_code, name="save_user_code"),
-    path('save/<int:code_id>',views.get_user_code, name="get_user_code"),
+    # path('save/<int:code_id>',views.get_user_code, name="get_user_code"),
 
 ]

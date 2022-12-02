@@ -18,8 +18,6 @@ var url3 = "https://dojang.io/mod/page/view.php?id=2177"
 
 export default class Result extends React.Component{
 
-    
-
     state = {
         view : this.props.result.case_correct,
         type : 0
@@ -60,7 +58,6 @@ export default class Result extends React.Component{
                             <div
                                 style={{
                                     position : "absolute",
-                                    width:"30%",
                                     lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
@@ -87,11 +84,11 @@ export default class Result extends React.Component{
                                     lineHeight:"400%",
                                     fontSize:"100%",
                                     fontWeight:"bolder",
-                                    left:"87%"
+                                    left:"85%"
                                     
                                 }}
                             >
-                                표절율 : 0%
+                                표절율 : 58%
                             </span>
                         </div>   
                         <div
@@ -153,6 +150,7 @@ export default class Result extends React.Component{
                             >
                                 가독성 점수 확인
                             </div>
+
                             <div
                                 style={{
                                     position:"absolute",
@@ -208,33 +206,62 @@ export default class Result extends React.Component{
                             <>
                                 {
                                     
-                                    this.state.type===0
-                                    ?
+                                    this.state.type===0 ?
                                     <>
                                     {
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => 
                                             <>
-                                                <div style={{marginTop:"3%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div> 
+                                                <div style={{marginTop:"3%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div>
                                                 <div style={{marginTop:"3%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
-                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder",color:(int==="통과")? "red":"blue"}}>{int}</div> 
+                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder",color:(int==="통과")? "red":"blue"}}>{int}</div>
                                             </>
                                     )}
                                     </>
                                     :
-                                    
+                                        this.state.type===1?
+
                                     Object.entries(this.state.view).map(
                                         ([word, int]) => <                       
                                                         >
                                                             <div style={{marginTop:"3%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div> 
                                                             <div style={{marginTop:"3%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
-                                                                <div style={{position:"relative",backgroundColor:"#FF7E7E", width:int.toString()+"%",height: "100%",borderRadius:"10px"}}>
+                                                                <div style={{position:"relative",backgroundColor:"#FF7E7E", width:(int).toString()+"%",height: "100%",borderRadius:"10px"}}>
                                                                 </div>
                                                             </div>
-                                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}점 </div>
+                                                                <div  style={{marginTop:"3%",width:"15%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}/100점 </div>
                                                             <br/>
-                                                        </> 
+                                                        </>
                                     )
+                                            :this.state.type===2?
+                                            <>
+                                                {Object.entries(this.state.view).map(
+                                                    ([word, int]) => <
+                                                            >
+                                                        <div style={{marginTop:"3%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div>
+                                                        <div style={{marginTop:"3%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
+                                                            <div style={{position:"relative",backgroundColor:"#FF7E7E", width:(int*5).toString()+"%",height: "100%",borderRadius:"10px"}}>
+                                                            </div>
+                                                        </div>
+                                                        <div  style={{marginTop:"3%",width:"15%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}/20점 </div>
+                                                        <br/>
+                                                    </>
+                                                )}
+
+                                                <div
+                                                style={{
+                                                    position:"absolute",
+                                                    top:"35%",
+                                                    width:"100%",
+                                                    left:"40%",
+                                                    fontSize:"13px"
+                                                }}>
+                                                    no newline at end of file (3)
+                                                    <br/>
+                                                    block comment should start with '# ' (1)
+                                                </div>
+                                            </>
+                                            :<></>
                                 }
                             </>
                             <div

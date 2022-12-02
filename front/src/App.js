@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     ${reset}
     // tag
     body{
-      background-color: ${(props) => props.theme.backgroundColor};
+      background-color:${(props) => props.theme.backgroundColor};
       color:${(props) => props.theme.textColor}
     }
     
@@ -93,10 +93,10 @@ export default class App extends React.Component {
         },
         readability: {
             "mypy": 20,
-            "pylint": 90,
-            "eradicate" : 85,
-            "radon": 70,
-            "pycodestyle": 15
+            "pylint": 20,
+            "eradicate" : 20,
+            "radon": 20,
+            "pycodestyle": 16
         },
         code_result:" ",
         data:""
@@ -270,7 +270,7 @@ export default class App extends React.Component {
 
                     {this.state.submit===0 ?
                         <>
-                <div
+                        <div
                             id={"problemComponent"}
                             style={{
                                 height:"94.5%",
@@ -281,40 +281,43 @@ export default class App extends React.Component {
                                      testcase1 = {testcase1}
                                      testcase2 = {testcase2}/>
                         </div>
-
+                        </>
+                        : <> </>}
                     <div
                         id={"condeEditComponent"}
                         style={{
+                            visibility: (this.state.submit===1) ? "hidden" : "visible",
                             position:"relative",
                             height:"94.5%",
-                            width: !(this.state.submit===1) ?"70.1%":"44.1%",
+                            width: !(this.state.submit===1) ?"70.1%":"0%",
                             left: !(this.state.submit===1) ? "0%":"1%",
                             float:"left"}}>
                         <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
                     </div>
-                    </>
-                : <> </>}{this.state.submit===1 ?
+
+                    {this.state.submit===1 ?
                         <>
-                <div
-                    style={{position:"relative",
-                    top:"1%",
-                    height:"85%",
-                    width:"48%",
-                    float:"left",
-                    marginTop:"3%",
-                    backgroundColor:"white"
-                }}
-                >
-                <Diff/>
-                </div>
-                <div
-                            id={"resultComponent"}
-                            style={{
-                                height:"80%",
-                                width:"50%",
-                                float:"left"}}>
-                            <Result result = {this.state} backHome={this.backHome}/>
-                        </div></>
+                            <div
+                                style={{position:"relative",
+                                top:"2%",
+                                height:"85%",
+                                width:"48%",
+                                float:"left",
+                                marginTop:"3%",
+                                backgroundColor:"white"
+                            }}
+                            >
+                                <Diff/>
+                            </div>
+                            <div
+                                id={"resultComponent"}
+                                style={{
+                                    height:"80%",
+                                    width:"50%",
+                                    float:"left"}}>
+                                <Result result = {this.state} backHome={this.backHome}/>
+                            </div>
+                        </>
                         : <></>}
                 </div>
             </ThemeProvider>

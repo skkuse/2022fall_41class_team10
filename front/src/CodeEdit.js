@@ -21,9 +21,16 @@ const SaveDiv = styled.div`
     float: left;
 `;
 
-var val = ["print('Hello World!')",
-"print('Hello World!')",
-"print('Hello World!')"]
+var skeleton = ("def plus(a, b):\n" +
+    "    #Write Your Code!\n" +
+    "\n" +
+    "a, b = map(int, input().split())\n" +
+    "result = plus(a, b)\n" +
+    "print(result)")
+
+var val = [skeleton,
+    skeleton,
+    skeleton]
 
 export default function CodeEdit(props) {
     const state = {
@@ -367,8 +374,7 @@ export default function CodeEdit(props) {
                             // backgroundColor:"#50A657",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder",
-                            fontSize:"20px"}}
+                            fontWeight:"bolder",}}
                         onClick={submission}> Submit
                     </button>
 
@@ -383,8 +389,7 @@ export default function CodeEdit(props) {
                             // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder",
-                            fontSize:"20px"}}
+                            fontWeight:"bolder",}}
                         onClick={grade}> Score
                     </button>
                     <div className={"spacer3percent"}/>
@@ -398,8 +403,7 @@ export default function CodeEdit(props) {
                             // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
-                            fontWeight:"bolder",
-                            fontSize:"20px"}}
+                            fontWeight:"bolder",}}
                         onClick={execution}> Run
                     </button>
                 </div>

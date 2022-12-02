@@ -64,7 +64,3 @@ def save_user_code(request):
         return JsonResponse({"message":"Save code"}, status=200)
     except:
         return JsonResponse({"message": "Error"}, status=400)
-
-def get_user_code(request):
-    body = json.loads(request.body)
-    class_id = body["class_id
