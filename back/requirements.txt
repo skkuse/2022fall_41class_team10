@@ -30,7 +30,7 @@ MarkupSafe==2.1.1
 matplotlib==3.5.3
 mccabe==0.6.1
 multimetric==1.3.0
-memory_profiler==5.9.4
+memory_profiler==0.61.0
 nest-asyncio==1.5.1
 numpy==1.21.6
 openai==0.25.0
