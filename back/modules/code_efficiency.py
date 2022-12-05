@@ -108,15 +108,10 @@ class MultiMetrics:
 
 
 
-    def CalculMetrics(code):
-        f=open("test.py",'w')
-        f.write(code)
-        f.close()
-        
-        _args =  MultiMetrics.ArgParser("test.py")
+    def CalculMetrics(file_path):        
+        _args =  MultiMetrics.ArgParser(file_path)
         _result = {"files": {}, "overall": {}}
         
-    
         # Get importer
         _importer = {}
         _importer["import_compiler"] = importer_pick(_args, _args.warn_compiler)
@@ -127,21 +122,16 @@ class MultiMetrics:
             _args, _args.warn_functional)
         _importer["import_security"] = importer_pick(_args, _args.warn_standard)
         _importer["import_standard"] = importer_pick(_args, _args.warn_security)
+
         # sanity check
         _importer = {k: v for k, v in _importer.items() if v}
-    
-        # instance metric modules
-        _overallMetrics = get_modules_metrics(_args, **_importer)
-        _overallCalc = get_modules_calculated(_args, **_importer)
     
         results = [MultiMetrics.file_process(f, _args, _importer) for f in _args.files]
         for x in results:
             _result["files"][x[1]] = x[0]
         for m in get_modules_stats(_args, **_importer):
             _result = m.get_results(_result, "files", "overall")
-  
-        os.remove("test.py")
-        
+
         data=_result["files"]
         keys=list(data.keys())
         code_efficiency={}
