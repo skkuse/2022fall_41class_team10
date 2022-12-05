@@ -1,6 +1,5 @@
 import argparse
 import os
-
 import chardet
 from pygments import lexers
 
@@ -10,6 +9,7 @@ from multimetric.cls.modules import get_additional_parser_args
 from multimetric.cls.modules import get_modules_calculated
 from multimetric.cls.modules import get_modules_metrics
 from multimetric.cls.modules import get_modules_stats
+from modules.db import db
 
 """
 API를 따로 제공해주지 않아 소스코드를 복사하여 사용
@@ -94,21 +94,13 @@ class MultiMetrics:
     
     
     """
-    해당 모듈을 사용하려면 py파일이 필요하므로
-    입력받은 문자열을 py파일로 작성 후 작업
-
-    결과물은 JSON 형식으로 나옴
-
     LOC : loc
     Halstead : Halstead effort
     Control flow 복잡도: Cyclomatic_complexity
-    Data flow 복잡도, Reservation Words는 어떤 항목을 보고 판단해야하는지 문의 필요
+    Data flow 복잡도: 
     """
 
-
-
-
-    def CalculMetrics(file_path):        
+    def CalculMetrics(class_id, assign_id, file_path):        
         _args =  MultiMetrics.ArgParser(file_path)
         _result = {"files": {}, "overall": {}}
         
@@ -134,10 +126,25 @@ class MultiMetrics:
 
         data=_result["files"]
         keys=list(data.keys())
+        
+        
+        #processing Data Flow
+        test_input=db.get_testcase_list(class_id, assign_id)[0][1]
+        command='mprof run --python --timeout 30  {0}'.format(file_path)
+        os.system('echo {0} | {1}'.format(test_input,command))
+        os.system('mprof peak > mem_log.txt')
+        os.system('mprof clean')
+        temp_output=open("mem_log.txt","r")
+        temp_output.readline()
+        mem_max=temp_output.readline().strip().split("\t")[1].split(" ")[0]
+        temp_output.close()
+        os.remove('mem_log.txt')
+
+        # return Json
         code_efficiency={}
         code_efficiency['LOC']=data[keys[0]]["loc"]
         code_efficiency['Halstead']=data[keys[0]]["halstead_effort"]
         code_efficiency['Control_flow']=data[keys[0]]["cyclomatic_complexity"]
-        #수정필요
-        code_efficiency['Data flow']=data[keys[0]]["cyclomatic_complexity"]
+        code_efficiency['Data flow']=mem_max
+
         return(code_efficiency)
