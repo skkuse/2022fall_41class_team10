@@ -12,8 +12,10 @@ import {ReactComponent as Gear_W} from "./icon/gear_white.svg"
 import {ReactComponent as Gear_B} from "./icon/gear_black.svg"
 import Diff from "./Diff"
 
-const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
-const pro2 = "입력받는 값은 정수로 처리해야 합니다."
+// const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
+const pro1 = "For given 2 input, show the addition result"
+// const pro2 = "입력받는 값은 정수로 처리해야 합니다."
+const pro2 = "The number type is integer only."
 const testcase1 ={
     'input': '1 3',
     'output': '4'
@@ -181,7 +183,7 @@ export default class App extends React.Component {
                                 fontSize:"25px",
                                 fontWeight:"bolder",
                                 left:"3%"}}>
-                            강의 1</div>
+                            Lecture 1</div>
                         <div
                             id={'weekTitle'}
                             style={{
@@ -196,7 +198,7 @@ export default class App extends React.Component {
                                 textAlign:"center",
                                 fontWeight:"bolder",
                                 fontSize:"120%"}}>
-                            week 1 정수 덧셈 구현</div>
+                            week 1 Integer add/subtract</div>
 
                         <div
                             id={"themeRadio"}

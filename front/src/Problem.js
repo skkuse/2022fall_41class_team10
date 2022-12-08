@@ -37,7 +37,8 @@ export default class Problem extends React.Component{
                             fontWeight:"bolder"
                         }}
                     >
-                    &nbsp;&nbsp;&nbsp;&nbsp;문제
+                    {/*&nbsp;&nbsp;&nbsp;&nbsp;문제*/}
+                    &nbsp;&nbsp;&nbsp;&nbsp;Problem
                     </span>
                     <br/>
                     <span>
@@ -50,7 +51,8 @@ export default class Problem extends React.Component{
                             fontWeight:"bolder"
                         }}
                     >
-                        &nbsp;&nbsp;&nbsp;&nbsp;참조/제약사항
+                        {/*&nbsp;&nbsp;&nbsp;&nbsp;참조/제약사항*/}
+                        &nbsp;&nbsp;&nbsp;&nbsp;Restrictions
                     </span>
                     <br/>
                     <span>
