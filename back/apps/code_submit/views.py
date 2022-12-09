@@ -5,6 +5,7 @@ from modules.code_efficiency import MultiMetrics
 from modules.code_explain import Explain
 from modules.copy_detect import CopyDetect
 from modules.code_readability import Pylama
+from modules.code_diff import CodeDiff
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -42,6 +43,7 @@ def code_submit(request):
     # code_explain = Explain.act(code)
     code_readability = Pylama.act("#This is test code")
     copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
+    code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
 
     result_json = json.dumps({
         "result": tc_list,
@@ -49,7 +51,8 @@ def code_submit(request):
             "code_efficiency" : code_efficiency,
             "code_explain" : "code_explain",
             "code_readability" : code_readability,
-            "copy_detect" : copy_detect,    
+            "copy_detect" : copy_detect,
+            "code_diff_str": code_diff,
         },
     })
 
