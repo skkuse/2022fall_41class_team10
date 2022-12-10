@@ -38,8 +38,11 @@ def code_submit(request):
         tc_list.append(CodeScore.check_testcase(file_path, tcIN, tcOUT))
 
 
+    CopyDetect.prepareCopyDetect(class_id, assign_id)
+    MultiMetrics.prepareMultiMetrics(class_id, assign_id)
+
     #설명
-    code_efficiency = MultiMetrics.CalculMetrics(class_id, assign_id, file_path)
+    code_efficiency = MultiMetrics.calculeScore(class_id, assign_id, file_path)
     # code_explain = Explain.act(code)
     code_readability = Pylama.act("#This is test code")
     copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)

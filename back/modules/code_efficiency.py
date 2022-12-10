@@ -1,6 +1,7 @@
 import argparse
 import os
 import chardet
+import json
 from pygments import lexers
 
 from multimetric.cls.importer.filtered import FilteredImporter
@@ -148,3 +149,52 @@ class MultiMetrics:
         code_efficiency['Data flow']=mem_max
 
         return(code_efficiency)
+
+    def prepareMultiMetrics(class_id, assign_id):
+        dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
+        anwser_path=dir_path+"/answer.py"
+        anwser_metric_path= dir_path+"/anwser_metric.json"
+        if not os.path.isfile(anwser_metric_path):
+            anwser_metric=MultiMetrics.CalculMetrics(class_id,assign_id,anwser_path)
+            with open(anwser_metric_path,'w') as f:
+                json.dump(anwser_metric,f,ensure_ascii=False,indent=4)
+
+    def calculeScore(class_id, assign_id, file_path):
+        dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
+        anwser_metric_path= dir_path+"/anwser_metric.json"
+        anwser_json=json.load(anwser_metric_path)
+        target_json=MultiMetrics.CalculMetrics(class_id, assign_id, file_path)
+
+        loc=round((anwser_json['LOC']/target_json['LOC'])*25)
+        if loc>25:
+            loc=25
+        elif loc<0:
+            loc=0
+        
+        halstead=round((anwser_json['Halstead']/target_json['Halstead'])*25)
+        if halstead>25:
+            halstead=25
+        elif halstead<0:
+            halstead=0
+
+        control_flow=round((anwser_json['Control_flow']/target_json['Control_flow'])*25)
+        if control_flow>25:
+            control_flow=25
+        elif control_flow<0:
+            control_flow=0
+
+        data_flow=round((anwser_json['Data flow']/target_json['Data flow'])*25)
+        if data_flow>25:
+            data_flow=25
+        elif data_flow<0:
+            data_flow=0
+
+        score=[]
+        score['LOC']=loc
+        score['Halstead']=halstead
+        score['Control_flow']=control_flow
+        score['Data flow']=data_flow
+        
+        return score
+        
+
