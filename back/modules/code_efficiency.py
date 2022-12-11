@@ -162,8 +162,10 @@ class MultiMetrics:
     def calculeScore(class_id, assign_id, file_path):
         dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
         anwser_metric_path= dir_path+"/anwser_metric.json"
-        anwser_json=json.load(anwser_metric_path)
+        anwser_metric_f=open(anwser_metric_path,'r')
+        anwser_json=json.load(anwser_metric_f)
         target_json=MultiMetrics.CalculMetrics(class_id, assign_id, file_path)
+        anwser_metric_f.close()
 
         loc=round((anwser_json['LOC']/target_json['LOC'])*25)
         if loc>25:
@@ -183,13 +185,13 @@ class MultiMetrics:
         elif control_flow<0:
             control_flow=0
 
-        data_flow=round((anwser_json['Data flow']/target_json['Data flow'])*25)
+        data_flow=round((float(anwser_json['Data flow'])/float(target_json['Data flow']))*25)
         if data_flow>25:
             data_flow=25
         elif data_flow<0:
             data_flow=0
 
-        score=[]
+        score={}
         score['LOC']=loc
         score['Halstead']=halstead
         score['Control_flow']=control_flow
