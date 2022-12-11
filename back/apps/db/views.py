@@ -65,11 +65,10 @@ def save_user_code(request):
     except:
         return JsonResponse({"message": "Error"}, status=400)
 
-def get_user_code(request):
+def get_user_code(request, code_id):
     body = json.loads(request.body)
     class_id = body["class_id"]
     assign_id = body["assign_id"]
-    code_id = body["code_id"]
     data=db.get_user_code(class_id,assign_id,code_id)
 
     result_json = json.dumps({
