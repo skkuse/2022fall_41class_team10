@@ -44,7 +44,7 @@ def code_submit(request):
     #설명
     code_efficiency = MultiMetrics.calculeScore(class_id, assign_id, file_path)
     code_explain = Explain.act(code)
-    code_readability = Pylama.act(code)
+    code_readability = Pylama.act(class_id, assign_id, file_path)
     copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
     code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
 
