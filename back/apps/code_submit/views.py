@@ -48,6 +48,12 @@ def code_submit(request):
     copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
     code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
 
+    #total
+    tc_score = 60 * sum(tc_list)/len(tc_list)
+    exp_score = (20/100) * (code_efficiency["LOC"]+code_efficiency["Halstead"]+code_efficiency["Control_flow"]+code_efficiency["Data flow"])
+    read_score = (20/100) * (sum(code_readability[:5]))
+    total = tc_score + exp_score + read_score
+
     result_json = json.dumps({
         "result": tc_list,
         "score": {
@@ -56,6 +62,7 @@ def code_submit(request):
             "code_readability" : code_readability,
             "copy_detect" : copy_detect,
             "code_diff_str": code_diff,
+            "total": total,
         },
     })
 
