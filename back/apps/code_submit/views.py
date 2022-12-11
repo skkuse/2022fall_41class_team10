@@ -43,7 +43,7 @@ def code_submit(request):
 
     #설명
     code_efficiency = MultiMetrics.calculeScore(class_id, assign_id, file_path)
-    # code_explain = Explain.act(code)
+    code_explain = db.get_explain(class_id, assign_id)
     code_readability = Pylama.act("#This is test code")
     copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
     code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
@@ -52,7 +52,7 @@ def code_submit(request):
         "result": tc_list,
         "score": {
             "code_efficiency" : code_efficiency,
-            "code_explain" : "code_explain",
+            "code_explain" : code_explain,
             "code_readability" : code_readability,
             "copy_detect" : copy_detect,
             "code_diff_str": code_diff,
