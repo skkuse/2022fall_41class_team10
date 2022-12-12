@@ -1,6 +1,5 @@
 import React, {useRef,useEffect, useState} from "react";
-import styled from 'styled-components';
-import * as Diff2Html from "diff2html";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "diff2html/bundles/css/diff2html.min.css";
 
 var exp1 = "1. It's defining a function called plus inside the class"
@@ -20,7 +19,8 @@ export default class Result extends React.Component{
 
     state = {
         view : this.props.result.case_correct,
-        type : 0
+        type : 0,
+        searchResult: ""
     }
     functionality= ()=>{
         this.setState({
@@ -72,7 +72,6 @@ export default class Result extends React.Component{
                                     lineHeight:"300%",
                                     fontSize:"150%",
                                     fontWeight:"bolder",
-                                    
                                 }}
                             >
                                 &nbsp;&nbsp;&nbsp;&nbsp;제출 결과

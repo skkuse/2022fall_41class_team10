@@ -21,12 +21,12 @@ const SaveDiv = styled.div`
     float: left;
 `;
 
-var skeleton = ("def plus(a, b):\n" +
+const skeleton = ("def plus(a, b):\n" +
     "    #Write Your Code!\n" +
     "\n" +
     "a, b = map(int, input().split())\n" +
     "result = plus(a, b)\n" +
-    "print(result)")
+    "print(result)");
 
 var val = [skeleton,
     skeleton,
@@ -227,8 +227,8 @@ export default function CodeEdit(props) {
                             </button>
 
                             <div
+                                className={'ms-md-auto'}
                                 style={{
-                                    position:"relative",
                                     display:"flex",
                                     alignItems:"center",
                                     left:"53%"
@@ -238,7 +238,6 @@ export default function CodeEdit(props) {
                                     style={{
                                         textAlign:"center",
                                         lineHeight:"40px",
-                                        // backgroundColor:"white",
                                         position:"relative",
                                         fontSize:"20px",
                                         height:"40px",
@@ -248,6 +247,7 @@ export default function CodeEdit(props) {
                                     02:13:30:00
                                 </div>
                                 <button
+                                    className={'me-2'}
                                     style={{
                                         position:"relative",
                                         left: "5%",
@@ -331,8 +331,7 @@ export default function CodeEdit(props) {
                         fontSize:"90%",
                         lineHeight:"220%"
                     }}
-                    onClick={copy}
-                    />
+                    onClick={copy}/>
                     <img
                         src = {DownloadSimple}
                         style={{
@@ -343,8 +342,7 @@ export default function CodeEdit(props) {
                         fontSize:"60%",
                         lineHeight:"290%"
                     }}
-                    onClick={download}
-                    />
+                    onClick={download}/>
                 </div>
             :
                 <div

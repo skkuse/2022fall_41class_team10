@@ -1,5 +1,5 @@
 import React, {useRef,useState} from "react";
-import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default class Problem extends React.Component{
@@ -26,8 +26,6 @@ export default class Problem extends React.Component{
                         left:"1%",
                         height:"65%",
                         width:"98%",
-                        // backgroundColor:"#F8F8F8",
-                        //borderRadius:"10px",
                         lineHeight: "200%",
                         //boxShadow: "1px 1px 1px black"
                     }}
