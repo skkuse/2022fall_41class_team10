@@ -131,7 +131,7 @@ class MultiMetrics:
         
         #processing Data Flow
         test_input=db.get_testcase_list(class_id, assign_id)[0][1]
-        command='mprof run --python --timeout 30  {0}'.format(file_path)
+        command='mprof run --python --timeout 10  {0}'.format(file_path)
         try:
             os.system('echo {0} | {1}'.format(test_input,command))
             os.system('mprof peak > mem_log.txt')
