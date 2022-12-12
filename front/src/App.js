@@ -18,6 +18,7 @@ const testcase2 ={
     'input': '4 4',
     'output': '8'
 }
+
 export default class App extends React.Component {
     
     state = {
@@ -49,6 +50,9 @@ export default class App extends React.Component {
             "radon": 70,
             "pycodestyle": 15
         },
+    
+        isLoading:false,
+            
         copy_detect:0,
         total_score:-1,
         code_explain:"",
@@ -56,10 +60,22 @@ export default class App extends React.Component {
         data:"",
         code_diff:""
     }
-
+    setLoading = ()=>{
+        this.setState({
+            isLoading:true
+        })
+    }
+    offLoading = ()=>{
+        this.setState({
+            isLoading:false
+        })
+    }
     api = async (data)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
+        this.setState({
+            isLoading:true
+        })
         await axios.post(
             "http://127.0.0.1:8000/code_submit/",
             {"code": data,
@@ -70,12 +86,16 @@ export default class App extends React.Component {
         .then(response=>{
             this.setReadability(JSON.parse(response["data"]))
             //console.log(JSON.parse(response["data"]))
+            //setLoading(false)
             }
         )
     }
     grade_api = async (data)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
+        this.setState({
+            isLoading:true
+        })
         await axios.post(
             "http://127.0.0.1:8000/code_grade/",
             {"code": data,
@@ -88,6 +108,7 @@ export default class App extends React.Component {
             console.log(JSON.parse(response["data"])["result"])
             }
         )
+        this.offLoading()
     }
     setReadability = (data)=>{
         console.log(data)
@@ -117,7 +138,8 @@ export default class App extends React.Component {
             total_score:data["score"]["total"],
             code_diff:data["score"]["code_diff_str"],
             code_explain:data["score"]["code_explain"].slice(1),
-            submit:1
+            submit:1,
+            isLoading:false
         })
     }
 
@@ -252,6 +274,13 @@ export default class App extends React.Component {
                 </div>
                 </>
                 : <></>}
+                {
+                    this.state.isLoading
+                    ?
+                <Loading
+                />
+                :<></>
+                }
         </div>)
     }
 }
