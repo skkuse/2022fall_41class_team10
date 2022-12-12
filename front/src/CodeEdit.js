@@ -96,8 +96,18 @@ export default function CodeEdit(props) {
         axios.post(
             "http://127.0.0.1:8000/code_run/",
             {code: editorRef.current.getValue()})
-            .then(response=>
-                setCodeResult(JSON.parse(response['data'])['result']))
+            .then(response=>{
+                var res = JSON.parse(response['data'])
+                console.log(res)
+                if(!res['stdout']){
+                    setCodeResult(res['stderr'])
+                }else{
+                    setCodeResult(res['stdout'])
+                }
+                //if()
+                //console.log(JSON.parse(response['data']))
+                //setCodeResult(JSON.parse(response['data'])['result'])
+            })
     }
     function grade(api){
         /*
@@ -382,7 +392,8 @@ export default function CodeEdit(props) {
                         top:"8%",
                         left:"5%",
                         height:"84%",
-                        width:"90%"}}>
+                        width:"90%",
+                        whiteSpace: "pre-wrap"}}>
                     {codeResult}
                 </div>
             </div>
