@@ -101,23 +101,15 @@ export default class Result extends React.Component{
     render(){
         return(
             <>
-                {
-                    this.state.select ===-1
-                    ?
+                {this.state.select ===-1 ?
                     <>
-                    {
-                        this.state.class===-1
-                        ?
+                    {this.state.class===-1 ?
                             <>
-                            <div
-
-                            >
+                            <div>
                                 과목 선택
                             </div>
-                                {
-                                this.state.ClassList.map(u=>(
-                                    <div
-                                        style={{
+                                {this.state.ClassList.map(u=>(
+                                    <div style={{
                                             width:"50%",
                                             height:"50%",
                                             border:"1px solid black"

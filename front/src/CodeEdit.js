@@ -379,7 +379,6 @@ export default function CodeEdit(props) {
                     top:"-23%",
                     height:"26%",
                     width:"100%",
-                    // backgroundColor:"white"
                 }}>
                 <div
                     style={{

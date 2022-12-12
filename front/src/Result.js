@@ -2,17 +2,6 @@ import React, {useRef,useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "diff2html/bundles/css/diff2html.min.css";
 
-var exp1 = "1. It's defining a function called plus inside the class"
-var exp2 = "2. It's taking two inputs from the user."
-var exp3 = "3. It's calling the plus function and passing the two inputs as arguments."
-var exp4 = ""
-
-var res1 = "[python] 파이썬 나누기, 곱하기, 더하기, 빼기 (사칙연산)"
-var res2 = "파이썬(Python) 두 개의 숫자 더하기 - Code Hunter"
-var res3 = "6.2 변수로 계산하기 - 파이썬 코딩 도장"
-var url1 = "https://blockdmask.tistory.com/378"
-var url2 = "https://notstop.co.kr/cgi-sys/suspendedpage.cgi"
-var url3 = "https://dojang.io/mod/page/view.php?id=2177"
 
 export default class Result extends React.Component{
 
@@ -50,18 +39,7 @@ export default class Result extends React.Component{
                             position:"relative",
                             width:"100%",
                             height:'7%',
-                        }}
-                    >
-                        <div
-                            style={{
-                                position : "absolute",
-                                lineHeight:"300%",
-                                fontSize:"150%",
-                                fontWeight:"bolder",
-                                left:"-93%"
-                            }}
-                            onClick={this.props.backHome}
-                        >코드 페이지 돌아가기</div>
+                        }}>
                         <div
                             style = {{
                                 position : "relative",
@@ -69,8 +47,7 @@ export default class Result extends React.Component{
                                 lineHeight:"300%",
                                 fontSize:"150%",
                                 fontWeight:"bolder",
-                            }}
-                        >
+                            }}>
                             &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
                             &emsp;&emsp;&emsp;&emsp;
                             &emsp;&emsp;&emsp;&emsp;
@@ -85,8 +62,7 @@ export default class Result extends React.Component{
                                 fontSize:"100%",
                                 fontWeight:"bolder",
                                 left:"85%"
-                            }}
-                        >
+                            }}>
                             표절율 : {this.props.copy_detect}%
                         </span>
                     </div>

@@ -19,15 +19,6 @@ const pro1 = "For given 2 input, show the addition result"
 // const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const pro2 = "The number type is integer only."
 
-const testcase1 ={
-    'input': '1 3',
-    'output': '4'
-}
-const testcase2 ={
-    'input': '4 4',
-    'output': '8'
-}
-
 const GlobalStyle = createGlobalStyle`
     ${reset}
     // tag
@@ -185,17 +176,17 @@ export default class App extends React.Component {
                 "히든 테스트케이스-5":(data["result"][0] === false)?"실패":"통과",
             },
             readability: {
-                "mypy": data["score"]["code_readability"][0]*5,
-                "pylint": data["score"]["code_readability"][1]*5,
-                "eradicate" : data["score"]["code_readability"][2]*5,
-                "radon": data["score"]["code_readability"][3]*5,
-                "pycodestyle": data["score"]["code_readability"][4]*5
+                "mypy": data["score"]["code_readability"][0],
+                "pylint": data["score"]["code_readability"][1],
+                "eradicate" : data["score"]["code_readability"][2],
+                "radon": data["score"]["code_readability"][3],
+                "pycodestyle": data["score"]["code_readability"][4]
             },
             efficency:{
-                "Line Of Codes":data["score"]["code_efficiency"]["LOC"]*4,
-                "Resevation Words": data["score"]["code_efficiency"]["Halstead"]*4,
-                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"]*4,
-                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]*4
+                "Line Of Codes":data["score"]["code_efficiency"]["LOC"],
+                "Resevation Words": data["score"]["code_efficiency"]["Halstead"],
+                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"],
+                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]
             },
             copy_detect:data["score"]['copy_detect'],
             total_score:data["score"]["total"],
@@ -380,13 +371,19 @@ export default class App extends React.Component {
                                     id={"diffComponent"}
                                     style={{position:"relative",
                                         height:"960px",
-                                        top:"2%",
                                         width:"43%",
                                         float:"left",
-                                        marginLeft:"5%",
-                                        marginTop:"5%",
                                         // backgroundColor:"white"
                                     }}>
+                                    <div
+                                        style={{
+                                            lineHeight:"300%",
+                                            fontSize:"150%",
+                                            fontWeight:"bolder",
+                                        }}
+                                        onClick={this.backHome}>
+                                        코드 페이지 돌아가기
+                                    </div>
                                     <Diff code_diff={this.state.code_diff}/>
                                 </div>
                                 <div
