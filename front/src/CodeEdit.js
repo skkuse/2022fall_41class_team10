@@ -119,7 +119,7 @@ export default function CodeEdit(props) {
     function submission(){
         execution()
         props.api(editorRef.current.getValue())
-        props.submit(1)
+        //props.submit(1)
         //상위 component에서 채점하는 것을 알아야 함
         //또한 현재 작성한 코드를 상위 component로 전송
         //상위 component는 서버로 데이터 전송

@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef,useState} from "react";
 import CodeEdit from "./CodeEdit";
 import Problem from "./Problem"
 import Result from "./Result"
@@ -7,6 +7,7 @@ import axios from 'axios'
 import {ReactComponent as Home} from "./icon/house.svg"
 import {ReactComponent as Gear} from "./icon/gear.svg"
 import Diff from "./Diff"
+import Loading from './Loading'
 const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
@@ -18,7 +19,7 @@ const testcase2 ={
     'output': '8'
 }
 export default class App extends React.Component {
-  
+    
     state = {
         submit: 1,
         case_correct:{
@@ -42,27 +43,53 @@ export default class App extends React.Component {
             "pycodestyle": 15
         },
         code_result:" ",
-        data:""
+        data:"",
+        code_diff:""
     }
 
     api = async (data)=>{
+        //const [loading, setLoading] = useState(true);
+        //setLoading(true);
         await axios.post(
             "http://127.0.0.1:8000/code_submit/",
-            {code: data})
-        .then(response=>
-            this.setReadability(JSON.parse(response["data"])))
+            {"code": data,
+            "class_id": 0,
+            "assign_id": 1,
+            "user_id": 35520
+            })
+        .then(response=>{
+            this.setReadability(JSON.parse(response["data"]))
+            //console.log(JSON.parse(response["data"]))
+            }
+        )
     }
 
     setReadability = (data)=>{
         console.log(data)
+        console.log(data["score"]["LOC"])
         this.setState({
+            case_correct:{
+                "테스트케이스-1":(data["result"][0] === false)?"실패":"통과",
+                "테스트케이스-2":(data["result"][0] === false)?"실패":"통과",
+                "히든 테스트케이스-3":(data["result"][0] === false)?"실패":"통과",
+                "히든 테스트케이스-4":(data["result"][0] === false)?"실패":"통과",
+                "히든 테스트케이스-5":(data["result"][0] === false)?"실패":"통과",
+            },
             readability: {
                 "mypy": data["score"]["code_readability"][0]*5,
                 "pylint": data["score"]["code_readability"][1]*5,
                 "eradicate" : data["score"]["code_readability"][2]*5,
                 "radon": data["score"]["code_readability"][3]*5,
                 "pycodestyle": data["score"]["code_readability"][4]*5
-            }
+            },
+            efficency:{
+                "Line Of Codes":data["score"]["code_efficiency"]["LOC"],
+                "Resevation Words": data["score"]["code_efficiency"]["Halstead"],
+                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"],
+                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]
+            },
+            code_diff:data["score"]["code_diff_str"],
+            submit:1
         })
     }
 
@@ -176,7 +203,7 @@ export default class App extends React.Component {
                     backgroundColor:"white"
                 }}
                 >
-                <Diff/>
+                <Diff  code_diff={this.state.code_diff}/>
                 </div>
                 <div
                     id={"resultComponent"}

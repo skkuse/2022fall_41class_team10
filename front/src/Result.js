@@ -216,7 +216,7 @@ export default class Result extends React.Component{
                                             <>
                                                 <div style={{marginTop:"3%",position:"relative",width:"60%",height:"3%",float:"left",textAlign:"center",fontWeight:"bolder"}}>{word}</div> 
                                                 <div style={{marginTop:"3%",position:"relative",width:"1%",height:"3%",float:"left",}}></div>
-                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder",color:(int==="통과")? "red":"blue"}}>{int}</div> 
+                                                <div  style={{marginTop:"3%",width:"10%",height:"3%",float:"left",textAlign:"right",fontWeight:"bolder",color:(int==="통과")? "blue":"red"}}>{int}</div> 
                                             </>
                                     )}
                                     </>
