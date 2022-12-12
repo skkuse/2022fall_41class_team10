@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class Problem extends React.Component{
     state = {
-        testnum:1
+        testnum:0
     }
     render(){
         return(
@@ -74,8 +74,7 @@ export default class Problem extends React.Component{
                             left:"20%",
                             height: "36px",
                             width: "36px",
-                            // backgroundColor:"#2E4E3F",
-                            // color:"white",
+                            backgroundColor: this.state.testnum===1? "#7bbc18" : "#2E4E3F" ,
                             fontSize:"100%",
                             lineHeight: "100%",
                         }}
@@ -89,13 +88,11 @@ export default class Problem extends React.Component{
                             left:"25%",
                             height: "36px",
                             width: "36px",
-                            // backgroundColor:"#2E4E3F",
-                            // color:"white",
+                            backgroundColor: this.state.testnum===2? "#7bbc18" : "#2E4E3F",
                             fontSize:"100%",
                             lineHeight: "100%",
                         }}
-                        onClick={()=>{this.setState({testnum:2})}}
-                    >
+                        onClick={()=>{this.setState({testnum:2})}}>
                         2
                     </button>
                 </div>
