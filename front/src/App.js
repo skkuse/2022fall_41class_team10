@@ -108,15 +108,15 @@ export default class App extends React.Component {
                 "pycodestyle": data["score"]["code_readability"][4]*5
             },
             efficency:{
-                "Line Of Codes":data["score"]["code_efficiency"]["LOC"],
-                "Resevation Words": data["score"]["code_efficiency"]["Halstead"],
-                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"],
-                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]
+                "Line Of Codes":data["score"]["code_efficiency"]["LOC"]*4,
+                "Resevation Words": data["score"]["code_efficiency"]["Halstead"]*4,
+                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"]*4,
+                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]*4
             },
             copy_detect:data["score"]['copy_detect'],
             total_score:data["score"]["total"],
             code_diff:data["score"]["code_diff_str"],
-            code_explain:data["score"]["code_explain"],
+            code_explain:data["score"]["code_explain"].slice(1),
             submit:1
         })
     }

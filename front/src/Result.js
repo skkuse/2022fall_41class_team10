@@ -78,7 +78,11 @@ export default class Result extends React.Component{
                                     
                                 }}
                             >
-                                &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
+                                &nbsp;&nbsp;&nbsp;&nbsp;제출 결과 
+                                &emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp; 
+                                총점: {this.props.total_score}
                             </div>
                             <span
                                 style = {{
@@ -91,7 +95,7 @@ export default class Result extends React.Component{
                                     
                                 }}
                             >
-                                표절율 : 0%
+                                표절율 : {this.props.copy_detect}%
                             </span>
                         </div>   
                         <div
@@ -267,13 +271,19 @@ export default class Result extends React.Component{
                                         lineHeight:"100%"
                                     }}
                                 >
-                                {exp1}
-                                <br/>
-                                <br/>
-                                {exp2}
-                                <br/>
-                                <br/>
-                                {exp3}
+                                
+                                {
+                                    
+                                    this.props.code_explain.split('\n').map( (word)=>
+                                    <>
+                                        {word}
+                                        <br/>
+                                        <br/>
+                                    </>
+                                    
+                                    )
+                                    
+                                }
                                 </span>
                             </div>
                             <div
