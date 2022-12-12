@@ -78,6 +78,7 @@ export default class Result extends React.Component{
             })
         })
 
+        
 
         var url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class),'/',index)
         axios.get(
@@ -108,7 +109,9 @@ export default class Result extends React.Component{
                         this.state.class===-1
                         ?
                             <>
-                            <div>
+                            <div
+
+                            >
                                 과목 선택
                             </div>
                                 {

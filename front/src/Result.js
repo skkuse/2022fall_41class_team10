@@ -19,7 +19,6 @@ export default class Result extends React.Component{
     state = {
         view : this.props.result.case_correct,
         type : 0,
-        searchResult: ""
     }
     functionality= ()=>{
         this.setState({
@@ -73,6 +72,10 @@ export default class Result extends React.Component{
                             }}
                         >
                             &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
+                            &emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;
+                            총점: {this.props.total_score}
                         </div>
                         <span
                             style = {{
@@ -82,10 +85,9 @@ export default class Result extends React.Component{
                                 fontSize:"100%",
                                 fontWeight:"bolder",
                                 left:"85%"
-
                             }}
                         >
-                            표절율 : 58%
+                            표절율 : {this.props.copy_detect}%
                         </span>
                     </div>
                     <div
@@ -94,10 +96,8 @@ export default class Result extends React.Component{
                             position:"relative",
                             width:"100%",
                             height:'103%',
-                            // backgroundColor:"white",
                             left:"3%"
-                        }}
-                    >
+                        }}>
                         <br/>
                         <div
                             style={{
@@ -111,8 +111,7 @@ export default class Result extends React.Component{
                                 fontSize:"18px",
                                 color: (this.state.type===0)? "red":"black"
                             }}
-                            onClick={this.functionality}
-                        >
+                            onClick={this.functionality}>
                             기능 점수 확인
                         </div>
                         <div
@@ -127,8 +126,7 @@ export default class Result extends React.Component{
                                 fontSize:"18px",
                                 color: (this.state.type===1)? "red":"black"
                             }}
-                            onClick={this.efficency}
-                        >
+                            onClick={this.efficency}>
                             효율 점수 확인
                         </div>
                         <div
@@ -143,8 +141,7 @@ export default class Result extends React.Component{
                                 fontSize:"18px",
                                 color: (this.state.type===2)? "red":"black"
                             }}
-                            onClick={this.readability}
-                        >
+                            onClick={this.readability}>
                             가독성 점수 확인
                         </div>
 
@@ -292,13 +289,12 @@ export default class Result extends React.Component{
                                     lineHeight:"100%"
                                 }}
                             >
-                            {exp1}
-                            <br/>
-                            <br/>
-                            {exp2}
-                            <br/>
-                            <br/>
-                            {exp3}
+                            {console.log(this.props.code_explain.split('\n'))}
+                                {this.props.code_explain.split('\n').map( (word)=>
+                                        <>
+                                            {word}
+                                            <br/>
+                                        </>)}
                             </span>
                         </div>
                         <div

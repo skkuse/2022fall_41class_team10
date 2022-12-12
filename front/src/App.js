@@ -79,6 +79,7 @@ const GlobalStyle = createGlobalStyle`
 
 
 export default class App extends React.Component {
+    
     state = {
         theme: 0,
         submit: 0,
@@ -112,6 +113,9 @@ export default class App extends React.Component {
             "radon": 20,
             "pycodestyle": 16
         },
+
+        isLoading:false,
+
         copy_detect:0,
         total_score:-1,
         code_explain:"",
@@ -120,10 +124,22 @@ export default class App extends React.Component {
         searchResult: "",
         code_diff: ""
     }
-
+    setLoading = ()=>{
+        this.setState({
+            isLoading:true
+        })
+    }
+    offLoading = ()=>{
+        this.setState({
+            isLoading:false
+        })
+    }
     api = async (data)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
+        this.setState({
+            isLoading:true
+        })
         await axios.post(
             "http://127.0.0.1:8000/code_submit/",
             {"code": data,
@@ -140,6 +156,9 @@ export default class App extends React.Component {
     grade_api = async (data)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
+        this.setState({
+            isLoading:true
+        })
         await axios.post(
             "http://127.0.0.1:8000/code_grade/",
             {"code": data,
@@ -152,6 +171,7 @@ export default class App extends React.Component {
             console.log(JSON.parse(response["data"])["result"])
             }
         )
+        this.offLoading()
     }
     setReadability = (data)=>{
         console.log(data)
@@ -172,16 +192,17 @@ export default class App extends React.Component {
                 "pycodestyle": data["score"]["code_readability"][4]*5
             },
             efficency:{
-                "Line Of Codes":data["score"]["code_efficiency"]["LOC"],
-                "Resevation Words": data["score"]["code_efficiency"]["Halstead"],
-                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"],
-                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]
+                "Line Of Codes":data["score"]["code_efficiency"]["LOC"]*4,
+                "Resevation Words": data["score"]["code_efficiency"]["Halstead"]*4,
+                "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"]*4,
+                "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]*4
             },
             copy_detect:data["score"]['copy_detect'],
             total_score:data["score"]["total"],
             code_diff:data["score"]["code_diff_str"],
-            code_explain:data["score"]["code_explain"],
-            submit:1
+            code_explain:data["score"]["code_explain"].slice(1),
+            submit:1,
+            isLoading:false
         })
     }
 
@@ -342,7 +363,15 @@ export default class App extends React.Component {
                                 height:"960px",
                                 width: !(this.state.submit===1) ?"64%":"0%",
                                 float:"left"}}>
-                            <CodeEdit api = {this.api} grade_api={this.grade_api} googleSearch = {this.googleSearch} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
+                            <CodeEdit
+                                setLoading={this.setLoading}
+                                offLoading={this.offLoading}
+                                skeleton_code = {this.state.skeleton_code}
+                                api = {this.api}
+                                grade_api={this.grade_api}
+                                submit = {this.setSubmit}
+                                setCodeResult = {this.setCodeResult}
+                                theme = {this.state.theme}/>
                         </div>
 
                         {this.state.submit===1 ?
@@ -374,6 +403,8 @@ export default class App extends React.Component {
                                 </div>
                             </>
                             : <></>}
+                        {this.state.isLoading ?
+                            <Loading/> : <></>}
                     </div>
 
                 </div>
