@@ -36,6 +36,13 @@ export default class Result extends React.Component{
             }
         )
     }
+    returnHome=()=>{
+        this.setState({
+            select:-1,
+            class:-1,
+            assign:-1,
+        })
+    }
     getAssign = async (index)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
@@ -98,35 +105,53 @@ export default class Result extends React.Component{
                     {
                         this.state.class===-1
                         ?
-                            this.state.ClassList.map(u=>(
+                            <>
+                            <div>
+                                과목 선택
+                            </div>
+                                {
+                                this.state.ClassList.map(u=>(
+                                    <div
+                                        style={{
+                                            width:"50%",
+                                            height:"50%",
+                                            border:"1px solid black"
+                                        }}
+                                        onClick={()=>this.getAssign(Object.entries(u)[0][1])}
+                                    >
+                                        {Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}
+                                    </div>
+                                ))
+                                }
+                            </>
+                        :    
+                        <>
+                        <div>
+                            과제 선택
+                        </div>              
+                        {  
+                            this.state.AssignList.map(u=>(
                                 <div
                                     style={{
                                         width:"50%",
                                         height:"50%",
                                         border:"1px solid black"
                                     }}
-                                    onClick={()=>this.getAssign(Object.entries(u)[0][1])}
+                                    onClick={()=>this.setCode(Object.entries(u)[0][1])}
                                 >
                                     {Object.entries(u)[0][1]} : {Object.entries(u)[1][1]}
                                 </div>
                             ))
-                        :                    
-                        this.state.AssignList.map(u=>(
-                            <div
-                                style={{
-                                    width:"50%",
-                                    height:"50%",
-                                    border:"1px solid black"
-                                }}
-                                onClick={()=>this.setCode(Object.entries(u)[0][1])}
-                            >
-                                {Object.entries(u)[0][1]} : {Object.entries(u)[1][1]}
-                            </div>
-                        ))
+                        }
+                        </>
                     }
                     </>
                     :
-                    <App content={this.state.Content} 
+                    <App 
+                        returnHome = {this.returnHome}
+                        class={this.state.class}
+                        assign={this.state.assign}
+                        content={this.state.Content} 
                         testcase1={this.state.testcase1}
                         testcase2={this.state.testcase2}
                         restriction={this.state.Restriction} skeleton_code={this.state.skeleton_code}/>

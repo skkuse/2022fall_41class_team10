@@ -15,7 +15,7 @@ export default function App(props) {
         fileListStartVisible: false,
         fileContentToggle: false,
         matching: "lines",
-        outputFormat: "line-by-line",
+        outputFormat: "side-by-side",
         synchronisedScroll: false,
         highlight: true,
         renderNothingWhenEmpty: false

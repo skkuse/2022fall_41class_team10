@@ -21,12 +21,14 @@ const testcase2 ={
 export default class App extends React.Component {
     
     state = {
-        submit: 1,
+        submit: 0,
         pro1 : this.props.content,
         pro2 : this.props.restriction,
         testcase1:this.props.testcase1,
         testcase2:this.props.testcase2,
         skeleton_code:this.props.skeleton_code,
+        classid:this.props.class,
+        assignid:this.props.assign,
         case_correct:{
             "테스트케이스-1":"통과",
             "테스트케이스-2":"통과",
@@ -47,6 +49,9 @@ export default class App extends React.Component {
             "radon": 70,
             "pycodestyle": 15
         },
+        copy_detect:0,
+        total_score:-1,
+        code_explain:"",
         code_result:" ",
         data:"",
         code_diff:""
@@ -58,8 +63,8 @@ export default class App extends React.Component {
         await axios.post(
             "http://127.0.0.1:8000/code_submit/",
             {"code": data,
-            "class_id": 0,
-            "assign_id": 1,
+            "class_id": this.state.classid,
+            "assign_id": this.state.assignid,
             "user_id": 35520
             })
         .then(response=>{
@@ -68,7 +73,22 @@ export default class App extends React.Component {
             }
         )
     }
-
+    grade_api = async (data)=>{
+        //const [loading, setLoading] = useState(true);
+        //setLoading(true);
+        await axios.post(
+            "http://127.0.0.1:8000/code_grade/",
+            {"code": data,
+            "class_id": this.state.classid,
+            "assign_id": this.state.assignid,
+            "user_id": 35520
+            })
+        .then(response=>{
+            //this.setReadability(JSON.parse(response["data"]))
+            console.log(JSON.parse(response["data"])["result"])
+            }
+        )
+    }
     setReadability = (data)=>{
         console.log(data)
         console.log(data["score"]["LOC"])
@@ -93,7 +113,10 @@ export default class App extends React.Component {
                 "Data Flow Compliexity": data["score"]["code_efficiency"]["Data flow"],
                 "control Flow Complexity":  data["score"]["code_efficiency"]["Control_flow"]
             },
+            copy_detect:data["score"]['copy_detect'],
+            total_score:data["score"]["total"],
             code_diff:data["score"]["code_diff_str"],
+            code_explain:data["score"]["code_explain"],
             submit:1
         })
     }
@@ -135,7 +158,9 @@ export default class App extends React.Component {
                         left:"1%",
                         height:"100%",
                         backgroundColor:"#2E4E3F",
-                        border:"#2E4E3F"}}>
+                        border:"#2E4E3F"}}
+                    onClick={this.props.returnHome}        
+                >
                     <Home/>
                 </button>
                 <div
@@ -194,6 +219,7 @@ export default class App extends React.Component {
                     float:"left"}}>
                 <CodeEdit 
                     skeleton_code = {this.state.skeleton_code}
+                    grade_api = {this.grade_api}
                     api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
             </div>
             </>
@@ -218,7 +244,11 @@ export default class App extends React.Component {
                         height:"80%",
                         width:"50%",
                         float:"left"}}>
-                    <Result result = {this.state} backHome={this.backHome}/>
+                    <Result result = {this.state} backHome={this.backHome}
+                        code_explain={this.state.code_explain}
+                        copy_detect={this.state.copy_detect}
+                        total_score={this.state.total_score}
+                    />
                 </div>
                 </>
                 : <></>}
