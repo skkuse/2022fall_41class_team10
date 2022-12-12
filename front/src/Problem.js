@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default class Problem extends React.Component{
     state = {
-        testnum:1
+        testnum:0
     }
     render(){
         return(
@@ -68,7 +68,19 @@ export default class Problem extends React.Component{
                 >
                     &nbsp;&nbsp;&nbsp;&nbsp;Test Case
                     <div
-                        style={{
+                        style={this.state.testnum===1?{
+			    position:"absolute",
+			    textAlign:"center",
+			    top:"25%",
+			    right:"5%",
+			    height:"70%",
+			    width:"10%",
+			    backgroundColor:"#7bbc18",
+			    color:"white",
+			    fontSize:"100%",
+			    borderRadius:"100%",
+			    lineHeight:"200%",
+			}:{
                             position:"absolute",
                             textAlign:"center",
                             top:"25%",
@@ -86,7 +98,19 @@ export default class Problem extends React.Component{
                         1
                     </div>
                     <div
-                        style={{
+                        style={this.state.testnum===2?{
+			    position:"absolute",
+			    textAlign:"center",
+			    top:"25%",
+			    right:"20%",
+			    height:"70%",
+			    width:"10%",
+			    backgroundColor:"#7bbc18",
+			    color:"white",
+			    fontSize:"100%",
+			    borderRadius:"100%",
+			    lineHeight:"200%",
+			}:{
                             position:"absolute",
                             textAlign:"center",
                             top:"25%",
