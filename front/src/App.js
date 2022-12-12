@@ -28,9 +28,6 @@ const testcase2 ={
     'output': '8'
 }
 
-// personal key
-const googleKey = "AIzaSyDa_Vn4vLHuughW32fbM9fVbBBnLf_h2KU";
-
 const GlobalStyle = createGlobalStyle`
     ${reset}
     // tag
@@ -85,6 +82,8 @@ export default class App extends React.Component {
     state = {
         theme: 0,
         submit: 0,
+        search: 0,
+        // todo: need to get title from server
         title: "Integer add/subtract",
         pro1 : this.props.content,
         pro2 : this.props.restriction,
@@ -116,10 +115,10 @@ export default class App extends React.Component {
         copy_detect:0,
         total_score:-1,
         code_explain:"",
-        code_result:" ",
-        data:"",
+        code_result:"",
+        data: "",
         searchResult: "",
-        code_diff:""
+        code_diff: ""
     }
 
     api = async (data)=>{
@@ -196,9 +195,8 @@ export default class App extends React.Component {
     }
 
     handleOptionChange = changeEvent => {
-        this.setState({
-            theme: (changeEvent.target.value === "Light")? 0 : 1
-        });
+        this.setState(current =>({
+            theme: (changeEvent.target.value === "Light")? 0 : 1}));
     };
 
     backHome = ()=>{
@@ -206,18 +204,19 @@ export default class App extends React.Component {
     }
 
     googleSearch = ()=>{
-        fetch("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyDa_Vn4vLHuughW32fbM9fVbBBnLf_h2KU&num=3&q=python " + this.state.title)
+        fetch("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyBoRLAzoCY3nbl6ArViHNtw6lIv9lhW16E&cx=b6cb9247f962c4d80&num=3&q=python+examples+" + this.state.title.replace(" ", "+"))
             .then(response => response.json())
             .then(response => {
-                this.setState({ searchResult: response });
-                console.log(response);
+                this.setState(current=>({searchResult: {titles: response.items.map(({title})=>title),links: response.items.map(({link})=>link)}}));
+                this.setState(current=>({search: 1}));
+                console.log(this.state.searchResult);
             });
     }
 
     render(){
-        if (this.state.searchResult ==="")
+        if(this.state.search === 0){
             this.googleSearch();
-
+        }
         return(
             <ThemeProvider theme={(this.state.theme === 1) ? darkTheme : lightTheme}>
                 <GlobalStyle />
@@ -343,7 +342,7 @@ export default class App extends React.Component {
                                 height:"960px",
                                 width: !(this.state.submit===1) ?"64%":"0%",
                                 float:"left"}}>
-                            <CodeEdit api = {this.api} googleSearch = {this.googleSearch} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
+                            <CodeEdit api = {this.api} grade_api={this.grade_api} googleSearch = {this.googleSearch} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
                         </div>
 
                         {this.state.submit===1 ?
@@ -368,6 +367,7 @@ export default class App extends React.Component {
                                         width:"50%",
                                         float:"left"}}>
                                     <Result result = {this.state} backHome={this.backHome}
+                                            search_result={this.state.searchResult}
                                             code_explain={this.state.code_explain}
                                             copy_detect={this.state.copy_detect}
                                             total_score={this.state.total_score}/>

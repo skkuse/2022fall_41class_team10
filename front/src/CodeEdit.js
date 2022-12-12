@@ -147,7 +147,7 @@ export default function CodeEdit(props) {
     function submission(){
         grade()
         props.api(editorRef.current.getValue())
-        //props.submit(1)
+        props.submit(1)
         //상위 component에서 채점하는 것을 알아야 함
         //또한 현재 작성한 코드를 상위 component로 전송
         //상위 component는 서버로 데이터 전송
@@ -218,19 +218,6 @@ export default function CodeEdit(props) {
                                     alignItems:"center",
                                     left:"53%"
                                 }}>
-                                {/*<div*/}
-                                {/*    className={"text_body"}*/}
-                                {/*    style={{*/}
-                                {/*        textAlign:"center",*/}
-                                {/*        lineHeight:"40px",*/}
-                                {/*        position:"relative",*/}
-                                {/*        fontSize:"20px",*/}
-                                {/*        height:"40px",*/}
-                                {/*        width:"160px",*/}
-                                {/*        borderRadius:"15px"*/}
-                                {/*    }}>*/}
-                                {/*    02:13:30:00*/}
-                                {/*</div>*/}
                                 <Timer/>
                                 <button
                                     className={'me-2'}
@@ -353,7 +340,6 @@ export default function CodeEdit(props) {
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder",}}
@@ -367,7 +353,6 @@ export default function CodeEdit(props) {
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            // backgroundColor:"white",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder",}}

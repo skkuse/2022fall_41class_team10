@@ -10,7 +10,6 @@ var exp4 = ""
 var res1 = "[python] 파이썬 나누기, 곱하기, 더하기, 빼기 (사칙연산)"
 var res2 = "파이썬(Python) 두 개의 숫자 더하기 - Code Hunter"
 var res3 = "6.2 변수로 계산하기 - 파이썬 코딩 도장"
-
 var url1 = "https://blockdmask.tistory.com/378"
 var url2 = "https://notstop.co.kr/cgi-sys/suspendedpage.cgi"
 var url3 = "https://dojang.io/mod/page/view.php?id=2177"
@@ -331,8 +330,8 @@ export default class Result extends React.Component{
                                     fontWeight:"bolder",
                                     fontSize:"17px"
                                 }}
-                                href={url1}>
-                                {res1}
+                                href={this.props.search_result['links'][0]}>
+                                {this.props.search_result['titles'][0]}
                             </a>
                             <br/>
                             <br/>
@@ -344,8 +343,8 @@ export default class Result extends React.Component{
                                     fontWeight:"bolder",
                                     fontSize:"17px"
                                 }}
-                                href={url2}>
-                                {res2}
+                                href={this.props.search_result['links'][1]}>
+                                {this.props.search_result['titles'][1]}
                             </a>
                             <br/>
                             <br/>
@@ -357,8 +356,8 @@ export default class Result extends React.Component{
                                     fontWeight:"bolder",
                                     fontSize:"17px"
                                 }}
-                                href={url3}>
-                                {res3}
+                                href={this.props.search_result['links'][2]}>
+                                {this.props.search_result['titles'][2]}
                             </a>
                         </div>
                     </div>
