@@ -6,6 +6,7 @@ import {ReactComponent as FolderOpen} from "./icon/folderopen_black.svg"
 import DownloadSimple from "./icon/DownloadSimple.png"
 import CopySimple from "./icon/CopySimple.png"
 import Arrow from "./icon/ArrowCounterClockwise.png"
+import Timer from "./Timer"
 import {ReactComponent as FloppyDisk_W} from "./icon/floppydisk_white.svg"
 import {ReactComponent as FloppyDisk_B} from "./icon/floppydisk_black.svg"
 import {ReactComponent as ThreeDots_W} from "./icon/threedots_white.svg"
@@ -160,7 +161,6 @@ export default function CodeEdit(props) {
                 style={{
                     position:"relative",
                     height:"6%"}}>
-                {(props.visible===0) ?
                     <>
                         <div
                             style={{
@@ -218,19 +218,20 @@ export default function CodeEdit(props) {
                                     alignItems:"center",
                                     left:"53%"
                                 }}>
-                                <div
-                                    className={"text_body"}
-                                    style={{
-                                        textAlign:"center",
-                                        lineHeight:"40px",
-                                        position:"relative",
-                                        fontSize:"20px",
-                                        height:"40px",
-                                        width:"160px",
-                                        borderRadius:"15px"
-                                    }}>
-                                    02:13:30:00
-                                </div>
+                                {/*<div*/}
+                                {/*    className={"text_body"}*/}
+                                {/*    style={{*/}
+                                {/*        textAlign:"center",*/}
+                                {/*        lineHeight:"40px",*/}
+                                {/*        position:"relative",*/}
+                                {/*        fontSize:"20px",*/}
+                                {/*        height:"40px",*/}
+                                {/*        width:"160px",*/}
+                                {/*        borderRadius:"15px"*/}
+                                {/*    }}>*/}
+                                {/*    02:13:30:00*/}
+                                {/*</div>*/}
+                                <Timer/>
                                 <button
                                     className={'me-2'}
                                     style={{
@@ -262,8 +263,8 @@ export default function CodeEdit(props) {
                 height="60%"
                 defaultLanguage="python"
                 defaultValue={props.skeleton_code}
+                theme={(props.theme === 1) ? "vs-dark" : "light"}
                 onMount={handleEditorDidMount}/>
-            {props.visible===0 ?
                 <div
                     style={{
                         position:"relative",
@@ -323,17 +324,6 @@ export default function CodeEdit(props) {
                     }}
                     onClick={download}/>
                 </div>
-            :
-                <div
-                    style={{
-                        position:"relative",
-                        height:"25%",
-                        width:"10%",
-                        left:"100%",
-                        top:"-70%"}}/>
-            }
-
-            {props.visible===0 ?
                 <div
                     id={"exeButtonSection"}
                     style={{
@@ -384,9 +374,6 @@ export default function CodeEdit(props) {
                         onClick={execution}> Run
                     </button>
                 </div>
-                :
-                <></>
-            }
 
             <div
                 className={"text_body"}

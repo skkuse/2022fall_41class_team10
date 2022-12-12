@@ -14,6 +14,7 @@ export default class Result extends React.Component{
         Content:"",
         skeleton_code:"",
         Restriction:"",
+        due_date:"",
         testcase1:{
             'input': '',
             'output': '',
@@ -86,6 +87,7 @@ export default class Result extends React.Component{
             this.setState({
                 Content:JSON.parse(response['data'])['Content'],
                 Restriction:JSON.parse(response['data'])['Restriction'],
+                due_date:JSON.parse(response['data'])['due_date'],
                 skeleton_code:JSON.parse(response['data'])['skeleton_code'],
                 select:0
             })

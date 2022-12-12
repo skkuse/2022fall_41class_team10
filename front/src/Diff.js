@@ -6,8 +6,7 @@ export default function App(props) {
 
   useEffect(() => {
     var diffHtml = Diff2Html.html(
-       props.code_diff
-        ,
+       props.code_diff,
       {
         inputFormat: "json",
         drawFileList: true,

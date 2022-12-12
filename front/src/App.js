@@ -19,8 +19,6 @@ const pro1 = "For given 2 input, show the addition result"
 // const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const pro2 = "The number type is integer only."
 
-const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
-const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const testcase1 ={
     'input': '1 3',
     'output': '4'
@@ -247,7 +245,7 @@ export default class App extends React.Component {
                                 className={'me-md-auto'}
                                 style={{
                                     border: "solid 2px",
-                                    borderColor: "#E6C619",
+                                    borderColor: (this.state.theme === 1) ? "#0d6efd" : "#E6C619",
                                     borderRadius:"10px",
                                     height:"60%",
                                     lineHeight:"140%",
@@ -321,61 +319,63 @@ export default class App extends React.Component {
                         </header>
                     </div>
 
-                    {this.state.submit===0 ?
-                        <>
-                            <div
-                                id={"problemComponent"}
-                                style={{
-                                    height:"960px",
-                                    width:"35%",
-                                    float:"left"}}>
-                                <Problem data1 = {this.state.pro1}
-                                         data2 = {this.state.pro2}
-                                         testcase1 = {this.state.testcase1}
-                                         testcase2 = {this.state.testcase2}/>
-                            </div>
-                        </>
-                        : <> </>}
-                    <div
-                        id={"condeEditComponent"}
-                        style={{
-                            visibility: (this.state.submit===1) ? "hidden" : "visible",
-                            position:"relative",
-                            height:"960px",
-                            width: !(this.state.submit===1) ?"65%":"0%",
-                            left: !(this.state.submit===1) ? "0%":"1%",
-                            float:"left"}}>
-                        <CodeEdit api = {this.api} googleSearch = {this.googleSearch} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
+                    <div id={"body"} className={'container-fluid'} >
+                        {this.state.submit===0 ?
+                            <>
+                                <div
+                                    id={"problemComponent"}
+                                    style={{
+                                        height:"960px",
+                                        width:"35%",
+                                        float:"left"}}>
+                                    <Problem data1 = {this.state.pro1}
+                                             data2 = {this.state.pro2}
+                                             testcase1 = {this.state.testcase1}
+                                             testcase2 = {this.state.testcase2}/>
+                                </div>
+                            </>
+                            : <> </>}
+                        <div
+                            id={"condeEditComponent"}
+                            className={'ms-2'}
+                            style={{
+                                visibility: (this.state.submit===1) ? "hidden" : "visible",
+                                height:"960px",
+                                width: !(this.state.submit===1) ?"64%":"0%",
+                                float:"left"}}>
+                            <CodeEdit api = {this.api} googleSearch = {this.googleSearch} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit} theme = {this.state.theme}/>
+                        </div>
+
+                        {this.state.submit===1 ?
+                            <>
+                                <div
+                                    id={"diffComponent"}
+                                    style={{position:"relative",
+                                        height:"960px",
+                                        top:"2%",
+                                        width:"43%",
+                                        float:"left",
+                                        marginLeft:"5%",
+                                        marginTop:"5%",
+                                        // backgroundColor:"white"
+                                    }}>
+                                    <Diff code_diff={this.state.code_diff}/>
+                                </div>
+                                <div
+                                    id={"resultComponent"}
+                                    style={{
+                                        height:"960px",
+                                        width:"50%",
+                                        float:"left"}}>
+                                    <Result result = {this.state} backHome={this.backHome}
+                                            code_explain={this.state.code_explain}
+                                            copy_detect={this.state.copy_detect}
+                                            total_score={this.state.total_score}/>
+                                </div>
+                            </>
+                            : <></>}
                     </div>
 
-                    {this.state.submit===1 ?
-                        <>
-                            <div
-                                id={"diffComponent"}
-                                style={{position:"relative",
-                                    height:"960px",
-                                    top:"2%",
-                                    width:"43%",
-                                    float:"left",
-                                    marginLeft:"5%",
-                                    marginTop:"5%",
-                                    // backgroundColor:"white"
-                                }}>
-                                <Diff code_diff={this.state.code_diff}/>
-                            </div>
-                            <div
-                                id={"resultComponent"}
-                                style={{
-                                    height:"960px",
-                                    width:"50%",
-                                    float:"left"}}>
-                                <Result result = {this.state} backHome={this.backHome}
-                                        code_explain={this.state.code_explain}
-                                        copy_detect={this.state.copy_detect}
-                                        total_score={this.state.total_score}/>
-                            </div>
-                        </>
-                        : <></>}
                 </div>
             </ThemeProvider>
         )
