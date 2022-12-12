@@ -212,20 +212,19 @@ export default class Result extends React.Component{
                                         </>
                                 )}
                                 </>
-                                :
-                                    this.state.type===1?
+                                : this.state.type===1?
 
                                 Object.entries(this.state.view).map(
-                                    ([word, int]) => <
-                                                    >
-                                                        <div style={{marginTop:"3%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div>
-                                                        <div style={{marginTop:"3%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
-                                                            <div style={{position:"relative",backgroundColor:"#FF7E7E", width:(int).toString()+"%",height: "100%",borderRadius:"10px"}}>
-                                                            </div>
-                                                        </div>
-                                                            <div  style={{marginTop:"3%",width:"15%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}/100점 </div>
-                                                        <br/>
-                                                    </>
+                                    ([word, int]) =>
+                                        <>
+                                            <div style={{marginTop:"3%",position:"relative",width:"40%",height:"2%",float:"left",textAlign:"center", borderRadius:"10px",fontWeight:"bolder"}}>{word}</div>
+                                            <div style={{marginTop:"3%",position:"relative",width:"33%",height:"2%",border:"0.1px solid black",float:"left", borderRadius:"10px"}}>
+                                                <div style={{position:"relative",backgroundColor:"#FF7E7E", width:(int).toString()+"%",height: "100%",borderRadius:"10px"}}>
+                                                </div>
+                                            </div>
+                                                <div  style={{marginTop:"3%",width:"15%",height:"3%",float:"left",textAlign:"right", fontWeight:"bolder"}}>{int}/100점 </div>
+                                            <br/>
+                                        </>
                                 )
                                         :this.state.type===2?
                                         <>

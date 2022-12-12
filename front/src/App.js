@@ -200,7 +200,7 @@ export default class App extends React.Component {
             copy_detect:data["score"]['copy_detect'],
             total_score:data["score"]["total"],
             code_diff:data["score"]["code_diff_str"],
-            code_explain:data["score"]["code_explain"].slice(1),
+            code_explain:data["score"]["code_explain"].slice(0),
             submit:1,
             isLoading:false
         })
