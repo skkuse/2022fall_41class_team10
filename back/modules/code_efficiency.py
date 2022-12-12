@@ -194,29 +194,41 @@ class MultiMetrics:
         target_json=MultiMetrics.CalculMetrics(class_id, assign_id, file_path)
         anwser_metric_f.close()
 
-        loc=round((anwser_json['LOC']/target_json['LOC'])*25)
-        if loc>25:
-            loc=25
-        elif loc<0:
+        if target_json['LOC']==0:
             loc=0
+        else:
+            loc=round((anwser_json['LOC']/target_json['LOC'])*25)
+            if loc>25:
+                loc=25
+            elif loc<0:
+                loc=0
         
-        halstead=round((anwser_json['Halstead']/target_json['Halstead'])*25)
-        if halstead>25:
-            halstead=25
-        elif halstead<0:
+        if target_json['Halstead']==0:
             halstead=0
+        else:
+            halstead=round((anwser_json['Halstead']/target_json['Halstead'])*25)
+            if halstead>25:
+                halstead=25
+            elif halstead<0:
+                halstead=0
 
-        control_flow=round((anwser_json['Control_flow']/target_json['Control_flow'])*25)
-        if control_flow>25:
-            control_flow=25
-        elif control_flow<0:
+        if target_json['Control_flow']==0:
             control_flow=0
+        else:
+            control_flow=round((anwser_json['Control_flow']/target_json['Control_flow'])*25)
+            if control_flow>25:
+                control_flow=25
+            elif control_flow<0:
+                control_flow=0
 
-        data_flow=round((float(anwser_json['Data flow'])/float(target_json['Data flow']))*25)
-        if data_flow>25:
-            data_flow=25
-        elif data_flow<0:
+        if target_json['Data flow']==0:
             data_flow=0
+        else:
+            data_flow=round((float(anwser_json['Data flow'])/float(target_json['Data flow']))*25)
+            if data_flow>25:
+                data_flow=25
+            elif data_flow<0:
+                data_flow=0
 
         score={}
         score['LOC']=loc

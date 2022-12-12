@@ -1,16 +1,13 @@
 import os
 
 class Pylama:
-    def act(text):
+    def act(class_id, assign_id, file_path):
         mypy = 20
         pylint = 20
         eradicate = 20
         radon = 20
         pycodestyle = 20
-        temp = open('./test.py', mode='w')
-        temp.write(text)
-        temp.close()
-        os.system("pylama " +"./test.py" + " > save.txt")
+        os.system("pylama " + file_path + " > save.txt")
         #file 자리에 해당 파이썬 코드의 파일이름 입력
         f = open('./save.txt', mode = 'r', encoding='utf-8')
         f1 = open('./mypy.txt', mode = 'w')
@@ -92,7 +89,6 @@ class Pylama:
         os.remove("eradicate.txt")
         os.remove("radon.txt")
         os.remove("pycodestyle.txt")
-        os.remove("test.py")
         '''
         return "mypy: {0}, pylint: {1}, eradicate: {2}, radon: {3}, pycodestyle: {4}".format(self.mypy, self.pylint, self.eradicate, self.radon, self.pycodestyle)
         '''
