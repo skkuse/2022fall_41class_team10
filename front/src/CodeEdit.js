@@ -337,7 +337,6 @@ export default function CodeEdit(props) {
                             width:"9%",
                             borderRadius:"20px",
                             border:"0.5px solid grey",
-                            // backgroundColor:"#50A657",
                             float:"right",
                             lineHeight: "200%",
                             fontWeight:"bolder",}}

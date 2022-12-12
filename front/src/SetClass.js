@@ -1,5 +1,5 @@
 import React, {useRef,useEffect, useState} from "react";
-import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 import App from './App';
 
@@ -104,43 +104,41 @@ export default class Result extends React.Component{
                 {this.state.select ===-1 ?
                     <>
                     {this.state.class===-1 ?
-                            <>
-                            <div>
-                                과목 선택
+                        <div className={'container'}>
+                            <div className={'d-flex align-items-center justify-content-center border-bottom mb-3'}
+                            style={{height:"60px"}}>
+                                <span className={'text-center fw-bold fs-3'}>
+                                    과목 선택
+                                </span>
                             </div>
+                            <ul className={'nav nav-pills flex-column '}>
                                 {this.state.ClassList.map(u=>(
-                                    <div style={{
-                                            width:"50%",
-                                            height:"50%",
-                                            border:"1px solid black"
-                                        }}
-                                        onClick={()=>this.getAssign(Object.entries(u)[0][1])}
-                                    >
-                                        {Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}
-                                    </div>
-                                ))
+                                    <li className={'card nav-item'}
+                                        style={{height:"45px"}}
+                                         onClick={()=>this.getAssign(Object.entries(u)[0][1])}>
+                                        <div className={'nav-link active fs-5 w-100  text-center'}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
+                                    </li>))
                                 }
-                            </>
-                        :    
-                        <>
-                        <div>
-                            과제 선택
-                        </div>              
-                        {  
-                            this.state.AssignList.map(u=>(
-                                <div
-                                    style={{
-                                        width:"50%",
-                                        height:"50%",
-                                        border:"1px solid black"
-                                    }}
-                                    onClick={()=>this.setCode(Object.entries(u)[0][1])}
-                                >
-                                    {Object.entries(u)[0][1]} : {Object.entries(u)[1][1]}
-                                </div>
-                            ))
-                        }
-                        </>
+                            </ul>
+                        </div>
+                        :
+                        <div className={'container'}>
+                            <div className={'d-flex align-items-center justify-content-center border-bottom mb-3'}
+                                 style={{height:"60px"}}>
+                                <span className={'text-center fw-bold fs-3'}>
+                                    과제 선택
+                                </span>
+                            </div>
+                            <ul className={'nav nav-pills flex-column mb-auto'}>
+                                {this.state.AssignList.map(u=>(
+                                    <li className={'card nav-item'}
+                                        style={{height:"45px"}}
+                                        onClick={()=>this.setCode(Object.entries(u)[0][1])}>
+                                        <div className={'nav-link active fs-5 w-100 text-center'}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
+                                    </li>))
+                                }
+                            </ul>
+                        </div>
                     }
                     </>
                     :
