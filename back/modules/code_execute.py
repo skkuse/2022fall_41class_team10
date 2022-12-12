@@ -5,6 +5,8 @@ import unittest
 import os
 from pathlib import Path
 import time
+import subprocess
+import json
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
@@ -31,26 +33,26 @@ code1 = ""
 
 class CodeExecute(unittest.TestCase):
 
-    def code_execute(code):
+    def save2file(dir_path, file_path, code):
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+        f = open(file_path, mode='w')
+        f.write(code)
+        f.close()
 
-        global code1
-        code1 = code
-        old_stdout = sys.stdout
-        redirected_output = sys.stdout = StringIO()
-
-        old_stderr = sys.stderr
-        codeErr = sys.stderr = StringIO()
-        
-        result = ""
-
+    def code_execute(file_path):
+        # RETURN : stdout, stderr
         try:
-            exec(code)
-            sys.stdout = old_stdout
-            sys.stderr = old_stderr
-            result = redirected_output.getvalue()
-        except:
-            sys.stdout = old_stdout
-            sys.stderr = old_stderr
-            result = "Failed to execute command"
-        
-        return result
+            result = subprocess.run(
+                ["python", file_path],
+                capture_output=True,
+                text=True,
+                timeout = 10,
+            )
+        except subprocess.TimeoutExpired:
+            return None, "Timeout"
+
+        if result.stderr:
+            return None, result.stderr
+        else:
+            return result.stdout.strip(), None

@@ -271,13 +271,13 @@ export default class Result extends React.Component{
                                         lineHeight:"100%"
                                     }}
                                 >
-                                
+                                {console.log(this.props.code_explain.split('\n'))}
                                 {
                                     
                                     this.props.code_explain.split('\n').map( (word)=>
                                     <>
                                         {word}
-                                        <br/>
+                                        
                                         <br/>
                                     </>
                                     
