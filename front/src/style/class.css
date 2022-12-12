@@ -9,6 +9,17 @@
   border-radius: 50%;
 }
 
+.active {
+  position: relative;
+  padding: 0;
+  text-align: center;
+  background-color: #7bbc18;
+  border: 0;
+  color: white;
+  font-size: 150%;
+  border-radius: 50%;
+}
+
 .spacer3percent{
   margin-top: 5%;
   width: 3%;

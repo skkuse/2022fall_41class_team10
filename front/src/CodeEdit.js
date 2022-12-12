@@ -25,6 +25,7 @@ export default function CodeEdit(props) {
     const editorRef = useRef(null);
     const textInput = useRef(null);
     const [codeResult, setCodeResult ] = useState("");
+    const [color, setColor] = useState(0);
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
@@ -155,35 +156,35 @@ export default function CodeEdit(props) {
                                 <FloppyDisk/>
                             </button>
                             <button
-                                className={"numberButton"}
+                                className={(color===1?"active":"numberButton")}
                                 style={{
                                     width: "4%",
                                     height: "65%",
                                     left: "5%"
                                 }}
-                                onClick={()=>load(0)}    
+                                onClick={()=>{setColor(1); load(0);}}    
                             >
                                 1
                             </button>
                             <button
-                                className={"numberButton"}
+                                className={(color===2?"active":"numberButton")}
                                 style={{
                                     width: "4%",
                                     height: "65%",
                                     left: "7%"
                                 }}
-                                onClick={()=>load(1)}    
+                                onClick={()=>{setColor(2); load(1);}}    
                             >
                                 2
                             </button>
                             <button
-                                className={"numberButton"}
+                                className={(color===3?"active":"numberButton")}
                                 style={{
                                     width: "4%",
                                     height: "65%",
                                     left: "9%"
                                 }}
-                                onClick={()=>load(2)}
+                                onClick={()=>{setColor(3); load(2);}}
                             >
                                 3
                             </button>
