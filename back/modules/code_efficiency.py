@@ -132,14 +132,17 @@ class MultiMetrics:
         #processing Data Flow
         test_input=db.get_testcase_list(class_id, assign_id)[0][1]
         command='mprof run --python --timeout 30  {0}'.format(file_path)
-        os.system('echo {0} | {1}'.format(test_input,command))
-        os.system('mprof peak > mem_log.txt')
-        os.system('mprof clean')
-        temp_output=open("mem_log.txt","r")
-        temp_output.readline()
-        mem_max=temp_output.readline().strip().split("\t")[1].split(" ")[0]
-        temp_output.close()
-        os.remove('mem_log.txt')
+        try:
+            os.system('echo {0} | {1}'.format(test_input,command))
+            os.system('mprof peak > mem_log.txt')
+            os.system('mprof clean')
+            temp_output=open("mem_log.txt","r")
+            temp_output.readline()
+            mem_max=temp_output.readline().strip().split("\t")[1].split(" ")[0]
+            temp_output.close()
+            os.remove('mem_log.txt')
+        except:
+            mem_max = 0
 
         # return Json
         code_efficiency={}

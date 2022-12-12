@@ -30,9 +30,9 @@ class CodeScore:
                 timeout=TIMEOUT,
             )
         except subprocess.TimeoutExpired:
-            return "Timeout"
+            return False
 
         if result.stderr:
-            return result.stderr
+            return False
         else:
             return result.stdout.strip() == unittest_output
