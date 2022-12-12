@@ -240,6 +240,8 @@ export default class App extends React.Component {
                     left: !(this.state.submit===1) ? "0%":"1%",
                     float:"left"}}>
                 <CodeEdit 
+                    setLoading={this.setLoading}
+                    offLoading={this.offLoading}
                     skeleton_code = {this.state.skeleton_code}
                     grade_api = {this.grade_api}
                     api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>

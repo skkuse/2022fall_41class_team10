@@ -93,6 +93,7 @@ export default function CodeEdit(props) {
         props.api(editorRef.current.getValue())
         props.submit(0)
         */
+        props.setLoading()
         axios.post(
             "http://127.0.0.1:8000/code_run/",
             {code: editorRef.current.getValue()})
@@ -108,6 +109,7 @@ export default function CodeEdit(props) {
                 //console.log(JSON.parse(response['data']))
                 //setCodeResult(JSON.parse(response['data'])['result'])
             })
+        props.offLoading()
     }
     function grade(api){
         /*
