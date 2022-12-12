@@ -43,23 +43,23 @@ def code_submit(request):
 
     #설명
     code_efficiency = MultiMetrics.calculeScore(class_id, assign_id, file_path)
-    code_explain = Explain.act(code)
-    code_readability = Pylama.act(code)
-    copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
-    code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
+    #code_explain = Explain.act(code)
+    #code_readability = Pylama.act(code)
+    #copy_detect = CopyDetect.findPlagiarismRate(class_id, assign_id, file_path)
+    #code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
 
     #total
-    tc_score = 60 * sum(tc_list)/len(tc_list)
-    exp_score = (20/100) * (code_efficiency["LOC"]+code_efficiency["Halstead"]+code_efficiency["Control_flow"]+code_efficiency["Data flow"])
-    read_score = (20/100) * (sum(code_readability[:5]))
-    total = tc_score + exp_score + read_score
+    #tc_score = 60 * sum(tc_list)/len(tc_list)
+    #exp_score = (20/100) * (code_efficiency["LOC"]+code_efficiency["Halstead"]+code_efficiency["Control_flow"]+code_efficiency["Data flow"])
+    #read_score = (20/100) * (sum(code_readability[:5]))
+    #total = tc_score + exp_score + read_score
 
     result_json = json.dumps({
-        "result": tc_list,
+        #"result": tc_list,
         "score": {
             "code_efficiency" : code_efficiency,
-            "code_explain" : code_explain,
-            "code_readability" : code_readability,
+            #"code_explain" : code_explain,
+            #"code_readability" : code_readability,
             "copy_detect" : copy_detect,
             "code_diff_str": code_diff,
             "total": total,
