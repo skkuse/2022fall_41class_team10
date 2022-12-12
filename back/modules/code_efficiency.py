@@ -1,7 +1,7 @@
 import argparse
 import os
-
 import chardet
+import json
 from pygments import lexers
 
 from multimetric.cls.importer.filtered import FilteredImporter
@@ -10,6 +10,7 @@ from multimetric.cls.modules import get_additional_parser_args
 from multimetric.cls.modules import get_modules_calculated
 from multimetric.cls.modules import get_modules_metrics
 from multimetric.cls.modules import get_modules_stats
+from modules.db import db
 
 """
 API를 따로 제공해주지 않아 소스코드를 복사하여 사용
@@ -94,29 +95,16 @@ class MultiMetrics:
     
     
     """
-    해당 모듈을 사용하려면 py파일이 필요하므로
-    입력받은 문자열을 py파일로 작성 후 작업
-
-    결과물은 JSON 형식으로 나옴
-
     LOC : loc
     Halstead : Halstead effort
     Control flow 복잡도: Cyclomatic_complexity
-    Data flow 복잡도, Reservation Words는 어떤 항목을 보고 판단해야하는지 문의 필요
+    Data flow 복잡도: 
     """
 
-
-
-
-    def CalculMetrics(code):
-        f=open("test.py",'w')
-        f.write(code)
-        f.close()
-        
-        _args =  MultiMetrics.ArgParser("test.py")
+    def CalculMetrics(class_id, assign_id, file_path):        
+        _args =  MultiMetrics.ArgParser(file_path)
         _result = {"files": {}, "overall": {}}
         
-    
         # Get importer
         _importer = {}
         _importer["import_compiler"] = importer_pick(_args, _args.warn_compiler)
@@ -127,27 +115,88 @@ class MultiMetrics:
             _args, _args.warn_functional)
         _importer["import_security"] = importer_pick(_args, _args.warn_standard)
         _importer["import_standard"] = importer_pick(_args, _args.warn_security)
+
         # sanity check
         _importer = {k: v for k, v in _importer.items() if v}
-    
-        # instance metric modules
-        _overallMetrics = get_modules_metrics(_args, **_importer)
-        _overallCalc = get_modules_calculated(_args, **_importer)
     
         results = [MultiMetrics.file_process(f, _args, _importer) for f in _args.files]
         for x in results:
             _result["files"][x[1]] = x[0]
         for m in get_modules_stats(_args, **_importer):
             _result = m.get_results(_result, "files", "overall")
-  
-        os.remove("test.py")
-        
+
         data=_result["files"]
         keys=list(data.keys())
+        
+        
+        #processing Data Flow
+        test_input=db.get_testcase_list(class_id, assign_id)[0][1]
+        command='mprof run --python --timeout 30  {0}'.format(file_path)
+        os.system('echo {0} | {1}'.format(test_input,command))
+        os.system('mprof peak > mem_log.txt')
+        os.system('mprof clean')
+        temp_output=open("mem_log.txt","r")
+        temp_output.readline()
+        mem_max=temp_output.readline().strip().split("\t")[1].split(" ")[0]
+        temp_output.close()
+        os.remove('mem_log.txt')
+
+        # return Json
         code_efficiency={}
         code_efficiency['LOC']=data[keys[0]]["loc"]
         code_efficiency['Halstead']=data[keys[0]]["halstead_effort"]
         code_efficiency['Control_flow']=data[keys[0]]["cyclomatic_complexity"]
-        #수정필요
-        code_efficiency['Data flow']=data[keys[0]]["cyclomatic_complexity"]
+        code_efficiency['Data flow']=mem_max
+
         return(code_efficiency)
+
+    def prepareMultiMetrics(class_id, assign_id):
+        dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
+        anwser_path=dir_path+"/answer.py"
+        anwser_metric_path= dir_path+"/anwser_metric.json"
+        if not os.path.isfile(anwser_metric_path):
+            anwser_metric=MultiMetrics.CalculMetrics(class_id,assign_id,anwser_path)
+            with open(anwser_metric_path,'w') as f:
+                json.dump(anwser_metric,f,ensure_ascii=False,indent=4)
+
+    def calculeScore(class_id, assign_id, file_path):
+        dir_path = "./data/class_%d/assign_%d" % (class_id, assign_id)
+        anwser_metric_path= dir_path+"/anwser_metric.json"
+        anwser_metric_f=open(anwser_metric_path,'r')
+        anwser_json=json.load(anwser_metric_f)
+        target_json=MultiMetrics.CalculMetrics(class_id, assign_id, file_path)
+        anwser_metric_f.close()
+
+        loc=round((anwser_json['LOC']/target_json['LOC'])*25)
+        if loc>25:
+            loc=25
+        elif loc<0:
+            loc=0
+        
+        halstead=round((anwser_json['Halstead']/target_json['Halstead'])*25)
+        if halstead>25:
+            halstead=25
+        elif halstead<0:
+            halstead=0
+
+        control_flow=round((anwser_json['Control_flow']/target_json['Control_flow'])*25)
+        if control_flow>25:
+            control_flow=25
+        elif control_flow<0:
+            control_flow=0
+
+        data_flow=round((float(anwser_json['Data flow'])/float(target_json['Data flow']))*25)
+        if data_flow>25:
+            data_flow=25
+        elif data_flow<0:
+            data_flow=0
+
+        score={}
+        score['LOC']=loc
+        score['Halstead']=halstead
+        score['Control_flow']=control_flow
+        score['Data flow']=data_flow
+        
+        return score
+        
+
