@@ -24,8 +24,28 @@ def get_assignment_list(request, class_id):
 
     return JsonResponse(result_json, safe=False)
 
+def get_assignment_list_eng(request, class_id):
+    data=db.get_assignment_list_eng(class_id)
+    # Maybe change later
+    result_json = json.dumps({
+        "Assignments" : data,
+    })
+
+    return JsonResponse(result_json, safe=False)
+
 def get_assignment_info(request, class_id, assign_id):
     data=db.get_assignment_info(class_id,assign_id)
+    result_json = json.dumps({
+        "Content" : data[0][0],
+        "Restriction" : data[0][1],
+        "due_date" : data[0][2],
+        "skeleton_code": data[0][3], 
+        "answer_code": data[0][4]
+    })
+    return JsonResponse(result_json, safe=False, json_dumps_params={'ensure_ascii':False})
+
+def get_assignment_info_eng(request, class_id, assign_id):
+    data=db.get_assignment_info_eng(class_id,assign_id)
     result_json = json.dumps({
         "Content" : data[0][0],
         "Restriction" : data[0][1],
