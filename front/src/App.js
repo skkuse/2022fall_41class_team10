@@ -22,6 +22,11 @@ export default class App extends React.Component {
     
     state = {
         submit: 1,
+        pro1 : this.props.content,
+        pro2 : this.props.restriction,
+        testcase1:this.props.testcase1,
+        testcase2:this.props.testcase2,
+        skeleton_code:this.props.skeleton_code,
         case_correct:{
             "테스트케이스-1":"통과",
             "테스트케이스-2":"통과",
@@ -174,10 +179,10 @@ export default class App extends React.Component {
                         height:"94.5%",
                         width:"29.5%",
                         float:"left"}}>
-                    <Problem data1 = {pro1}
-                             data2 = {pro2}
-                             testcase1 = {testcase1}
-                             testcase2 = {testcase2}/>
+                    <Problem data1 = {this.state.pro1}
+                             data2 = {this.state.pro2}
+                             testcase1 = {this.state.testcase1}
+                             testcase2 = {this.state.testcase2}/>
                 </div>
                 <div
                 id={"condeEditComponent"}
@@ -187,7 +192,9 @@ export default class App extends React.Component {
                     width: !(this.state.submit===1) ?"70.1%":"44.1%",
                     left: !(this.state.submit===1) ? "0%":"1%",
                     float:"left"}}>
-                <CodeEdit api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
+                <CodeEdit 
+                    skeleton_code = {this.state.skeleton_code}
+                    api = {this.api} submit = {this.setSubmit} setCodeResult = {this.setCodeResult} visible={this.state.submit}/>
             </div>
             </>
                 : <> </>}

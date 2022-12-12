@@ -48,7 +48,7 @@ export default function CodeEdit(props) {
         props.setCodeResult(" ")
     }
     function clear(){
-        editorRef.current.setValue("print('Hello World!')");
+        editorRef.current.setValue(props.skeleton_code);
         props.submit(0)
         props.setCodeResult(" ")
     }
@@ -237,7 +237,7 @@ export default function CodeEdit(props) {
                 backgroundColor="#F0F0F0"
                 height="60%"
                 defaultLanguage="python"
-                defaultValue="print('Hello World!')"
+                defaultValue={props.skeleton_code}
                 onMount={handleEditorDidMount}/>
             {props.visible===0 ?
                 <div
