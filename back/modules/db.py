@@ -21,10 +21,26 @@ class db:
         con.close()
         return data
 
+    def get_assignment_list_eng(class_id):
+        con = sqlite3.connect(DB_PATH)
+        cur = con.cursor()
+        data=cur.execute('SELECT assign_id, name FROM assignment_eng WHERE class_id={0} ORDER BY assign_id'.format(class_id)).fetchall()
+        cur.close()
+        con.close()
+        return data
+
     def get_assignment_info(class_id, assign_id):
         con = sqlite3.connect(DB_PATH)
         cur = con.cursor()
         data=cur.execute('SELECT content, restriction, due_date, skeleton_code, answer_code FROM assignment WHERE class_id={0} AND assign_id={1} ORDER BY assign_id'.format(class_id, assign_id)).fetchall()
+        cur.close()
+        con.close()
+        return data
+
+    def get_assignment_info_eng(class_id, assign_id):
+        con = sqlite3.connect(DB_PATH)
+        cur = con.cursor()
+        data=cur.execute('SELECT content, restriction, due_date, skeleton_code, answer_code FROM assignment_eng WHERE class_id={0} AND assign_id={1} ORDER BY assign_id'.format(class_id, assign_id)).fetchall()
         cur.close()
         con.close()
         return data

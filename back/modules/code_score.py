@@ -35,4 +35,4 @@ class CodeScore:
         if result.stderr:
             return result.stderr
         else:
-            return str(result.stdout.strip() == unittest_output)
+            return result.stdout.strip() == unittest_output

@@ -48,7 +48,7 @@ export default function CodeEdit(props) {
         props.setCodeResult(" ")
     }
     function clear(){
-        editorRef.current.setValue("print('Hello World!')");
+        editorRef.current.setValue(props.skeleton_code);
         props.submit(0)
         props.setCodeResult(" ")
     }
@@ -104,11 +104,7 @@ export default function CodeEdit(props) {
         props.api(editorRef.current.getValue())
         props.submit(2)
         */
-        axios.post(
-            "http://127.0.0.1:8000/code_submit/",
-            {code: editorRef.current.getValue()})
-            .then(response=>
-                console.log(JSON.parse(response['data'])))
+        props.grade_api(editorRef.current.getValue())
         //상위 component에서 채점하는 것을 알아야 함
         //또한 현재 작성한 코드를 상위 component로 전송
         //상위 component는 서버로 데이터 전송
@@ -119,7 +115,7 @@ export default function CodeEdit(props) {
     function submission(){
         execution()
         props.api(editorRef.current.getValue())
-        props.submit(1)
+        //props.submit(1)
         //상위 component에서 채점하는 것을 알아야 함
         //또한 현재 작성한 코드를 상위 component로 전송
         //상위 component는 서버로 데이터 전송
@@ -237,7 +233,7 @@ export default function CodeEdit(props) {
                 backgroundColor="#F0F0F0"
                 height="60%"
                 defaultLanguage="python"
-                defaultValue="print('Hello World!')"
+                defaultValue={props.skeleton_code}
                 onMount={handleEditorDidMount}/>
             {props.visible===0 ?
                 <div
