@@ -116,7 +116,7 @@ export default class Result extends React.Component{
                                     <li className={'card nav-item'}
                                         style={{height:"45px"}}
                                          onClick={()=>this.getAssign(Object.entries(u)[0][1])}>
-                                        <div className={'nav-link active fs-5 w-100  text-center'}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
+                                        <div className={'nav-link active fs-5 w-100  text-center'} style={{backgroundColor:"#2E4E3F"}}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
                                     </li>))
                                 }
                             </ul>
@@ -134,7 +134,7 @@ export default class Result extends React.Component{
                                     <li className={'card nav-item'}
                                         style={{height:"45px"}}
                                         onClick={()=>this.setCode(Object.entries(u)[0][1])}>
-                                        <div className={'nav-link active fs-5 w-100 text-center'}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
+                                        <div className={'nav-link active fs-5 w-100 text-center'} style={{backgroundColor:"#2E4E3F"}}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
                                     </li>))
                                 }
                             </ul>

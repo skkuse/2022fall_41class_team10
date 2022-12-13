@@ -48,7 +48,7 @@ export default class Result extends React.Component{
                                 fontSize:"150%",
                                 fontWeight:"bolder",
                             }}>
-                            &nbsp;&nbsp;&nbsp;&nbsp;제출 결과
+                            제출 결과
                             &emsp;&emsp;&emsp;&emsp;
                             &emsp;&emsp;&emsp;&emsp;
                             &emsp;&emsp;

@@ -40,7 +40,7 @@ export default function CodeEdit(props) {
     const editorRef = useRef(null);
     const textInput = useRef(null);
     const [codeResult, setCodeResult ] = useState("");
-    const [color, setColor] = useState(0);
+    const [color, setColor] = useState(1);
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
@@ -193,7 +193,7 @@ export default function CodeEdit(props) {
                                 {props.theme === 1 ?  <FloppyDisk_W/>  :<FloppyDisk_B/>}
                             </button>
                             <button
-                                className={(color===1?"active":"numberButton")}
+                                className={(color===1?"activeNumBtn ":"") + "numberButton"}
                                 style={{
                                     height: "36px",
                                     width: "36px",
@@ -203,22 +203,20 @@ export default function CodeEdit(props) {
                                 1
                             </button>
                             <button
-                                className={(color===2?"active":"numberButton")}
+                                className={"numberButton " + (color===2?"activeNumBtn":"")}
                                 style={{
                                     height: "36px",
                                     width: "36px",
-                                    left: "7%"
-                                }}
+                                    left: "7%"}}
                                 onClick={()=>{setColor(2); load(1);}}>
                                 2
                             </button>
                             <button
-                                className={(color===3?"active":"numberButton")}
+                                className={"numberButton " + (color===3?"activeNumBtn":"")}
                                 style={{
                                     height: "36px",
                                     width: "36px",
-                                    left: "9%"
-                                }}
+                                    left: "9%"}}
                                 onClick={()=>{setColor(3); load(2);}}>
                                 3
                             </button>

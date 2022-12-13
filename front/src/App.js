@@ -46,6 +46,10 @@ const GlobalStyle = createGlobalStyle`
       color:${(props) => props.theme.numButtonTextColor}
     }
     
+    .activeNumBtn{
+      background-color: ${(props) => props.theme.activeBtn};
+    }
+    
     .iconButton{
       background-color: ${(props) => props.theme.transparent};
     }
