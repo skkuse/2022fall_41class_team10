@@ -199,11 +199,11 @@ export default class App extends React.Component {
         console.log(data["score"]["LOC"])
         this.setState({
             case_correct:{
-                "테스트케이스-1":(data["result"][0] === false)?"실패":"통과",
-                "테스트케이스-2":(data["result"][1] === false)?"실패":"통과",
-                "히든 테스트케이스-3":(data["result"][2] === false)?"실패":"통과",
-                "히든 테스트케이스-4":(data["result"][3] === false)?"실패":"통과",
-                "히든 테스트케이스-5":(data["result"][4] === false)?"실패":"통과",
+                "테스트케이스-1":(data["result"][0][0] === false)?"실패":"통과",
+                "테스트케이스-2":(data["result"][1][0] === false)?"실패":"통과",
+                "히든 테스트케이스-3":(data["result"][2][0] === false)?"실패":"통과",
+                "히든 테스트케이스-4":(data["result"][3][0] === false)?"실패":"통과",
+                "히든 테스트케이스-5":(data["result"][4][0] === false)?"실패":"통과",
             },
             readability: {
                 "mypy": data["score"]["code_readability"][0],
