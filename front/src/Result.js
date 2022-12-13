@@ -126,7 +126,6 @@ export default class Result extends React.Component{
                             className={'line'}
                             style={{
                                 position:"absolute",
-                                // backgroundColor:"black",
                                 width:"94%",
                                 height:"1px",
                                 left:"3%",
@@ -137,7 +136,6 @@ export default class Result extends React.Component{
                             className={'line'}
                             style={{
                                 position:"absolute",
-                                // backgroundColor:"black",
                                 width:"94%",
                                 height:"1px",
                                 left:"3%",
@@ -148,7 +146,6 @@ export default class Result extends React.Component{
                             className={'line'}
                             style={{
                                 position:"absolute",
-                                // backgroundColor:"black",
                                 width:"94%",
                                 height:"1px",
                                 left:"3%",
@@ -159,7 +156,6 @@ export default class Result extends React.Component{
                             className={'line'}
                             style={{
                                 position:"absolute",
-                                // backgroundColor:"black",
                                 width:"94%",
                                 height:"1px",
                                 left:"3%",

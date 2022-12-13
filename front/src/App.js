@@ -185,8 +185,8 @@ export default class App extends React.Component {
             console.log(JSON.parse(response["data"])["result"])
             this.setState({
                 testcase_correct:{
-                    "1":JSON.parse(response["data"])["result"][0][0],
-                    "2":JSON.parse(response["data"])["result"][1][0],
+                    "1":JSON.parse(response["data"])["result"][0],
+                    "2":JSON.parse(response["data"])["result"][1],
                 }
             })
             }
