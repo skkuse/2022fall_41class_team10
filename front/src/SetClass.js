@@ -26,6 +26,7 @@ export default class Result extends React.Component{
             'output':''
         }
     }
+
     api = async (data)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
@@ -35,6 +36,7 @@ export default class Result extends React.Component{
         .then(response=>{
             this.setState({ClassList:JSON.parse(response['data'])['Classes']})})
     }
+
     returnHome=()=>{
         this.setState({
             select:-1,
@@ -42,6 +44,7 @@ export default class Result extends React.Component{
             assign:-1,
         })
     }
+
     getAssign = async (index,name)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
@@ -58,9 +61,10 @@ export default class Result extends React.Component{
             }
         )
     }
+
     setCode(index,name){
         this.setState({assign:index})
-        var url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class),'/',index,'/testcase')
+        let url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class), '/', index, '/testcase');
 
         axios.get(
             url,
@@ -78,9 +82,7 @@ export default class Result extends React.Component{
             })
         })
 
-        
-
-        var url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class),'/',index)
+        url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class), '/', index);
         axios.get(
             url,
         ).then(response=>{
@@ -93,11 +95,12 @@ export default class Result extends React.Component{
                 select:0
             })
         })
-
     }
+
     componentDidMount(){
         this.api()
     }
+
     render(){
         return(
             <>
@@ -123,12 +126,18 @@ export default class Result extends React.Component{
                         </div>
                         :
                         <div className={'container'}>
-                            <div className={'d-flex align-items-center justify-content-center border-bottom mb-3'}
+                            <div className={'d-flex align-items-center border-bottom mb-3'}
                                  style={{height:"60px"}}>
-                                <span className={'text-center fw-bold fs-3'}>
+                                <span className={'text-center fw-bold fs-3'}
+                                    style={{marginLeft:"46%"}}>
                                     과제 선택
                                 </span>
+                                <span style={{marginLeft:"40%"}}
+                                onClick={()=>this.setState({class: -1})}>
+                                    뒤로가기
+                                </span>
                             </div>
+
                             <ul className={'nav nav-pills flex-column mb-auto'}>
                                 {this.state.AssignList.map(u=>(
                                     <li className={'card nav-item'}
