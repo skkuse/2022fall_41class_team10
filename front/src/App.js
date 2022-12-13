@@ -110,7 +110,10 @@ export default class App extends React.Component {
             "radon": 20,
             "pycodestyle": 16
         },
-
+        testcase_correct:{
+            "1":-1,
+            "2":-1,
+        },
         isLoading:false,
 
         copy_detect:0,
@@ -166,6 +169,12 @@ export default class App extends React.Component {
         .then(response=>{
             //this.setReadability(JSON.parse(response["data"]))
             console.log(JSON.parse(response["data"])["result"])
+            this.setState({
+                testcase_correct:{
+                    "1":JSON.parse(response["data"])["result"][0],
+                    "2":JSON.parse(response["data"])["result"][1],
+                }
+            })
             }
         )
         this.offLoading()
@@ -357,7 +366,9 @@ export default class App extends React.Component {
                                     <Problem data1 = {this.state.pro1}
                                              data2 = {this.state.pro2}
                                              testcase1 = {this.state.testcase1}
-                                             testcase2 = {this.state.testcase2}/>
+                                             testcase2 = {this.state.testcase2}
+                                             testcase_correct = {this.state.testcase_correct}
+                                             />
                                 </div>
                             </>
                             : <> </>}
