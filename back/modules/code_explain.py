@@ -18,7 +18,9 @@ class Explain:
         )
         result = response["choices"][0]["text"]
         list = result.split('\n')
-        result = list[1] + '\n' +list[2] + '\n' + list[3]
+        while '' in list:
+            list.remove('')
+        result = list[0] + '\n' + list[1] + '\n'+ list[2]
         return result
         
 

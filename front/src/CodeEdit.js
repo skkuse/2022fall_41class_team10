@@ -1,4 +1,4 @@
-import React, {useState, useRef } from "react";
+import React, {useState, useRef, Component } from "react";
 import Editor from "@monaco-editor/react";
 import styled from 'styled-components';
 import './style/class.css'
@@ -29,18 +29,19 @@ const skeleton = ("def plus(a, b):\n" +
     "result = plus(a, b)\n" +
     "print(result)");
 
-var val = [skeleton,
-    skeleton,
-    skeleton]
 
 export default function CodeEdit(props) {
     const state = {
-        val : 0
+        val : 1
     }
     const editorRef = useRef(null);
     const textInput = useRef(null);
     const [codeResult, setCodeResult ] = useState("");
     const [color, setColor] = useState(1);
+
+    var valid = [props.skeleton_code,
+        props.skeleton_code,
+        props.skeleton_code]
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
@@ -61,7 +62,8 @@ export default function CodeEdit(props) {
     }
 
     function load(num){
-        editorRef.current.setValue(val[num]);
+        editorRef.current.setValue(valid[num]);
+        console.log(valid)
         props.setCodeResult(" ")
     }
 
@@ -86,39 +88,18 @@ export default function CodeEdit(props) {
 
     function save(){
         // editorRef.current.getValue()
-        if(val[0]===("def plus(a, b):\n" +
-            "    #Write Your Code!\n" +
-            "\n" +
-            "a, b = map(int, input().split())\n" +
-            "result = plus(a, b)\n" +
-            "print(result)")){
-            val[0] = editorRef.current.getValue()
-            this.setState({
-                val : 1
-            })
+        if(color === 1){
+            valid[0] = editorRef.current.getValue();
         }
-        else if(val[1]===("def plus(a, b):\n" +
-            "    #Write Your Code!\n" +
-            "\n" +
-            "a, b = map(int, input().split())\n" +
-            "result = plus(a, b)\n" +
-            "print(result)")){
-            val[1] = editorRef.current.getValue()
-            this.setState({
-                val : 2
-            })
+        else if(color === 2){
+            valid[1] = editorRef.current.getValue()
         }
-        else if(val[2]===("def plus(a, b):\n" +
-            "    #Write Your Code!\n" +
-            "\n" +
-            "a, b = map(int, input().split())\n" +
-            "result = plus(a, b)\n" +
-            "print(result)")){
-            val[2] = editorRef.current.getValue()
-            this.setState({
-                val : 3
-            })
+        else if(color === 3){
+            valid[2] = editorRef.current.getValue()
         }
+        // valid[1]=valid[0]
+        // valid[2]=valid[1]
+        // valid[0]=editorRef.current.getValue()
         //{editorRef.current.getValue()}
     }
     function execution(api){
@@ -252,7 +233,7 @@ export default function CodeEdit(props) {
                             height:"10%"
                         }}>
                     </div>
-                }
+
             </div>
 
             <Editor

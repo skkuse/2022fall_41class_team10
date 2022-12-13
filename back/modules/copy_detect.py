@@ -49,5 +49,5 @@ class CopyDetect:
             else:
                 detector.add_file(ref_name,"ref")
         detector.run()
-
-        return detector.similarity_matrix[0][0][0]
+        output=round(detector.similarity_matrix[0][0][0],1)*100
+        return output

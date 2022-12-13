@@ -6,6 +6,8 @@ import App from './App';
 
 export default class Result extends React.Component{
     state={
+        class_name:"",
+        assign_name:"",
         select:-1,
         class:-1,
         assign:-1,
@@ -44,7 +46,7 @@ export default class Result extends React.Component{
             assign:-1,
         })
     }
-    getAssign = async (index)=>{
+    getAssign = async (index,name)=>{
         //const [loading, setLoading] = useState(true);
         //setLoading(true);
         var url = "http://127.0.0.1:8000/lecture/".concat(String(index))
@@ -54,12 +56,13 @@ export default class Result extends React.Component{
         )
         .then(response=>{
             this.setState({
+                class_name:name,
                 AssignList:JSON.parse(response['data'])['Assignments']
             })
             }
         )
     }
-    setCode(index){
+    setCode(index,name){
         this.setState({assign:index})
         var url = "http://127.0.0.1:8000/lecture/".concat(String(this.state.class),'/',index,'/testcase')
 
@@ -67,6 +70,7 @@ export default class Result extends React.Component{
             url,
         ).then(response=>{
             this.setState({
+                assign_name:name,
                 testcase1:{
                     'input': JSON.parse(response['data'])["Tests"][0][1],
                     'output': JSON.parse(response['data'])["Tests"][0][2]
@@ -115,7 +119,7 @@ export default class Result extends React.Component{
                                 {this.state.ClassList.map(u=>(
                                     <li className={'card nav-item'}
                                         style={{height:"45px"}}
-                                         onClick={()=>this.getAssign(Object.entries(u)[0][1])}>
+                                         onClick={()=>this.getAssign(Object.entries(u)[0][1],Object.entries(u)[1][1])}>
                                         <div className={'nav-link active fs-5 w-100  text-center'} style={{backgroundColor:"#2E4E3F"}}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
                                     </li>))
                                 }
@@ -133,7 +137,7 @@ export default class Result extends React.Component{
                                 {this.state.AssignList.map(u=>(
                                     <li className={'card nav-item'}
                                         style={{height:"45px"}}
-                                        onClick={()=>this.setCode(Object.entries(u)[0][1])}>
+                                        onClick={()=>this.setCode(Object.entries(u)[0][1],Object.entries(u)[1][1])}>
                                         <div className={'nav-link active fs-5 w-100 text-center'} style={{backgroundColor:"#2E4E3F"}}>{Object.entries(u)[0][1]} - {Object.entries(u)[1][1]}</div>
                                     </li>))
                                 }
@@ -144,6 +148,8 @@ export default class Result extends React.Component{
                     :
                     <App 
                         returnHome = {this.returnHome}
+                        class_name={this.state.class_name}
+                        assign_name={this.state.assign_name}
                         class={this.state.class}
                         assign={this.state.assign}
                         content={this.state.Content} 

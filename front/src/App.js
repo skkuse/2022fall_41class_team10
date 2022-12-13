@@ -186,6 +186,13 @@ export default class App extends React.Component {
                 "radon": data["score"]["code_readability"][3],
                 "pycodestyle": data["score"]["code_readability"][4]
             },
+            readability_why:{
+                "0":data["score"]["code_readability"][5],
+                "1":data["score"]["code_readability"][6],
+                "2":data["score"]["code_readability"][7],
+                "3":data["score"]["code_readability"][8],
+                "4":data["score"]["code_readability"][9],
+            },
             efficency:{
                 "Line Of Codes":data["score"]["code_efficiency"]["LOC"],
                 "Resevation Words": data["score"]["code_efficiency"]["Halstead"],
@@ -254,7 +261,7 @@ export default class App extends React.Component {
                                 style={{
                                     fontSize:"25px",
                                     fontWeight:"bolder"}}>
-                                Lecture 1</div>
+                                {this.props.class_name} Lecture</div>
                             <div
                                 id={'weekTitle'}
                                 className={'me-md-auto'}
@@ -268,7 +275,7 @@ export default class App extends React.Component {
                                     textAlign:"center",
                                     fontWeight:"bolder",
                                     fontSize:"120%"}}>
-                                week 1 {this.state.title}</div>
+                                과제명: {this.props.assign_name}</div>
 
                             <div
                                 id={"themeRadio"}
@@ -396,7 +403,9 @@ export default class App extends React.Component {
                                         height:"960px",
                                         width:"50%",
                                         float:"left"}}>
-                                    <Result result = {this.state} backHome={this.backHome}
+                                    <Result 
+                                            readability_why={this.state.readability_why}
+                                            result = {this.state} backHome={this.backHome}
                                             search_result={this.state.searchResult}
                                             code_explain={this.state.code_explain}
                                             copy_detect={this.state.copy_detect}

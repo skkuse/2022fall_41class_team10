@@ -225,9 +225,10 @@ export default class Result extends React.Component{
                                                 left:"40%",
                                                 fontSize:"13px"
                                             }}>
-                                                no newline at end of file (3)
-                                                <br/>
-                                                block comment should start with '# ' (1)
+                                                {Object.entries(this.props.readability_why).map(
+                                                    ([word,int])=><>{int}</>
+                                                )}
+                                                {console.log(this.props.readability_why)}
                                             </div>
                                         </>
                                         :<></>
