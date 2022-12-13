@@ -49,7 +49,10 @@ def code_submit(request):
     code_diff = CodeDiff.MakeDiffStr(class_id, assign_id, file_path)
 
     #total
-    tc_score = 60 * sum(tc_list)/len(tc_list)
+    tc_sum=0
+    for i in range(0,len(tc_list)):
+        tc_sum+=tc_list[i][0]
+    tc_score = 60 * tc_sum/len(tc_list)
     exp_score = (20/100) * (code_efficiency["LOC"]+code_efficiency["Halstead"]+code_efficiency["Control_flow"]+code_efficiency["Data flow"])
     read_score = (20/100) * (sum(code_readability[:5]))
     total = tc_score + exp_score + read_score
