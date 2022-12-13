@@ -116,7 +116,7 @@ export default class Problem extends React.Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;1번&nbsp;
+                            <br/>
                             {this.props.testcase_correct["1"]===true
                             ?   
                                 <>테스트 케이스 통과</>
@@ -139,7 +139,7 @@ export default class Problem extends React.Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;2번&nbsp;
+                            <br/>
                             {this.props.testcase_correct["2"]===true
                             ?   
                                 <>테스트 케이스 통과</>

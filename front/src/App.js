@@ -27,14 +27,6 @@ const GlobalStyle = createGlobalStyle`
       color:${(props) => props.theme.textColor}
     }
     
-    #top_navigationBar{
-      background-color: ${(props) => props.theme.primaryColor};
-    }
-    
-    #fileBtns{
-      background-color: ${(props) => props.theme.primaryColor};
-    }
-    
     header div.title{
       color:${(props) => props.theme.numButtonTextColor}
     }
@@ -62,6 +54,18 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${(props) => props.theme.bgsecondary};
     }
     
+    .line{
+      background-color: ${(props) => props.theme.primaryColor};
+    }
+    
+    .d2h-wrapper{
+      color: #1b1b1b;
+    }
+    
+    .d2h-cntx{
+      background-color: #fff;
+    }
+    
     // #id
     #total_container{
       background-color: ${(props) => props.theme.containerBg};
@@ -73,6 +77,18 @@ const GlobalStyle = createGlobalStyle`
     
     #submitButton{
       background-color: ${(props) => props.theme.secondaryColor};
+    }
+
+    #top_navigationBar{
+      background-color: ${(props) => props.theme.primaryColor};
+    }
+
+    #fileBtns{
+      background-color: ${(props) => props.theme.primaryColor};
+    }
+
+    #d2h-wrapper{
+      background-color: ${(props) => props.theme.bgsecondary};
     }
 `
 
@@ -418,7 +434,7 @@ export default class App extends React.Component {
                                     className={'ms-2'}
                                     style={{
                                         height:"960px",
-                                        width:"50%",
+                                        width:"56%",
                                         float:"left"}}>
                                     <Result 
                                             readability_why={this.state.readability_why}
