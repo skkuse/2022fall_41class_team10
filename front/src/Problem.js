@@ -108,13 +108,19 @@ export default class Problem extends React.Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>
-                            {this.props.testcase_correct["1"]===true ?
+                            {this.props.testcase_correct["1"][0]===true ?
                                 <>테스트 케이스 통과</>
                                 :
                                 <>
-                                {this.props.testcase_correct["1"]===false ?
-                                    <>테스트 케이스 실패</>
+                                {this.props.testcase_correct["1"][0]===false ?
+                                    <>
+                                        <div>
+                                            테스트 케이스 실패
+                                        </div>
+                                        <div style={{color:"#FF7E7E"}}>
+                                            {this.props.testcase_correct["1"][1]}
+                                        </div>
+                                    </>
                                     :
                                     <></>
                                 }
@@ -129,13 +135,19 @@ export default class Problem extends React.Component{
                             <br/>
                             <br/>
                             <br/>
-                            <br/>
-                            {this.props.testcase_correct["2"]===true ?
+                            {this.props.testcase_correct["2"][0]===true ?
                                 <>테스트 케이스 통과</>
                                 :
                                 <>
-                                {this.props.testcase_correct["2"]===false ?
-                                    <>테스트 케이스 실패</>
+                                {this.props.testcase_correct["2"][0]===false ?
+                                    <>
+                                        <div>
+                                            테스트 케이스 실패
+                                        </div>
+                                        <div style={{color:"#FF7E7E"}}>
+                                            {this.props.testcase_correct["2"][1]}
+                                        </div>
+                                    </>
                                     :
                                     <></>
                                 }
