@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import time
+import os
 
 # Create your views here.
 @csrf_exempt
@@ -16,5 +17,6 @@ def code_run(request):
     CodeExecute.save2file(dir_path, file_path, code)
 
     out, err = CodeExecute.code_execute(file_path)
+    os.remove(file_path)
     result_json = json.dumps({"stdout": out, "stderr": err})
     return JsonResponse(result_json, safe=False)
