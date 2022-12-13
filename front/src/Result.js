@@ -35,28 +35,25 @@ export default class Result extends React.Component{
             <>
                 <>
                     <div
+                        id={"resultTitle"}
                         style={{
-                            position:"relative",
                             width:"100%",
                             height:'7%',
                         }}>
-                        <div
+                        <span
                             style = {{
-                                position : "relative",
                                 height:"6%",
                                 lineHeight:"300%",
                                 fontSize:"150%",
                                 fontWeight:"bolder",
                             }}>
                             제출 결과
-                            &emsp;&emsp;&emsp;&emsp;
-                            &emsp;&emsp;&emsp;&emsp;
-                            &emsp;&emsp;
+                        </span>
+                        <span>
                             총점: {this.props.total_score}
-                        </div>
+                        </span>
                         <span
                             style = {{
-                                position : "relative",
                                 height:"6%",
                                 lineHeight:"400%",
                                 fontSize:"100%",
@@ -67,12 +64,11 @@ export default class Result extends React.Component{
                         </span>
                     </div>
                     <div
-                        className={"text_body"}
+                        className={"text_body ms-3"}
                         style={{
                             position:"relative",
                             width:"100%",
                             height:'103%',
-                            left:"3%"
                         }}>
                         <br/>
                         <div

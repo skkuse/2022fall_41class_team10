@@ -33,11 +33,7 @@ export default class Result extends React.Component{
             "http://127.0.0.1:8000/lecture/",
         )
         .then(response=>{
-            this.setState({
-                ClassList:JSON.parse(response['data'])['Classes']
-            })
-            }
-        )
+            this.setState({ClassList:JSON.parse(response['data'])['Classes']})})
     }
     returnHome=()=>{
         this.setState({

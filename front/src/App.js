@@ -31,6 +31,10 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${(props) => props.theme.primaryColor};
     }
     
+    #fileBtns{
+      background-color: ${(props) => props.theme.primaryColor};
+    }
+    
     header div.title{
       color:${(props) => props.theme.numButtonTextColor}
     }
@@ -79,8 +83,6 @@ export default class App extends React.Component {
         theme: 0,
         submit: 0,
         search: 0,
-        // todo: need to get title from server
-        title: "Integer add/subtract",
         pro1 : this.props.content,
         pro2 : this.props.restriction,
         testcase1:this.props.testcase1,
@@ -224,10 +226,12 @@ export default class App extends React.Component {
 
     backHome = ()=>{
         this.setState(current=>({submit:0}))
+        this.setState(current=>({search:0}))
     }
 
     googleSearch = ()=>{
-        fetch("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyBoRLAzoCY3nbl6ArViHNtw6lIv9lhW16E&cx=b6cb9247f962c4d80&num=3&q=python+examples+" + this.state.title.replace(" ", "+"))
+        fetch("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyBoRLAzoCY3nbl6ArViHNtw6lIv9lhW16E&cx=b6cb9247f962c4d80&num=3&q=python+예시+"
+            + this.props.class_name.replace(" ","+") +"+" +this.props.assign_name.replace(" ", "+"))
             .then(response => response.json())
             .then(response => {
                 this.setState(current=>({searchResult: {titles: response.items.map(({title})=>title),links: response.items.map(({link})=>link)}}));
@@ -359,7 +363,7 @@ export default class App extends React.Component {
                             : <> </>}
                         <div
                             id={"condeEditComponent"}
-                            className={'ms-2'}
+                            className={(this.state.submit===1? '':'ms-2')}
                             style={{
                                 visibility: (this.state.submit===1) ? "hidden" : "visible",
                                 height:"960px",
@@ -380,6 +384,7 @@ export default class App extends React.Component {
                             <>
                                 <div
                                     id={"diffComponent"}
+
                                     style={{position:"relative",
                                         height:"960px",
                                         width:"43%",
@@ -399,6 +404,7 @@ export default class App extends React.Component {
                                 </div>
                                 <div
                                     id={"resultComponent"}
+                                    className={'ms-2'}
                                     style={{
                                         height:"960px",
                                         width:"50%",
