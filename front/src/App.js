@@ -14,9 +14,7 @@ import {ReactComponent as Gear_B} from "./icon/gear_black.svg"
 import Diff from "./Diff"
 import Loading from './Loading'
 
-// const pro1 = "두 수를 입력받아 더한 결과를 나타내십시오."
 const pro1 = "For given 2 input, show the addition result"
-// const pro2 = "입력받는 값은 정수로 처리해야 합니다."
 const pro2 = "The number type is integer only."
 
 const GlobalStyle = createGlobalStyle`
@@ -187,24 +185,25 @@ export default class App extends React.Component {
             console.log(JSON.parse(response["data"])["result"])
             this.setState({
                 testcase_correct:{
-                    "1":JSON.parse(response["data"])["result"][0],
-                    "2":JSON.parse(response["data"])["result"][1],
+                    "1":JSON.parse(response["data"])["result"][0][0],
+                    "2":JSON.parse(response["data"])["result"][1][0],
                 }
             })
             }
         )
         this.offLoading()
     }
+
     setReadability = (data)=>{
         console.log(data)
         console.log(data["score"]["LOC"])
         this.setState({
             case_correct:{
                 "테스트케이스-1":(data["result"][0] === false)?"실패":"통과",
-                "테스트케이스-2":(data["result"][0] === false)?"실패":"통과",
-                "히든 테스트케이스-3":(data["result"][0] === false)?"실패":"통과",
-                "히든 테스트케이스-4":(data["result"][0] === false)?"실패":"통과",
-                "히든 테스트케이스-5":(data["result"][0] === false)?"실패":"통과",
+                "테스트케이스-2":(data["result"][1] === false)?"실패":"통과",
+                "히든 테스트케이스-3":(data["result"][2] === false)?"실패":"통과",
+                "히든 테스트케이스-4":(data["result"][3] === false)?"실패":"통과",
+                "히든 테스트케이스-5":(data["result"][4] === false)?"실패":"통과",
             },
             readability: {
                 "mypy": data["score"]["code_readability"][0],
