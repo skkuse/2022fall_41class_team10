@@ -117,12 +117,46 @@ export default class Problem extends React.Component{
                             &nbsp;&nbsp;&nbsp;&nbsp;input: {this.props.testcase1['input']}
                             <br/>
                             &nbsp;&nbsp;&nbsp;&nbsp;output: {this.props.testcase1['output']}
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;1번&nbsp;
+                            {this.props.testcase_correct["1"]===true
+                            ?   
+                                <>테스트 케이스 통과</>
+                            :
+                                <>
+                                {this.props.testcase_correct["1"]===false
+                                    ?
+                                    <>테스트 케이스 실패</>
+                                    :
+                                    <></>
+                                }
+                                </>
+                            }
                         </>
                     :
                         <>
                             &nbsp;&nbsp;&nbsp;&nbsp;input: {this.props.testcase2['input']}
                             <br/>
                             &nbsp;&nbsp;&nbsp;&nbsp;output: {this.props.testcase2['output']}
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;2번&nbsp;
+                            {this.props.testcase_correct["2"]===true
+                            ?   
+                                <>테스트 케이스 통과</>
+                            :
+                                <>
+                                {this.props.testcase_correct["2"]===false
+                                    ?
+                                    <>테스트 케이스 실패</>
+                                    :
+                                    <></>
+                                }
+                                </>
+                            }
                         </>
                     }
                 </div>
